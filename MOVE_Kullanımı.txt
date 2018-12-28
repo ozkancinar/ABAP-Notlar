@@ -1,0 +1,28 @@
+MOVE var1 to var2.
+
+
+TYPES : BEGIN OF ls_flightinfo,
+            carrid TYPE s_carr_id,
+            connid TYPE s_conn_id,
+            fldate TYPE s_date,
+            percentage(3) TYPE p DECIMALS 2,
+  END OF ls_flightinfo.
+
+TYPES : BEGIN OF ls_flightinfo_2,
+            carrid TYPE s_carr_id,
+            connid TYPE s_conn_id,
+            fldate TYPE s_date,
+            percentage(3) TYPE p DECIMALS 2,
+  END OF ls_flightinfo_2.
+
+MOVE ls_flightinfo_2-carrid to ls_flightinfo-carrid.
+MOVE '0002' to ls_flightinfo-connid.
+
+" MOVE-CORRESPONDING
+" yalnızca isimlerinin eşleştiği değere atama yapar diğer değişkenlere dokunmaz
+" hata vermez
+
+DATA ls_flightinfo_3 TYPE spfli_t. "transparan tablo tipinde bir değişken
+
+MOVE-CORRESPONDING ls_flightinfo_2 to ls_flightinfo_3.
+

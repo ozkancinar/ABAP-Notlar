@@ -1,0 +1,36 @@
+* Değişken tanımlama
+DATA(text) = `ABC`.
+
+* Internal table
+
+READ TABLE itab ASSIGNING FIELD-SYMBOL(<line>). "field symbol"
+wa = itab[ idx ]. "Read"
+wa = itab[ KEY key INDEX idx ]."read using key and index"
+wa = itab[ col1 = … col2 = … ]. "read by key"
+IF line_exists( itab[ … ] ). "Veri var mı kontrolü"
+DATA(idx) = line_index( itab[ … ] ). "satır indexini al"
+TRY.
+      ls_jest = lt_jest[ objnr = lt_caufv-objnr ].
+      CATCH cx_sy_itab_line_not_found. "try catch kullanmak gerekir yoksa veri bulunmadığında hata verir
+    ENDTRY.
+
+
+
+* Döngü
+LOOP AT itab ASSIGNING FIELD-SYMBOL(<line>). "Field symbol"
+   …
+ENDLOOP.
+
+* Value
+Variables:    VALUE dtype|#( )
+Structures:  VALUE dtype|#( comp1 = a1 comp2 = a2 … )
+Tables:         VALUE dtype|#( ( … ) ( … ) … ) …
+
+
+* SQL 
+SELECT * FROM dbtab
+   INTO TABLE DATA(itab) 
+        WHERE fld1 = @lv_fld1.
+
+
+

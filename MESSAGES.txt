@@ -1,0 +1,25 @@
+
+MESSAGE 'Başarılı İşlem' TYPE 'S'.
+MESSAGE 'Hata' TYPE 'E'.
+MESSAGE 'Uyarı Mesajı' TYPE 'W'.
+MESSAGE 'Hata. İşlem sonlandırılıyor. Ekran kapatılıyor' TYPE 'A'.
+MESSAGE 'Uyarı Mesajı' TYPE 'I'. "Uyarı mesajı gösterir kullanıcı ok'e tıkladıüında devam eder
+MESSAGE 'Short Dump Hatası' TYPE 'X'. "Dump hatası gösterilir pek kullanılmaz
+
+1). MESSAGE 'abs' type 'I'.
+2). MESSAGE I002 (<Message Class>)
+            In the message class we have to write the corresponding message for 002.
+3). REPORT <Program Name> MESSAGE-ID <Message Class>.
+        MESSAGE I002.
+            In the message class we have to write the corresponding message for 002.
+4). MESSAGE i006 WITH text-003.
+                    In the text symbols 003 we have to write the corresponding message.
+5). MESSAGE text-001 type 'I'.
+                        In the text symbols 001 we have to write the corresponding message.
+6). MESSAGE i006 WITH 'Invalid purchase order Number'(003).
+ " "      006 message description is sending at runtime, in the message class we mention & & & & for the corresponding 006 number. In the text symbols 003 we are writing the description, it    just for our display purpose.
+7). MESSAGE ID '<Message Class>' type 'I' NUMBER 002.
+8). MESSAGE i003 (<Message Class>) WITH '<Some text message> '.
+9). MESSAGE i003 (<Message Class>) WITH text-003.
+                        In the text symbols 003 we have to write the corresponding message.
+10). MESSAGE i003 (<Message Class>) with p_user.

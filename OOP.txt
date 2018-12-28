@@ -1,0 +1,62 @@
+class lcl_szl_nak definition deferred. "Oluşturulan bir sınıfı en başta tanıt"
+
+*&---------------------------------------------------------------------*
+**&  Include          z_CLASS                                *
+*&---------------------------------------------------------------------*
+CLASS lcl_airplane DEFINITION.
+  PUBLIC SECTION.
+    CONSTANTS: pos_1 TYPE i VALUE 30.
+    METHODS:
+      constructor IMPORTING
+              im_name TYPE string
+              im_planetype TYPE saplane-planetype,
+              display_attributes.
+    CLASS-METHODS: display_n_o_airplanes.
+  PRIVATE SECTION.
+    METHODS: get_technical_attributes
+             IMPORTING im_type    TYPE saplane-planetype
+            EXPORTING ex_weight  TYPE s_plan_wei
+                      ex_tankcap TYPE s_capacity.
+
+    DATA: name TYPE string,
+              planetype TYPE saplane-planetype.
+    CLASS-DATA: n_o_airplanes TYPE i.
+ENDCLASS.                    "lcl_airplane DEFINITION
+*---------------------------------------------------------------------*
+*       CLASS lcl_airplane IMPLEMENTATION
+*       *---------------------------------------------------------------------*
+*---------------------------------------------------------------------*
+CLASS lcl_airplane IMPLEMENTATION.
+  METHOD constructor.
+    name      = im_name.
+    planetype = im_planetype.
+    n_o_airplanes = n_o_airplanes + 1.
+  ENDMETHOD.                    "constructor
+  METHOD display_attributes.
+    DATA: weight TYPE saplane-weight,
+                 cap TYPE saplane-tankcap.
+    WRITE: / icon_ws_plane AS ICON,
+               / 'Name of airplane', AT pos_1 name,
+                          / 'Airplane type:', AT pos_1 planetype.
+    get_technical_attributes( EXPORTING im_type    = planetype
+                                  IMPORTING ex_weight  = weight
+                                                                          ex_tankcap = cap ).
+    WRITE: / 'Weight:', weight,
+                 'Tank capacity:', cap.
+  ENDMETHOD.                    "display_attributes
+  METHOD display_n_o_airplanes.
+    WRITE: /,/ 'Number of airplanes:',AT pos_1 n_o_airplanes
+                    LEFT-JUSTIFIED, /.
+  ENDMETHOD.                    "display_n_o_airplanes
+  METHOD get_technical_attributes.
+    SELECT SINGLE weight
+                      tankcap
+                                   FROM saplane
+                                                INTO (ex_weight, ex_tankcap)
+    WHERE planetype = im_type.
+    IF sy-subrc <> 0.
+      ex_weight = 100000.
+      ex_tankcap = 10000.
+    ENDIF.
+  ENDMETHOD.                    "get_technical_attributes
+ENDCLASS.                    "lcl_airplane IMPLEMENTATION

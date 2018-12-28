@@ -1,0 +1,22 @@
+
+types: begin of ty_veri,
+	matnr type mara-matnr,
+	mtart type marc-mtart,
+	maktx type makt-maktx,
+       end of ty_veri.
+
+data: gs_veri type ty_veri,
+      gt-veri type table of ty_veri with header line.
+
+*---------------------------------------------------------------
+*& ------------------------ Döngü ---------------------
+*-------------------------------------------------------------
+
+loop at gt_veri into gs_veri.
+  write: / gs_veri-mtart, gts_veri-matnr, gs_veri-maktx.
+  clear gs_veri.
+endloop.
+
+loop at gt_veri assigning <lf_veri>
+
+endloop.

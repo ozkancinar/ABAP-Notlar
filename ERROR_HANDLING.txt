@@ -1,0 +1,53 @@
+"Try - Catch Exception handling"
+DATA :v_unit_value TYPE i,
+      v_total_value TYPE i VALUE 20,
+      v_quantity TYPE i.
+DATA r_ex TYPE REF TO cx_sy_zerodivide.
+
+TRY .
+    v_unit_value = v_total_value / v_quantity.
+    WRITE v_unit_value.
+
+  CATCH cx_sy_zerodivide INTO r_ex.
+    WRITE :/'Error Short Text:',r_ex->get_text( ). "Division by zero
+    WRITE :/'Error long Text:',r_ex->get_longtext( ).
+  CLEANUP.
+    " Any cleanup logic goes here the CLEANUP block
+    " can be used to close any open files or rollback any database updates.
+ENDTRY.
+
+
+ "En genel hata yakalama exception"
+data lr_exception TYPE REF TO cx_root. 
+TRY .
+
+CATCH cx_root INTO lr_exception. "Eğer dönecek hatanın sınıfını bilmiyorsan bu yöntem kullanılır"
+	data(lv_text) = lr_exception->get_text( ). "Hata kısa metninin döner"
+
+ENDTRY.
+
+
+
+
+
+
+
+
+
+
+
+
+"fonksiyonlar için"
+CALL FUNCTION 'CONVERT_TO_LOCAL_CURRENCY'
+ ...
+EXCEPTIONS  " un-comment these sections
+  no_rate_found = 1
+  overflow = 2
+  no_factors_found = 3
+  no_spread_found = 4
+  derived_2_times = 5
+OTHERS = 6.
+IF sy-subrc NE 0.
+ MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO  " this is display the system message automatically when ever exp are hit
+ WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4.
+ENDIF.
