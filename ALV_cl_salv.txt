@@ -85,7 +85,7 @@ START-OF-SELECTION.
       SET_FUNCTIONS = lcl_salv->c_functions_all.
 
   lr_display = lcl_salv->get_display_settings( ).
-  lr_display->set_striped_pattern( cl_salv_display_settings=>true ).
+  lr_display->set_striped_pattern( cl_salv_display_settings=>true ). "zebra
 
   data: lr_events type ref to cl_salv_events_table.
 

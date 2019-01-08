@@ -28,10 +28,11 @@ DATA STR(20) VALUE 'ABAP IS IN SAP'.
 WRITE STR COLOR 5.
 *--------------------------------------
 *---------TRANSLATE Stringin harf boyutunu ayarlar. Küçük veya büyük
-DATA STR(10) VALUE 'CHENNAI'.
+DATA STR(10) VALUE 'CHENNAIÇğÜ'.
   TRANSLATE STR TO LOWER CASE.
   translate lv_projetipi to upper case.
   translate lv_proje using 'AaHh'. "değer olarak bir harf kabul eder. İlk harfi ikinci harfle değiştirir"
+  TRANSLATE str USING 'ğgşsİIçcÇC'. "türkçe karakterleri ingilizceye çevirir"
 WRITE STR.
 *-------------------------------------
 *---------CONDENSE Boşlukları siler

@@ -380,7 +380,13 @@ CALL FUNCTION 'COPF_DETERMINE_DURATION'
    E_DURATION               = i_dur
 
 *---------------------------------------
-
+"Bir tarihin haftanın kaçıncı gününe geldiğini veren fonksiyon"
+ call function 'DAY_IN_WEEK'.
+*---------------------------------------
+call function 'GET_WEEK_INFO_BASED_ON_DATE'
+*---------------------------------------
+"Haftanın gününü dil olarak döner"
+call FUNCTION 'GET_WEEKDAY_NAME'
 *--------------------------------------
 * RANDOM
 CALL FUNCTION 'RANDOM_12'
@@ -392,6 +398,11 @@ CALL FUNCTION 'RANDOM_12'
   EXCEPTIONS
     OTHERS 1.
 PSTKY = RNDVALUE.
+
+"-----------------------------------------"
+*random rastgele
+call function 'QF05_RANDOM_INTEGER'
+"-----------------------------------------"
 *--------------------------------------
 * PDF'i mail için binarye çevirme
 "Adobe form oluştur. İmport kısmından gelen veriyi kullanacağız"
@@ -478,6 +489,10 @@ DATA: LT_FILE TYPE FILETABLE,
 
      endif.
 
+*------------------------------------------------
+"file dialog
+call function 'WD_FILENAME_GET'
+
 --------------------------------------------------
 * Siparişin DUE Date, Teslimat tarihini al
 call function 'J_1A_SD_CI_DUEDATE_CHECK'
@@ -506,7 +521,10 @@ call function 'J_1A_SD_CI_DUEDATE_CHECK'
     importing
       ev_month_begin_date = lv_begindate
       ev_month_end_date   = lv_enddate.
-
+*----------------------------------------------------
+"Bir tarihe ay ekle veya çıkart date"
+call function 'HR_JP_ADD_MONTH_TO_DATE'
+"------------------------------------------------"
 --------------------------------------------------
 * CRM siparişlerini oku
  SELECT guid FROM crmd_orderadm_h INTO TABLE gt_header
@@ -698,7 +716,7 @@ CALL FUNCTION 'HR_IMAGE_EXISTS'
    p_endda               = '99991231'
   IMPORTING
     p_exists              = lv_exist
-    p_connect_info        = lt_connect_info
+    p_connect_info        = 
   EXCEPTIONS
     error_connectiontable = 1
     OTHERS                = 2.
@@ -748,3 +766,24 @@ IF lv_exist EQ '1'.
               WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
   ENDIF.
 
+*------------------------------------
+"Excel xls dosyalarını sap yükle"
+call function 'TEXT_CONVERT_XLS_TO_SAP'
+
+*------------------------------------
+"Mesaj sınıfındaki mesaj numaasının metnini döndür"
+call FUNCTION 'MESSAGE_TEXT_BUILD'
+    EXPORTING
+      msgid               = messtab-msgid    " Message ID
+      msgnr               = messtab-msgnr    " Number of message
+      msgv1               = messtab-msgv1  " Parameter 1
+      msgv2               = messtab-msgv2    " Parameter 2
+      msgv3               = messtab-msgv3    " Parameter 3
+      msgv4               = messtab-msgv4    " Parameter 4
+    IMPORTING
+      message_text_output =  gs_alv-mesaj   " Output message text
+          .
+*--------------------------------------
+"bir değişken sayı integer mı kontrolü"
+call function 'NUMERIC_CHECK'.
+*-------------------------------------

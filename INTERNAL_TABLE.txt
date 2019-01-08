@@ -45,9 +45,11 @@ MODIFY TABLE itab FORM wa_itab <conditions>.
 *Delete: Internal tabledan bir satır siler
 DELETE TABLE itab FROM wa_itab.
 DELETE ADJACENT DUPLICATES FROM ITAB COMPARING K.
+DELETE itab [ INDEX index I WHERE condition ].
 DELETE ITAB FROM 450 TO 550.
 DELETE itab WHERE field NOT IN select_option...
 DELETE itab where field eq 'something'.
+
 
 * Sort sıralama
 Sort: Tablolar herhangi bir sütuna göre aşağı veya yukarı yönlü sıralanabilir. Sorted Table''lar sıralanamaz

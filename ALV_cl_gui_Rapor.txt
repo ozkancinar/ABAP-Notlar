@@ -91,6 +91,12 @@ module STATUS_0100 output.
           ls_fieldcat-scrtext_m =
           ls_fieldcat-scrtext_l = 'Kazanan Firma'.
           ls_fieldcat-no_out = 'X' "alan gizlenir
+        when 'DATE'.
+          "Date conversion exit"
+          ls_fieldcat-datatype = 'DATUM' 
+          ls_fieldcat-inttype = 'D' 
+          ls_fieldcat-intlen = '000008' 
+          ls_fieldcat-dd_outlen = '000010'
 
       endcase.
       modify pt_fieldcat from ls_fieldcat.

@@ -16,6 +16,14 @@ MODULE module_1 INPUT.
   ENDIF.
 ENDMODULE.
 
+"trigger pai"
+CALL METHOD CL_GUI_CFW=>SET_NEW_OK_CODE
+      EXPORTING
+        NEW_CODE = 'DOUBLE_CLICK'
+*      IMPORTING
+*        RC       =
+        .
+
 FIELD CARRIER VALUES (NOT 'AA', 'LH', BETWEEN 'QF' AND 'UA').
 "Search help: Oluşturduğun arama yardımını screen painterda seçebilir ve alanla bağlayabilirsin"
 FIELD CONNECT SELECT  *

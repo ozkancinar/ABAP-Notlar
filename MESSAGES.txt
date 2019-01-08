@@ -23,3 +23,33 @@ MESSAGE 'Short Dump Hatası' TYPE 'X'. "Dump hatası gösterilir pek kullanılma
 9). MESSAGE i003 (<Message Class>) WITH text-003.
                         In the text symbols 003 we have to write the corresponding message.
 10). MESSAGE i003 (<Message Class>) with p_user.
+
+
+*"  IMPORTING
+*"     VALUE(IV_VAL1) TYPE  INT4 OPTIONAL
+*"     VALUE(IV_VAL2) TYPE  INT4 OPTIONAL
+*"  EXPORTING
+*"     VALUE(EV_RESULT) TYPE  INT4
+*"     VALUE(EV_SUBRC) TYPE  SYSUBRC
+*"     VALUE(ET_RETURN) TYPE  BAPIRET2_T
+*"  EXCEPTIONS
+*"      DIVIDE_BY_ZERO
+*"----------------------------------------------------------------------
+  DATA: ls_return LIKE LINE OF et_return.
+
+  IF iv_val2 LE 0.
+    MESSAGE e007(zaa_msg) RAISING divide_by_zero.
+    ev_subrc = 4.
+    CLEAR ls_return.
+    ls_return-id = 'ZAA_MSG'.
+    ls_return-number = '007'.
+    ls_return-type = 'E'.
+    ls_return-message_v1 = '0'.
+    MESSAGE ID ls_return-id TYPE ls_return-type NUMBER ls_return-number
+      WITH ls_return-message_v1 ls_return-message_v2 ls_return-message_v3 ls_return-message_v4
+      INTO ls_return-message.
+    APPEND ls_return TO et_return.
+    EXIT.
+  ELSE.
+    ev_result = iv_val1 / iv_val2.
+  ENDIF.
