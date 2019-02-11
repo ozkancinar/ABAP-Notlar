@@ -1,3 +1,6 @@
+
+write ls_mara-menge to lv_str unit ls_mara-meins.
+
 *  write data
 * Header:
   write: / 'index' , 20 'Belge No', 30 'Kalem No', 40 'Malzeme', 60 'Fiyat'.

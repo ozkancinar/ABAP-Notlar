@@ -66,3 +66,9 @@ if (this.rawValue == 1) {
 else{
 	this.presence = 'hidden';
 }
+
+// Bir group oluştur toplamını alman kolaylaşır 
+// Grand total
+sum(it_mara.DATA[*].group.data[*].ntgew);
+
+page1.table.bodyrow[].all.length //tablo satur sayısı

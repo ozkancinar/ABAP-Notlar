@@ -1,4 +1,11 @@
-REPORT  ZEXPORT_TO_MEMORY.
+" MEMORY bellekte bir alan olarak tutulur. Bu alana değişken, tablo, structure atılabilir. Bu alan globaldir her yerden aynı isimle erişilir.
+
+"report ZPRG1.
+EXPORT lt_mara TO MEMORY ID 'PRG5'.
+
+*report ZPRG2.
+DATA lt_mara_import TYPE TABLE OF mara.
+IMPORT lt_mara TO lt_mara_import FROM MEMORY ID 'PRG5'.
 
 TYPES: BEGIN OF t_data,
          id    TYPE c LENGTH 2,
@@ -36,3 +43,4 @@ EXPORT ex_text = gv_text1 TO MEMORY ID 'EXXX'.
 
 IMPORT ex_text = gv_text2 FROM MEMORY ID 'EXXX'.
 WRITE: 'Export text:', gv_text2.
+

@@ -1,4 +1,4 @@
-tables: vbak.
+PARAMETERS: p_city(100) LOWER CASE.   
 
 data: gd_ucomm type sy-ucomm.
 
@@ -11,7 +11,13 @@ selection-screen end of block blckyarat .
 parameters pa_diger radiobutton group grp1.
 
 selection-screen begin of block blckdiger with frame.
+
 select-options so_diger for vbak-erdat obligatory modif id gr2 .
+
+selection-screen comment 1(20) text-002.
+** Label
+selection-screen comment 5(20) text-003.
+
 selection-screen end of block blckdiger .
 
 initialization.
@@ -143,3 +149,44 @@ FORM CHECKRADIO .
     MODIFY SCREEN.
   ENDLOOP.
 ENDFORM.                    " CHECKRADIO
+
+*--------------------------------------------------------------------------*
+* Button on selection screen
+TABLES: vbap, klah, SSCRFIELDS.
+
+SELECT-OPTIONS: so_plant for vbap-werks, "plant
+                so_class for klah-clint. "class
+
+SELECTION-SCREEN: FUNCTION KEY 1,
+                  FUNCTION KEY 2,
+                  FUNCTION KEY 3.
+
+INITIALIZATION.
+
+  data: lv_fcntext TYPE smp_dyntxt.
+
+  clear lv_fcntext.
+  lv_fcntext-text = 'Görüntüle'.
+  sscrfields-functxt_01 = lv_fcntext.
+
+  clear lv_fcntext.
+  lv_fcntext-text = 'Değiştir'.
+  sscrfields-functxt_02 = lv_fcntext.
+
+  clear lv_fcntext.
+  lv_fcntext-text = 'Yarat'.
+  sscrfields-functxt_03 = lv_fcntext.
+
+at SELECTION-SCREEN OUTPUT.
+  set PF-STATUS 'STATUS100'.
+
+at SELECTION-SCREEN .
+  CASE sy-ucomm.
+    WHEN 'FC01'.
+      MESSAGE 'Görüntüle' TYPE 'S'.
+    WHEN 'FC02'.
+      MESSAGE 'Düzenle' TYPE 'S'.
+    WHEN 'FC03'.
+      MESSAGE 'Yarat' TYPE 'S'.
+    WHEN OTHERS.
+  ENDCASE.

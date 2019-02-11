@@ -38,6 +38,7 @@ WRITE STR.
 *---------CONDENSE Boşlukları siler
 data str(30) value ' ITALY IS GREAT'.
   CONDENSE STR.
+  CONDENSE str no-gaps. "cümle içindeki boşlukları da siler"
 WRITE STR.
 *-------------------------------------
 *---------REPLACE
@@ -53,9 +54,10 @@ data len type i.
   len = STRLEN( STR ).
 write len.
 *----------------------------------
+*Tip aktarımı
+write ls_mara-menge to lv_str unit ls_mara-meins.
 
 ****** Comparing string ********
-
 IF p_string eq c_abc.
   NEW-LINE.
   WRITE: p_string, 'Sabit degerimiz', c_abc,'e eşit'.

@@ -1,23 +1,55 @@
+******* /SORTED TABLE **************
 Sorted table: Tüm indexi koymak gerekir. Aşağı ekleme yapılamaz. Sıralamanın tersi bir şey eklenirse dump alır.
+data: t_mara_sorted TYPE SORTED TABLE OF ty_mara,
+      t_mara_standard TYPE STANDARD TABLE OF ty_mara,.
 
-Append: Bir structureı internal table''a ekler. Yalnızca standartad table tipi için uygundur. Sorted ve hashed tablolar için insert kullanılır
+t_mara_sorted[] = t_mara_standard[]. "Yapılabilir hata vermez
+insert ls_mara into table t_mara1. "Append kullanılamaz
+******* /SORTED TABLE *************
+
+******* APPEND *************
+"Append: Bir structureı internal table''a ekler. Yalnızca standartad table tipi için uygundur. Sorted ve hashed tablolar için insert kullanılır
 APPEND wa_itab to itab.
 APPEND LINES OF ITAB1 TO ITAB2.
+******* /APPEND *************
 
-*Insert: Standard tablelarda kayıt ekler, sorted tablelarda istenilen bir noktaya kayıt ekler, hashed tablelarda 
-has algoritmasına göre ekler
+******* INSERT *************
+*Insert: Standard tablelarda kayıt ekler, sorted tablelarda istenilen bir noktaya kayıt ekler, hashed tablelarda  hash algoritmasına göre ekler
 INSERT wa_itab INTO TABLE itab <condition>.
-
-Bir internal table ile çok miktarda kayıt eklemek:
+"Bir internal table ile çok miktarda kayıt eklemek:
 INSERT itab2 <condition2> FROM <connection1>. 
-INSERT CUSTOMERS FROM TABLE TAB.
+INSERT CUSTOMERS FROM TABLE t_iTAB. "Database tablosuna internal tablo ile veri atma
 
 LOOP AT TAB INTO TAB_WA.
-  INSERT INTO CUSTOMERS VALUES TAB_WA.
+  INSERT INTO CUSTOMERS VALUES TAB_WA. "database tablosuna structure şle veri atma
 ENDLOOP.
-*Read: Internal table''ın bir satırındaki veriyi bir structurea kopyalar
-Binary SEARCH kullanmadan önce sort ile internal table sıralanmalı
+******* /INSERT *************
 
+******* DELETE *************
+*Delete: Internal tabledan bir satır siler
+DELETE TABLE itab FROM wa_itab.
+DELETE ADJACENT DUPLICATES FROM ITAB COMPARING K.
+DELETE itab [ INDEX index I WHERE condition ].
+DELETE ITAB FROM 450 TO 550.
+DELETE itab WHERE field NOT IN select_option...
+DELETE DBTABLE where field eq 'something'.
+******* /DELETE *************
+
+******* UPDATE *************
+UPDATE dbtable set isim = 'Özkan' where id = '12'.
+commit work.
+******* /UPDATE *************
+
+******* MODIFY *************
+*Modify: Internal tableın bir satırın aynı tipteki bir structurla günceller 
+MODIFY TABLE itab FORM wa_itab <conditions>.
+MODIFY dbtable from table gt_data. "Tablodaki verelere göre db tablosunu günceller"
+******* /MODIFY *************
+
+******* READ *************
+*Read: Internal table''ın bir satırındaki veriyi bir structurea kopyalar
+
+"Binary SEARCH kullanmadan önce sort ile internal table sıralanmalı
 READ TABLE it_header INTO wa_header with key order_number = ls_siparis-sip_no
                             order_type = 'ZP04' BINARY SEARCH.
 
@@ -38,35 +70,27 @@ ENDIF.
 
 assign gt_makineler[ 1 ] to FIELD-SYMBOL(<fs_makine>).
 *--------------------
+******* /READ *************
 
-*Modify: Internal tableın bir satırın aynı tipteki bir structurla günceller 
-MODIFY TABLE itab FORM wa_itab <conditions>.
-
-*Delete: Internal tabledan bir satır siler
-DELETE TABLE itab FROM wa_itab.
-DELETE ADJACENT DUPLICATES FROM ITAB COMPARING K.
-DELETE itab [ INDEX index I WHERE condition ].
-DELETE ITAB FROM 450 TO 550.
-DELETE itab WHERE field NOT IN select_option...
-DELETE itab where field eq 'something'.
-
-
-* Sort sıralama
+******* /SORT *************
 Sort: Tablolar herhangi bir sütuna göre aşağı veya yukarı yönlü sıralanabilir. Sorted Table''lar sıralanamaz
 SORT itab.
 SORT it_flight by percentage. "!Tavsiye edilen!"
 sort gt_data by fiel1 field2.
+******* /SORT *************
 
+******* COLLECT *************
 * Collect: Hangi malzeme numarasından hangi malzemelerden kaç tane var
 * karakter alanları farklı olanları alt alta yazıyor, aynı karakter tipindeki numerik alanları toplar.
 loop at gt_data int gs_data.
   Collect gs_data into gt_data3.
 ENDLOOP.
+******* /COLLECT *************
 
-Tabloları kopyalamak COPY: 
+"Tabloları kopyalamak COPY: 
 ITAB2[] = ITAB1[].
  
-Tabloları karşılaştırmak:
+"Tabloları karşılaştırmak:
 IF ITAB1[] = ITAB2[].
 " ...
 ENDIF.
@@ -74,17 +98,15 @@ ENDIF.
 * they have the same number of lines and 
 * each pair of corresponding lines is equal. 
 
+******* /CLEAR *************
 *Clear: Tabloyu temizler
 CLEAR itab[].
 Refresh ": Clear gibi çalışır
 FREE ": Tabloyu siler ve hafızanın tutulan alanını serbest bırakır
+******* /CLEAR *************
 
-
-
-
-
-* nested table - iç içe tablo
-
+******************************************
+* > 7.40 nested table - iç içe tablo
 TYPES:
   BEGIN OF struc1,
     col1 TYPE i,
@@ -113,3 +135,4 @@ DATA(itab) = VALUE itab3(
                            ( col1 = 15 col2 = 16 )
                            ( col1 = 17 col2 = 18 ) ) ) ) ) ).
 DATA(num2) = itab[ 2 ]-col2[ 1 ][ 2 ]-col1.
+*******************************************

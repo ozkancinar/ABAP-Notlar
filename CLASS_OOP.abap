@@ -656,6 +656,17 @@ START-OF-SELECTION.
   science->m1( ). "Alias
 *****************/Interface Alias*************************
 
+*****************Interface Ignore*************************
+"Eğer bir interface içindeki metodun override olması durumunu zorunluluktan çıkarmak istiyorsak default ignore kullanılır
+INTERFACE scary_behavior.
+METHODS:  scare_small_children,
+          sells_mortgages DEFAULT FAIL,
+          hide_under_bed DEFAULT IGNORE,
+          is_fire_breather DEFAULT IGNORE
+                RETURNING rf_yes_it_is TYPE abap_bool.
+ENDINTERFACE. "Scary Behavior
+*****************/Interface Ignore*************************
+
 *****************Exception Handling**************************
 
 CLASS lcl_material_data DEFINITION .

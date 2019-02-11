@@ -385,7 +385,7 @@ CALL FUNCTION 'COPF_DETERMINE_DURATION'
 *---------------------------------------
 call function 'GET_WEEK_INFO_BASED_ON_DATE'
 *---------------------------------------
-"Haftanın gününü dil olarak döner"
+"Haftanın gününü dile göre metin olarak döner"
 call FUNCTION 'GET_WEEKDAY_NAME'
 *--------------------------------------
 * RANDOM
@@ -787,3 +787,30 @@ call FUNCTION 'MESSAGE_TEXT_BUILD'
 "bir değişken sayı integer mı kontrolü"
 call function 'NUMERIC_CHECK'.
 *-------------------------------------
+"programın alt nesneleri"
+call function 'WB_TREE_SELECT'
+*------------------------------------
+"program versiyonu üreten fonksiyon"
+call function 'SVRS_AFTER_CHANGED_ONLINE_NEW'
+*-----------------------------------
+"sm30 bakım ekranını çağır"
+call function 'VIEW_MAINTENANCE_CALL'
+*----------------------------------
+"ekrandaki alanların değerini anında okumak için"
+call function 'DYNP_VALUES_READ'
+*----------------------------------
+"Ekrandaki alanları anında güncellemek için"
+CALL FUNCTION 'DYNP_VALUES_UPDATE'
+*----------------------------------
+"internal table html dönüşümü"
+call function 'WWW_ITAB_TO_HTML_LAYOUT'
+CALL FUNCTION 'WWW_ITAB_TO_HTML'
+*---------------------------------
+"SM62'den yaratılan eventı tetikleyen FM
+CALL FUNCTION 'BP_EVENT_RAISE'
+  EXPORTING
+    eventid    = 'ZOZ_EVENT_TEST'.
+*-----------------------------------
+"kullanıcı favoriler menusune tcode ekle
+call function 'GUI_ADD_TCODE_TO_FAVORITES'
+*----------------------------------

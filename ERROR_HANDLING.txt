@@ -16,6 +16,17 @@ TRY .
     " can be used to close any open files or rollback any database updates.
 ENDTRY.
 
+***** RETRY *****
+PARAMETERS: pa_sayi1 TYPE i,
+            pa_sayi2 TYPE i.
+data result TYPE p DECIMALS 2.
+
+TRY .
+  result = pa_sayi1 / pa_sayi2.
+CATCH cx_sy_zerodivide.
+  pa_sayi1 = 0.
+  RETRY. "try bloğunu tekrardan çalıştırır"
+ENDTRY.
 
  "En genel hata yakalama exception"
 data lr_exception TYPE REF TO cx_root. 
@@ -25,7 +36,6 @@ CATCH cx_root INTO lr_exception. "Eğer dönecek hatanın sınıfını bilmiyors
 	data(lv_text) = lr_exception->get_text( ). "Hata kısa metninin döner"
 
 ENDTRY.
-
 
 
   IF iv_val2 LE 0.
@@ -44,10 +54,6 @@ ENDTRY.
   ELSE.
     ev_result = iv_val1 / iv_val2.
   ENDIF.
-
-
-
-
 
 
 

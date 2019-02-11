@@ -34,18 +34,7 @@ FORM MODIFY_DATA .
 ENDFORM.                    " MODIFY_DATA
 
 FORM PREPARE_ALV_PARAMETERS .
-* Tasarım tanımlamaları
-  gs_layout-colwidth_optimize = 'X'.
-  gs_layout-zebra             = 'X'.
-  gs_layout-get_selinfos      = 'X'.
-  gs_layout-numc_sum          = 'X'.
-  gs_layout-no_sumchoice      = ''.
-  gv_alv_repid                = sy-repid.
-  gs_layout-coltab_fieldname  = 'C51'.
-  gs_layout-edit = ''.
-"gs_layout-SUBTOTALS_TEXT = 'PSTAT'.
-  gs_layout-zebra = 'X'.
-  gs_layout-box_fieldname = 'SEL'. "Seçim yapılan satırları almak için kullandığımız structure alanı"
+
 
   " ALV tablosunun alanlarını tek tek oluştur.
   "fieldname kısmı internal table'ın alanlarıyla aynı olmalı"
@@ -102,7 +91,18 @@ LOOP AT lt_fieldcat INTO ls_fieldcat.
 ENDFORM.                    " PREPARE_ALV_PARAMETERS
 
 FORM SHOW_ALV .
- 
+* Tasarım tanımlamaları
+  gs_layout-colwidth_optimize = 'X'.
+  gs_layout-zebra             = 'X'.
+  gs_layout-get_selinfos      = 'X'.
+  gs_layout-numc_sum          = 'X'.
+  gs_layout-no_sumchoice      = ''.
+  gv_alv_repid                = sy-repid.
+  gs_layout-coltab_fieldname  = 'C51'.
+  gs_layout-edit = ''.
+"gs_layout-SUBTOTALS_TEXT = 'PSTAT'.
+  gs_layout-zebra = 'X'.
+  gs_layout-box_fieldname = 'SEL'. "Seçim yapılan satırları almak için kullandığımız structure alanı"
 
   "sub total
   gt_sort-fieldname = 'PSTAT'.
