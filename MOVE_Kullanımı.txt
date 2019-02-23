@@ -26,3 +26,4 @@ DATA ls_flightinfo_3 TYPE spfli_t. "transparan tablo tipinde bir değişken
 
 MOVE-CORRESPONDING ls_flightinfo_2 to ls_flightinfo_3.
 
+MOVE-CORRESPONDING itab1 TO itab2 KEEPING TARGET LINES "Sütunları koru"

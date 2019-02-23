@@ -19,3 +19,6 @@ WRITE lv_time to lv_time2 USING EDIT MAST '__:__:__'. "Formatı belirliyoruz
 *Ekrana yazalım
 
 WRITE: / 'Formatlı zaman:', lv_time2. "HH:MM:SS
+
+"Timestamp'a çevir
+CONVERT DATE sy-datum TIME sy-uzeit INTO TIME STAMP g_timestmp1 TIME ZONE sy-zonlo.

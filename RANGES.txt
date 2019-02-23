@@ -33,3 +33,44 @@
   IF gs_rapor-departman IS NOT INITIAL.
     lr_departman = VALUE #( ( option = 'EQ' sign = 'I' low = gs_rapor-departman ) ).
   ENDIF.
+
+"----------Range SELECT-----------------------------"
+TYPES: tr_matnr TYPE RANGE OF matnr.
+
+SELECT *
+ FROM afpo
+  INTO TABLE @DATA(lt_afpo)
+    WHERE dauat EQ 'ZP01'.
+
+data(lr_matnr) = VALUE tr_matnr( for ls_afpo in lt_afpo
+                                 let s = 'I'
+                                     o = 'EQ'
+                                  in sign   = s
+                                     option = o
+                                  ( low = ls_afpo-matnr ) ).
+
+SELECT * FROM makt
+    INTO TABLE @data(lt_maktx)
+        WHERE matnr in @lr_matnr
+          and spras eq @sy-langu. 
+*--------------------------------------------------------*
+
+
+
+  types : tr_aufnr type range of aufnr,
+          tr_matnr type range of matnr.
+
+  data(r_matnr) =  value tr_matnr( for rs_matnr in lt_component
+                     let s = 'I'
+                         o = 'EQ'
+                      in sign     = s
+                         option   = o
+                       ( low = rs_matnr-material ) ).
+
+
+  select menge, bwart
+   from aufm
+    into table @data(lt_aufm)
+      where matnr in @r_matnr
+        and aufnr eq @gt_data-aufnr
+        and bwart in ('261', '262').

@@ -20,3 +20,12 @@ endloop.
 loop at gt_veri assigning <lf_veri>
 
 endloop.
+
+
+"AT - ENDAT"
+data itab type sorted table of sflight with non-unique key.  
+loop at itab into wa.
+  at new carrid.
+    write: / wa-carrid.
+  endat.
+endloop.

@@ -378,7 +378,9 @@ CALL FUNCTION 'COPF_DETERMINE_DURATION'
    I_UNIT_OF_DURATION       = 'H'
  IMPORTING
    E_DURATION               = i_dur
-
+*----------------------------------------
+"Dile göre haftanın günlerini dön"
+call function 'WEEKDAY_GET'
 *---------------------------------------
 "Bir tarihin haftanın kaçıncı gününe geldiğini veren fonksiyon"
  call function 'DAY_IN_WEEK'.
@@ -387,6 +389,9 @@ call function 'GET_WEEK_INFO_BASED_ON_DATE'
 *---------------------------------------
 "Haftanın gününü dile göre metin olarak döner"
 call FUNCTION 'GET_WEEKDAY_NAME'
+*---------------------------------------
+" Get date of next occuring week day"
+call function '/OSP/GETDATE_WEEKDAY'
 *--------------------------------------
 * RANDOM
 CALL FUNCTION 'RANDOM_12'
@@ -814,3 +819,8 @@ CALL FUNCTION 'BP_EVENT_RAISE'
 "kullanıcı favoriler menusune tcode ekle
 call function 'GUI_ADD_TCODE_TO_FAVORITES'
 *----------------------------------
+"Tarih saat to Timestamp
+call function 'IB_CONVERT_INTO_TIMESTAMP'.
+*----------------------------------
+"Timestamp to tarih saat
+call function 'IB_CONVERT_FROM_TIMESTAMP'
