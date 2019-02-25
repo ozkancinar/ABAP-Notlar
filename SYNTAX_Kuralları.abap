@@ -29,8 +29,8 @@ data text_line type c length 40. " 40 karakterlik metin değişkeni oluşturur
 
 ----- Parameters kullanımı:
 
-- Bir program çalıştırıldığında sistem ekranda input field, 
-  radiobutton gibi nesneler gösterecektir bunlara parameters denir. 
+- Bir program çalıştırıldığında sistem ekranda input field,
+  radiobutton gibi nesneler gösterecektir bunlara parameters denir.
 
 parameters <parametreAdı>[(uzunluk)] [type t] [decimals d] ...
 
