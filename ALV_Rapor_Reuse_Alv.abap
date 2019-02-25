@@ -65,7 +65,7 @@ LOOP AT lt_fieldcat INTO ls_fieldcat.
         ls_fieldcat-edit = 'X'.
         ls_fieldcat-datatype = 'CURR'.
         "Fieldcat options:"
-        "ls_fieldcat-key = 'X'. "key alanlarını işaretle" 
+        "ls_fieldcat-key = 'X'. "key alanlarını işaretle"
         "ls_fieldcat-col_pos  = 1.
         "ls_fieldcat-fieldname = 'ORDER_NUMBER'.
         "ls_fieldcat-seltext_m = 'SİPARİŞ NO'.
@@ -129,7 +129,7 @@ FORM SHOW_ALV .
 *      i_callback_html_top_of_page = 'TOP_OF_PAGE'
 *     i_callback_html_end_of_list = 'END_OF_LIST'
     TABLES
-      t_outtab               = lt_itab 
+      t_outtab               = lt_itab
     EXCEPTIONS
       inconsistent_interface = 1
       program_error          = 2
@@ -151,7 +151,7 @@ FORM user_command USING ok_code LIKE sy-ucomm
   CASE ok_code.
     WHEN 'KAYDET'.
       MESSAGE 'Kayıt butonuna tık' TYPE 'S'.
-      
+
 ***************************************************
 "ALV'de yapılan bir değişikliği yakala
       IF REF_GRID IS INITIAL.
@@ -163,14 +163,14 @@ FORM user_command USING ok_code LIKE sy-ucomm
         CALL METHOD REF_GRID->CHECK_CHANGED_DATA .
       ENDIF.
 ***************************************************
-      
+
       READ TABLE ivals INTO xvals INDEX 0.
       LOOP AT lt_odemeliste INTO wa_odemeliste WHERE YODTUTAR ne 0. "alanları güncelle
 *        READ TABLE lt_odemeliste INTO wa_odemeliste INDEX sy-tabix.
           "lt_odemeliste bizim verilerin olduğu internal table
           "alv üzerinden değişiklik yapıldığında otomatik güncellenir"
           modify lt_odemeliste index gd_tabix  FROM wa_odemeliste .
-          
+
         ENDIF.
       ENDLOOP.
     when '&SHOW'.

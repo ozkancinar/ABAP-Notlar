@@ -657,7 +657,7 @@ call function 'CONVERSION_EXIT_ISOLA_INPUT'
       MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
                  WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
     ENDIF.
-    
+
 FORM set_param_val TABLES record_tab STRUCTURE seahlpres
                  CHANGING shlp        TYPE shlp_descr_t
                           callcontrol LIKE ddshf4ctrl.
@@ -721,7 +721,7 @@ CALL FUNCTION 'HR_IMAGE_EXISTS'
    p_endda               = '99991231'
   IMPORTING
     p_exists              = lv_exist
-    p_connect_info        = 
+    p_connect_info        =
   EXCEPTIONS
     error_connectiontable = 1
     OTHERS                = 2.

@@ -93,9 +93,9 @@ module STATUS_0100 output.
           ls_fieldcat-no_out = 'X' "alan gizlenir
         when 'DATE'.
           "Date conversion exit"
-          ls_fieldcat-datatype = 'DATUM' 
-          ls_fieldcat-inttype = 'D' 
-          ls_fieldcat-intlen = '000008' 
+          ls_fieldcat-datatype = 'DATUM'
+          ls_fieldcat-inttype = 'D'
+          ls_fieldcat-intlen = '000008'
           ls_fieldcat-dd_outlen = '000010'
 
       endcase.
@@ -128,7 +128,7 @@ module USER_COMMAND_0100 input.
     WHEN 'EXIT' OR 'BACK' OR 'CNCL'.
       LEAVE PROGRAM.
     WHEN 'LIST'. "Butonun function kodu unutma!
-     
+
     WHEN OTHERS.
   ENDCASE.
   CLEAR: OK_CODE.

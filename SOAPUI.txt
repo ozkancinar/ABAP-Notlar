@@ -1,2 +1,0 @@
-Web servisle ilgili işlemler için kullanılan yazılım
-https://www.soapui.org/
