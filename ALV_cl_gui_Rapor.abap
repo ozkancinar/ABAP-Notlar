@@ -128,7 +128,9 @@ module USER_COMMAND_0100 input.
     WHEN 'EXIT' OR 'BACK' OR 'CNCL'.
       LEAVE PROGRAM.
     WHEN 'LIST'. "Butonun function kodu unutma!
-
+    WHEN 'SAVE'.
+      g_Grid->check_changed_data( ). "Eğer entera basılmadıysa alvdeki değişiklikleri yakalamak için
+      perform save. 
     WHEN OTHERS.
   ENDCASE.
   CLEAR: OK_CODE.
