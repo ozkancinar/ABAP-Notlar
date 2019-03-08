@@ -2,8 +2,8 @@
 MESSAGE 'Başarılı İşlem' TYPE 'S'.
 MESSAGE 'Hata' TYPE 'E'.
 MESSAGE 'Uyarı Mesajı' TYPE 'W'.
-MESSAGE 'Hata. İşlem sonlandırılıyor. Ekran kapatılıyor' TYPE 'A'.
 MESSAGE 'Uyarı Mesajı' TYPE 'I'. "Uyarı mesajı gösterir kullanıcı ok'e tıkladıüında devam eder
+MESSAGE 'Hata. İşlem sonlandırılıyor. Ekran kapatılıyor' TYPE 'A'.
 MESSAGE 'Short Dump Hatası' TYPE 'X'. "Dump hatası gösterilir pek kullanılmaz
 
 1). MESSAGE 'abs' type 'I'.
@@ -24,7 +24,10 @@ MESSAGE 'Short Dump Hatası' TYPE 'X'. "Dump hatası gösterilir pek kullanılma
                         In the text symbols 003 we have to write the corresponding message.
 10). MESSAGE i003 (<Message Class>) with p_user.
 
+"Mesaj sınıf ve id bilgilerini değişken ile gönder
+MESSAGE ID my_mid TYPE my_mtype NUMBER my_num WITH my_var1 my_var2 my_var3 my_var4 INTO lv_msg_txt.
 
+"BAPIRET2_T mesaj tablosu oluştur:
 *"  IMPORTING
 *"     VALUE(IV_VAL1) TYPE  INT4 OPTIONAL
 *"     VALUE(IV_VAL2) TYPE  INT4 OPTIONAL

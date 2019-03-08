@@ -22,8 +22,8 @@ for(var j = 0 ; j < page; j++)
  for (var i=0; i < fields.length; i++)
  {
   if (fields.item(i).name == "NETWR")
-  {       
-       total = total + fields.item(i).rawValue;            
+  {
+       total = total + fields.item(i).rawValue;
   }
  }
 }
@@ -64,11 +64,79 @@ if (this.rawValue == 1) {
 	this.presence = 'visible';
 }
 else{
-	this.presence = 'hidden';
+  	this.presence = 'hidden';
 }
 
-// Bir group oluştur toplamını alman kolaylaşır 
+// Bir group oluştur toplamını alman kolaylaşır
 // Grand total
 sum(it_mara.DATA[*].group.data[*].ntgew);
 
 page1.table.bodyrow[].all.length //tablo satur sayısı
+
+
+
+1. örnek
+
+var i = 0
+var p = $layout.page(ref($))
+var d = 0
+var qnt = 0.000
+for i = 0 upto (page1.Table2.BodyRow.all.length - 1) step 1 do
+  d = $layout.page(ref(page1.Table2.BodyRow[i].POSNUM))
+  if ( d == p ) then
+      page1.Table2.PageTotal.PLACES = page1.Table2.PageTotal.PLACES + page1.Table2.BodyRow[i].PLACES
+      page1.Table2.PageTotal.BRGEW = page1.Table2.PageTotal.BRGEW + page1.Table2.BodyRow[i].BRGEW
+      qnt = qnt + page1.Table2.BodyRow[i].LFIMG
+      page1.Table2.PageTotal.NETWR = page1.Table2.PageTotal.NETWR + page1.Table2.BodyRow[i].NETWR
+      page1.Table2.PageTotal.VAT = page1.Table2.PageTotal.VAT + page1.Table2.BodyRow[i].VAT
+      page1.Table2.PageTotal.WRBTR = page1.Table2.PageTotal.WRBTR + page1.Table2.BodyRow[i].WRBTR
+  elseif ( d > p ) then
+    break
+  endif
+endfor
+if ( $record.H_HEADER.TOT_QUANT == 0 or $record.H_HEADER.TOT_QUANT == NULL ) then
+  page1.Table2.PageTotal.QUANT = "X"
+else
+  if (qnt == 0) then
+    page1.Table2.PageTotal.QUANT = "-"
+  else
+    page1.Table2.PageTotal.QUANT = Format("zzz,zzz,zz9.999", qnt)
+  endif
+endif
+
+
+2. örnek
+
+
+data.page1.Table2.TOT.EndPageTotal::ready:layout - (FormCalc, client)
+var i = 0
+var p = $layout.page(ref($))
+var d = 0
+var qnt = 0.000
+      page1.Table2.EndPageTotal.PLACES = 0
+      page1.Table2.EndPageTotal.BRGEW = 0
+      page1.Table2.EndPageTotal.NETWR = 0
+      page1.Table2.EndPageTotal.VAT = 0
+      page1.Table2.EndPageTotal.WRBTR = 0
+for i = 0 upto (page1.Table2.BodyRow.all.length - 1) step 1 do
+  d = $layout.page(ref(page1.Table2.BodyRow[i].POSNUM))
+  if ( d == p ) then
+      page1.Table2.EndPageTotal.PLACES = page1.Table2.EndPageTotal.PLACES + page1.Table2.BodyRow[i].PLACES
+      page1.Table2.EndPageTotal.BRGEW = page1.Table2.EndPageTotal.BRGEW + page1.Table2.BodyRow[i].BRGEW
+      qnt = qnt + page1.Table2.BodyRow[i].LFIMG
+      page1.Table2.EndPageTotal.NETWR = page1.Table2.EndPageTotal.NETWR + page1.Table2.BodyRow[i].NETWR
+      page1.Table2.EndPageTotal.VAT = page1.Table2.EndPageTotal.VAT + page1.Table2.BodyRow[i].VAT
+      page1.Table2.EndPageTotal.WRBTR = page1.Table2.EndPageTotal.WRBTR + page1.Table2.BodyRow[i].WRBTR
+  elseif ( d > p ) then
+    break
+  endif
+endfor
+if ( $record.H_HEADER.TOT_QUANT == 0 or $record.H_HEADER.TOT_QUANT == NULL ) then
+  page1.Table2.EndPageTotal.QUANT = "X"
+else
+  if (qnt == 0) then
+    page1.Table2.EndPageTotal.QUANT = "-"
+  else
+    page1.Table2.EndPageTotal.QUANT = Format("zzz,zzz,zz9.999", qnt)
+  endif
+endif
