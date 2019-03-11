@@ -74,7 +74,7 @@ sum(it_mara.DATA[*].group.data[*].ntgew);
 page1.table.bodyrow[].all.length //tablo satur sayısı
 
 
-
+// Sayfa toplam alt toplam vs.
 1. örnek
 
 var i = 0
