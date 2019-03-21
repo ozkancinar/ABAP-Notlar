@@ -824,3 +824,7 @@ call function 'IB_CONVERT_INTO_TIMESTAMP'.
 *----------------------------------
 "Timestamp to tarih saat
 call function 'IB_CONVERT_FROM_TIMESTAMP'
+*---------------------------------
+"Email verification kontrolü
+call function 'SX_INTERNET_ADDRESS_TO_NORMAL '
+*---------------------------------

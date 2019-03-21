@@ -178,23 +178,6 @@ FORM BUILD_COLUMNS  USING LR_COLUMNS
 *
 *  set_text: 'ZPRIDIS' 'PRI Disb' 'PRI Disbursment' 'PRI Disbursment'.
 *
-*  set_text: 'ZPRIEB' 'Pr.Acc' 'Princ.Accum' 'Principal Accumulation'.
-*  set_text: 'ZPRIPCG' '% Pri.Int' '% Pri.Int' '% Princ. Int'.
-*  set_text: 'ZIDC' 'IDC' 'IDC' 'IDC'.
-*
-*  set_text: 'ZIDCEB' 'IDC EB' 'IDC Ending Balance' 'IDC Ending Balance'.
-*  set_text: 'ZIDCPCG' '%IDC Int' '% IDC Interest' '% IDC Interest'.
-*  set_text: 'ZIDCINT' 'IDC Int' 'IDC Interest' 'IDC Interest'.
-*  set_text: 'ZIDCTPB' 'IDCPost' 'IDC To be Posted' 'IDC To be Posted'.
-*
-*  set_text: 'ZIDCINTTBP' 'IDC Int Pst'
-*     'IDC Interest Posted' 'IDC Interest To be Posted'.
-*  set_text: 'WRBTR' 'Amt Post' 'Amount Posted' 'Amount Posted'.
-*  set_text: 'ANLN1' 'AUC No' 'AUC No' 'AUC No'.
-*
-*  set_text: 'BELNR' 'Acc Doc' 'Acc Doc' 'Accounting Document Number'.
-
-
 * HOTSPOT - Tıklanılabilir hücre
 try.
       lr_column ?= lr_columns->get_column( 'VBELN' ).
