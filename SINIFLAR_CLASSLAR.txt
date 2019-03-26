@@ -1,0 +1,1 @@
+CL_SYSTEM_UUID -> Guid oluşturmak için kullanılır
