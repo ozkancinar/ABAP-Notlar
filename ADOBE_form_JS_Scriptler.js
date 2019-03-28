@@ -73,6 +73,8 @@ sum(it_mara.DATA[*].group.data[*].ntgew);
 
 page1.table.bodyrow[].all.length //tablo satur sayısı
 
+//Barkod barcode genişliğini değiştir
+this.ui.barcode.dataLength = '10';
 
 // Sayfa toplam alt toplam vs.
 1. örnek

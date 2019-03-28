@@ -17,7 +17,7 @@ APPEND LINES OF ITAB1 TO ITAB2.
 *Insert: Standard tablelarda kayıt ekler, sorted tablelarda istenilen bir noktaya kayıt ekler, hashed tablelarda  hash algoritmasına göre ekler
 INSERT wa_itab INTO TABLE itab <condition>.
 "Bir internal table ile çok miktarda kayıt eklemek:
-INSERT itab2 <condition2> FROM <connection1>. 
+INSERT itab2 <condition2> FROM <connection1>.
 INSERT CUSTOMERS FROM TABLE t_iTAB. "Database tablosuna internal tablo ile veri atma
 
 LOOP AT TAB INTO TAB_WA.
@@ -41,7 +41,7 @@ commit work.
 ******* /UPDATE *************
 
 ******* MODIFY *************
-*Modify: Internal tableın bir satırın aynı tipteki bir structurla günceller 
+*Modify: Internal tableın bir satırın aynı tipteki bir structurla günceller
 MODIFY TABLE itab FORM wa_itab <conditions>.
 MODIFY dbtable from table gt_data. "Tablodaki verelere göre db tablosunu günceller"
 ******* /MODIFY *************
@@ -57,7 +57,7 @@ data(lv_countit) = lines( gt_data ). " Satır sayısını al"
 
 *>7.40------------------
 TRY.
-    wa_header = it_header[ order_number = ls_siparis-sip_no 
+    wa_header = it_header[ order_number = ls_siparis-sip_no
                            order_type = 'ZP04' ].
   CATCH cx_sy_itab_line_not_found.
 ENDTRY.
@@ -73,10 +73,11 @@ assign gt_makineler[ 1 ] to FIELD-SYMBOL(<fs_makine>).
 ******* /READ *************
 
 ******* /SORT *************
-Sort: Tablolar herhangi bir sütuna göre aşağı veya yukarı yönlü sıralanabilir. Sorted Table''lar sıralanamaz
+"Sort: Tablolar herhangi bir sütuna göre aşağı veya yukarı yönlü sıralanabilir. Sorted Table''lar sıralanamaz
 SORT itab.
 SORT it_flight by percentage. "!Tavsiye edilen!"
 sort gt_data by fiel1 field2.
+sort lt_zmii_f2_adres by barkod tarih descending saat descending.
 ******* /SORT *************
 
 ******* COLLECT *************
@@ -87,16 +88,16 @@ loop at gt_data int gs_data.
 ENDLOOP.
 ******* /COLLECT *************
 
-"Tabloları kopyalamak COPY: 
+"Tabloları kopyalamak COPY:
 ITAB2[] = ITAB1[].
- 
+
 "Tabloları karşılaştırmak:
 IF ITAB1[] = ITAB2[].
 " ...
 ENDIF.
-* Two internal tables are equal if 
-* they have the same number of lines and 
-* each pair of corresponding lines is equal. 
+* Two internal tables are equal if
+* they have the same number of lines and
+* each pair of corresponding lines is equal.
 
 ******* /CLEAR *************
 *Clear: Tabloyu temizler
