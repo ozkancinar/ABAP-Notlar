@@ -10,7 +10,7 @@ insert ls_mara into table t_mara1. "Append kullanılamaz
 ******* APPEND *************
 "Append: Bir structureı internal table''a ekler. Yalnızca standartad table tipi için uygundur. Sorted ve hashed tablolar için insert kullanılır
 APPEND wa_itab to itab.
-APPEND LINES OF ITAB1 TO ITAB2.
+APPEND LINES OF ITAB1 TO ITAB2. "itab + itab
 ******* /APPEND *************
 
 ******* INSERT *************
