@@ -828,3 +828,6 @@ call function 'IB_CONVERT_FROM_TIMESTAMP'
 "Email verification kontrolü
 call function 'SX_INTERNET_ADDRESS_TO_NORMAL '
 *---------------------------------
+"Kullanıcı bilgisayar adını al computer name
+call function ' TMP_GUI_GET_COMPUTERNAME'
+*---------------------------------
