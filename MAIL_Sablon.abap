@@ -92,7 +92,7 @@ FORM CREATE_MAIL .
   add_line '<h3>Merhaba' p_alici.
   add_line ',</h3>' ''.
   add_line '<div>' ''.
-  add_line '<p>Size mutlu bir gün dileriz.<p><hr/>' ''.
+  add_line '<p>İyi Günler.<p><hr/>' ''.
   add_line '<em>Bu mesaj' sy-uname.
   add_line 'tarafından' p_alici.
   add_line '&apos;a gönderilmiştir <br></em>' ''.
