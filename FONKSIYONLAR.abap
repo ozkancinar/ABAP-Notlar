@@ -392,6 +392,9 @@ call FUNCTION 'GET_WEEKDAY_NAME'
 *---------------------------------------
 " Get date of next occuring week day"
 call function '/OSP/GETDATE_WEEKDAY'
+*---------------------------------------
+"Bir tarihe saniye saat ekle
+call function 'C14Z_CALC_DATE_TIME'
 *--------------------------------------
 * RANDOM
 CALL FUNCTION 'RANDOM_12'
@@ -530,6 +533,8 @@ call function 'J_1A_SD_CI_DUEDATE_CHECK'
 "Bir tarihe ay ekle veya çıkart date"
 call function 'HR_JP_ADD_MONTH_TO_DATE'
 "------------------------------------------------"
+"Ayın son günü"
+call function 'RP_LAST_DAY_OF_MONTHS'
 --------------------------------------------------
 * CRM siparişlerini oku
  SELECT guid FROM crmd_orderadm_h INTO TABLE gt_header

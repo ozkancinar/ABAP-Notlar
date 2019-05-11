@@ -1,7 +1,7 @@
 			POPUP MESAJLAR
 
 -----------------------------------
-Popup mesaj göstermek 
+Popup mesaj göstermek
 
 * Standart uyarı popup
 call function 'POPUP_TO_INFORM'
@@ -64,8 +64,13 @@ START-OF-SELECTION.
 
   WRITE ls_selfield-tabindex.
 
---------------------------------------------
-Giriş alanı olan popup input popup 
+""--------------------------------------------
+bapiret2 tablosunu popup şeklinde gösteren fonksiyon
+call function 'RSCRMBW_DISPLAY_BAPIRET2'
+"bapiret2 tablosu popup şeklinde göster
+call function 'C14Z_MESSAGES_SHOW_AS_POPUP'
+"---------------------------------------------
+Giriş alanı olan popup input popup
 
 data: ivals  type table of sval.
 data: xvals  type sval.
@@ -91,7 +96,7 @@ CALL FUNCTION 'POPUP_GET_VALUES'
   IF SY-SUBRC <> 0.
 * Implement suitable error handling here
   ENDIF.
-dönen değer = ivals-VALUE 
+dönen değer = ivals-VALUE
 
 *-----------------------------------------
 Popup Yes-No Question - Evet Hayır Mesajı - Evet Hayır Sorusu
@@ -137,7 +142,7 @@ WRITE lv_answer.
 Evet = 1 - Hayır = 2
 
 ------------------------------------------
-Popup Kaydedilsin mi? 
+Popup Kaydedilsin mi?
 
 DATA : lv_titel(70),
        lv_answer(1).
