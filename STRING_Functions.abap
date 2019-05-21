@@ -1,10 +1,16 @@
-*--------SPLIT 
+*---- string alt satıra geç string enter
+CONCATENATE gv_sbnam gv_telnr gv_email INTO DATA(lv_001) SEPARATED BY cl_abap_char_utilities=>cr_lf.
+read text to text -> call function 'CONVERT_ITF_TO_STREAM_TEXT'
+
+
+*--------SPLIT
 DATA STR(30) VALUE 'SAP IS AN ERP'.
 DATA: S1(5), S2(5), S3(5), S4(5).
   SPLIT STR AT ' ' INTO S1 S2 S3 S4.
+  SPLIT ls_sorumluluk-resp_code at ', ' INTO TABLE lt_resps.
 WRITE :/ S1, / S2, / S3, / S4.
 *-----------------------------------
-*---------SEARCH 
+*---------SEARCH
 DATA STR(30) VALUE 'SAP IS AN ERP'.
 DATA S1(3) VALUE 'AN'.
   SEARCH STR FOR S1.

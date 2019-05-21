@@ -836,3 +836,15 @@ call function 'SX_INTERNET_ADDRESS_TO_NORMAL '
 "Kullanıcı bilgisayar adını al computer name
 call function ' TMP_GUI_GET_COMPUTERNAME'
 *---------------------------------
+"date: YYYYMMDD -> DD/MM/YYYY
+call function 'CONVERSION_EXIT_GDATE_OUTPUT'
+*---------------------------------
+"read_text to text"
+call function 'CONVERT_ITF_TO_STREAM_TEXT'
+"-----------------------------------
+"kullanıcı tarih formatını al user date formatınac
+call function 'SLS_MISC_GET_USER_DATE_FORMAT'
+"------------------------------------
+"tarihi formata çevirir
+call function 'SLS_MISC_CONVERT_TO_DATE'
+"-----------------------------------"

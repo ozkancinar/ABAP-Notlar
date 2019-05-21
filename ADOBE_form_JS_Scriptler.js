@@ -75,6 +75,7 @@ page1.table.bodyrow[].all.length //tablo satur sayısı
 
 //Barkod barcode genişliğini değiştir
 this.ui.barcode.dataLength = '10';
+this.ui.barcode.dataLength = MATNR_SIZE.rawValue;
 
 // Sayfa toplam alt toplam vs.
 1. örnek
