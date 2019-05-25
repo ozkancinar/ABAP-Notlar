@@ -689,3 +689,40 @@ ENDCLASS.
 CLASS lcx_no_material IMPLEMENTATION.
 ENDCLASS.
 *****************/Local Exception Class*************************
+
+****************Read Only Variable***********************************
+CLASS /clean/message_severity DEFINITION PUBLIC CREATE PRIVATE FINAL.
+  PUBLIC SECTION.
+    CLASS-DATA:
+      warning TYPE REF TO /clean/message_severity READ-ONLY,
+      error   TYPE REF TO /clean/message_severity READ-ONLY.
+  " ...
+ENDCLASS.
+
+"An immutable is an object that never changes after its construction.
+"For this kind of object consider using public read-only attributes instead of getter methods.
+"use
+CLASS /clean/some_data_container DEFINITION.
+  PUBLIC SECTION.
+    METHODS constructor
+      IMPORTING
+        a TYPE i
+        b TYPE c
+        c TYPE d.
+    DATA a TYPE i READ-ONLY.
+    DATA b TYPE c READ-ONLY.
+    DATA c TYPE d READ-ONLY.
+ENDCLASS.
+
+"instead of
+CLASS /dirty/some_data_container DEFINITION.
+  PUBLIC SECTION.
+    METHODS get_a ...
+    METHODS get_b ...
+    METHODS get_c ...
+  PRIVATE SECTION.
+    DATA a TYPE i.
+    DATA b TYPE c.
+    DATA c TYPE d.
+ENDCLASS.
+*******************/Read Only Variable********************************

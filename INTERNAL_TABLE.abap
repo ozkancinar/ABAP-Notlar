@@ -2,7 +2,8 @@
 Sorted table: Tüm indexi koymak gerekir. Aşağı ekleme yapılamaz. Sıralamanın tersi bir şey eklenirse dump alır.
 data: t_mara_sorted TYPE SORTED TABLE OF ty_mara,
       t_mara_standard TYPE STANDARD TABLE OF ty_mara,.
-
+DATA itab1 TYPE STANDARD TABLE OF row_type WITH EMPTY KEY. "herhangi bir primary key lazım değilse
+DATA itab2 TYPE STANDARD TABLE OF row_type WITH NON-UNIQUE KEY comp1 comp2. "tekil olmayan keyler tanımlanır
 t_mara_sorted[] = t_mara_standard[]. "Yapılabilir hata vermez
 insert ls_mara into table t_mara1. "Append kullanılamaz
 ******* /SORTED TABLE *************
@@ -70,6 +71,10 @@ ENDIF.
 
 assign gt_makineler[ 1 ] to FIELD-SYMBOL(<fs_makine>).
 *--------------------
+" line_exists
+IF line_exists( my_table[ key = 'A' ] ).
+endif.
+
 ******* /READ *************
 
 ******* /SORT *************

@@ -1,4 +1,4 @@
-			POPUP MESAJLAR
+POPUP MESAJLAR
 
 -----------------------------------
 Popup mesaj göstermek

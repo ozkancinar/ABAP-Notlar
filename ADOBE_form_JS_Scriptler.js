@@ -60,12 +60,14 @@ if(data.Sayfa2.topofpage.TextField10.rawValue != '' || data.Sayfa2.topofpage.Tex
 // Dropdown menünün seçili elementini kontrol etme
 if(this.parent.DropDownList2.selectedIndex == 1)
 
-if (this.rawValue == 1) {
+if (this.rawValue != null || this.rawValue != '') {
 	this.presence = 'visible';
 }
 else{
   	this.presence = 'hidden';
 }
+
+
 
 // Bir group oluştur toplamını alman kolaylaşır
 // Grand total
