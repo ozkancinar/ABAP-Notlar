@@ -576,7 +576,7 @@ call function 'READ_TEXT' "Metin oku"
 call function 'CONVERSION_EXIT_ISOLA_INPUT'
 
 *-----------------------------------------------------
-"f4 help ALV"
+"f4 help ALV search help"
 
  data lt_ret type table of ddshretval. "f4 hep dönüş verisi
     field-symbols: <ft_modi> type lvc_t_modi.
@@ -590,20 +590,9 @@ call function 'CONVERSION_EXIT_ISOLA_INPUT'
         exporting
 *         DDIC_STRUCTURE         = ' '
           retfield     = 'PROJE_TIPI'
-*         PVALKEY      = ' '
-*         DYNPPROG     = ' '
-*         DYNPNR       = ' '
-*         DYNPROFIELD  = ' '
-*         STEPL        = 0
           window_title = 'Proje Seçimi'
-*         VALUE        = ' '
           value_org    = 'S'
-*         MULTIPLE_CHOICE        = ' '
-*         DISPLAY      = ' '
-*         CALLBACK_PROGRAM       = ' '
-*         CALLBACK_FORM          = ' '
-*         CALLBACK_METHOD        =
-*         MARK_TAB     =
+
 * IMPORTING
 *         USER_RESET   =
         tables
@@ -639,15 +628,8 @@ call function 'CONVERSION_EXIT_ISOLA_INPUT'
         dynpprog          = sy-repid    " Current program
         dynpnr            = sy-dynnr    " Screen number
         dynprofield       = 'GS_RANDEVULAR-DOKTOR_NO'    " Name of screen field for value return
-*       stepl             =     " Steploop line of screen field
-*       value             = SPACE    " Field contents for F4 call
-*       multiple_choice   = SPACE    " Switch on multiple selection
-*       display           = SPACE    " Override readiness for input
-*       suppress_recordlist = SPACE    " Skip display of the hit list
         callback_program  = sy-repid    " Program for callback before F4 start
         callback_form     = 'SET_PARAM_VAL'    " Form for callback before F4 start (-> long docu)
-*       callback_method   =     " Interface for Callback Routines
-*       selection_screen  = SPACE    " Behavior as in Selection Screen (->Long Docu)
 *    IMPORTING
 *       user_reset        =     " Single-Character Flag
       TABLES
@@ -662,6 +644,25 @@ call function 'CONVERSION_EXIT_ISOLA_INPUT'
       MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
                  WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
     ENDIF.
+
+"--------------------------------------------------------------
+data lt_return_tab type standard table of ddshretval.
+CALL FUNCTION 'F4IF_FIELD_VALUE_REQUEST'
+EXPORTING
+     searchhelp = 'ZSLV_HR_SH_ENDUSTRILER'
+     tabname     = 'ZCRM_HR_04'
+     fieldname   = 'ENDUSTRI'
+     dynpprog    = sy-repid
+     dynpnr      = sy-dynnr
+     dynprofield = 'GS_PROJE_DETAY-ENDUSTRI'
+TABLES
+ return_tab        = lt_return_tab
+EXCEPTIONS
+ field_not_found   = 1
+ no_help_for_field = 2
+ inconsistent_help = 3
+ no_values_found   = 4
+ OTHERS            = 5.
 
 FORM set_param_val TABLES record_tab STRUCTURE seahlpres
                  CHANGING shlp        TYPE shlp_descr_t
@@ -811,6 +812,25 @@ call function 'DYNP_VALUES_READ'
 *----------------------------------
 "Ekrandaki alanları anında güncellemek için"
 CALL FUNCTION 'DYNP_VALUES_UPDATE'
+"------------------------------------
+"DYNP_VALUES_UPDATE alternatifi ve daha iyisi
+APPEND VALUE #( fieldname = 'GS_PROJE_DETAY-ENDUSTRI_EN' fieldvalue = ls_hr04-endustri_en ) to lt_dynpfields.
+call FUNCTION 'DYNP_UPDATE_FIELDS'
+  EXPORTING
+    dyname                         = sy-repid    " Program Name
+    dynumb                         = '2001'    " Screen Number
+  TABLES
+    dynpfields                     = lt_dynpfields    " Screen field value reset table
+  EXCEPTIONS
+    invalid_abapworkarea           = 1
+    invalid_dynprofield            = 2
+    invalid_dynproname             = 3
+    invalid_dynpronummer           = 4
+    invalid_request                = 5
+    no_fielddescription            = 6
+    undefind_error                 = 7
+    others                         = 8
+  .
 *----------------------------------
 "internal table html dönüşümü"
 call function 'WWW_ITAB_TO_HTML_LAYOUT'
@@ -848,3 +868,6 @@ call function 'SLS_MISC_GET_USER_DATE_FORMAT'
 "tarihi formata çevirir
 call function 'SLS_MISC_CONVERT_TO_DATE'
 "-----------------------------------"
+"virgülden sonraki sıfırlaı siler decimal sıfırlar"
+ call function 'FTR_CORR_SWIFT_DELETE_ENDZERO'
+ "---------------------------------------"
