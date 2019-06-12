@@ -22,7 +22,7 @@ DATA:
 DATA :
   OK_CODE LIKE sy-ucomm.
 
-START-OF-SELECTION.
+START-OF-SELECTION. 
 
  CALL SCREEN 100.
 *&---------------------------------------------------------------------*
@@ -130,7 +130,7 @@ module USER_COMMAND_0100 input.
     WHEN 'LIST'. "Butonun function kodu unutma!
     WHEN 'SAVE'.
       g_Grid->check_changed_data( ). "Eğer entera basılmadıysa alvdeki değişiklikleri yakalamak için
-      perform save. 
+      perform save.
     WHEN OTHERS.
   ENDCASE.
   CLEAR: OK_CODE.
