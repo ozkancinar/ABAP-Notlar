@@ -388,7 +388,7 @@ call function 'WEEKDAY_GET'
 call function 'GET_WEEK_INFO_BASED_ON_DATE'
 *---------------------------------------
 "Haftanın gününü dile göre metin olarak döner"
-call FUNCTION 'GET_WEEKDAY_NAME'
+call FUNCTION 'ISP_GET_WEEKDAY_NAME'
 *---------------------------------------
 " Get date of next occuring week day"
 call function '/OSP/GETDATE_WEEKDAY'
@@ -744,43 +744,17 @@ IF lv_exist EQ '1'.
       stor_cat             =  space   " Category
       crep_id              =   lt_connect_info-archiv_id  " Repository (Only Allowed if Category = SPACE)
       doc_id               =  lt_connect_info-arc_doc_id    " Document ID
-*      phio_id              =     " PHIO ID if Known, May Be Shorter than DocID
       comp_id              = 'DATA'    " Component ID
-*      signature            = 'X'    " Sign URL for Access to Document ("X" Yes, SPACE No)
-*      security             = SPACE    " 'F' Frontend, 'B' Backend
-*      use_location         = 'A'    " Location Use ("A" Automatic, "E" Explicit, "S" Set/Get Param
-*      location             = SPACE    " Location as distribution criterion
-*      http_url_only        = SPACE    " Only Return HTTP URL
       dp_url_only          = 'X'    " Only Return DataProvider URL
-*      lifetime             = SPACE    " Lifetime for DP URLs
-*      no_cache             = SPACE    " Screens, display user entry
-*      expiration           =     " UTC Time Stamp in Short Form (YYYYMMDDhhmmss)
-*      pdf_mode             = SPACE
-*      url_extention        = SPACE
-*      force_get            = SPACE    " Force Get-Request - No docGet
     IMPORTING
       url                  = url    " Generated URL
-    EXCEPTIONS
-      error_config         = 1
-      error_parameter      = 2
-      error_signature      = 3
-      http_not_supported   = 4
-      docget_not_supported = 5
-      not_accessable       = 6
-      data_provider_error  = 7
-      tree_not_supported   = 8
-      not_supported        = 9
-      others               = 10
     .
-  IF sy-subrc <> 0.
-   MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
-              WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
-  ENDIF.
-
+*------------------------------------
+"HR personel bilgilerini oku
+call function 'HREIC_READ_EMPDATA'
 *------------------------------------
 "Excel xls dosyalarını sap yükle"
 call function 'TEXT_CONVERT_XLS_TO_SAP'
-
 *------------------------------------
 "Mesaj sınıfındaki mesaj numaasının metnini döndür"
 call FUNCTION 'MESSAGE_TEXT_BUILD'
@@ -811,9 +785,20 @@ call function 'VIEW_MAINTENANCE_CALL'
 call function 'DYNP_VALUES_READ'
 *----------------------------------
 "Ekrandaki alanları anında güncellemek için"
-CALL FUNCTION 'DYNP_VALUES_UPDATE'
+DATA lt_dynpfields  TYPE STANDARD TABLE OF dynpread .
+CLEAR lt_dynpfields.
+APPEND VALUE #( fieldname = |GS_PROJE_DETAY-{ lv_field }| fieldvalue = COND #( WHEN field EQ 'ENDUSTRI' THEN ls_hr04-endustri ELSE ls_hr04-endustri_en ) ) TO lt_dynpfields.
+APPEND VALUE #( fieldname = |GS_PROJE_DETAY-{ lv_field2 }| fieldvalue = lv_text ) TO lt_dynpfields.
+call FUNCTION 'DYNP_VALUES_UPDATE'
+  EXPORTING
+    dyname               = sy-repid
+    dynumb               = sy-dynnr
+  TABLES
+    dynpfields           = lt_dynpfields
+  .
 "------------------------------------
 "DYNP_VALUES_UPDATE alternatifi ve daha iyisi
+"f4 helpte kullandığında sapıtabiliyor. Dikkat etmek gerekli
 APPEND VALUE #( fieldname = 'GS_PROJE_DETAY-ENDUSTRI_EN' fieldvalue = ls_hr04-endustri_en ) to lt_dynpfields.
 call FUNCTION 'DYNP_UPDATE_FIELDS'
   EXPORTING
@@ -867,6 +852,9 @@ call function 'SLS_MISC_GET_USER_DATE_FORMAT'
 "------------------------------------
 "tarihi formata çevirir
 call function 'SLS_MISC_CONVERT_TO_DATE'
+*------------------------------------
+"belirtilen tarihler aralığındaki tatilleri verir
+call function 'HOLIDAY_GET'
 "-----------------------------------"
 "virgülden sonraki sıfırlaı siler decimal sıfırlar"
  call function 'FTR_CORR_SWIFT_DELETE_ENDZERO'

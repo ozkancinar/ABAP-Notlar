@@ -55,6 +55,7 @@ READ TABLE it_header INTO wa_header with key order_number = ls_siparis-sip_no
                             order_type = 'ZP04' BINARY SEARCH.
 
 data(lv_countit) = lines( gt_data ). " Satır sayısını al"
+IF NOT line_exists( lt_second_units[ table_line = 'TRY' ] ). "eğer variable table ise"
 
 *>7.40------------------
 TRY.
