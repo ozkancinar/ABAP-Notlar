@@ -16,7 +16,10 @@ APPEND LINES OF ITAB1 TO ITAB2. "itab + itab
 
 ******* INSERT *************
 *Insert: Standard tablelarda kayıt ekler, sorted tablelarda istenilen bir noktaya kayıt ekler, hashed tablelarda  hash algoritmasına göre ekler
-INSERT wa_itab INTO TABLE itab <condition>.
+"sorted
+INSERT wa_itab INTO TABLE itab <condition>. "sorted"
+insert LINES OF VALUE if_alv=>tt_malzemeler( for wa1 in go_toplu_giris->t_malzemeler_list where ( sel = 'X' ) ( wa1 ) ) into TABLE lt_mats.
+
 "Bir internal table ile çok miktarda kayıt eklemek:
 INSERT itab2 <condition2> FROM <connection1>.
 INSERT CUSTOMERS FROM TABLE t_iTAB. "Database tablosuna internal tablo ile veri atma
