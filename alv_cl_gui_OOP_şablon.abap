@@ -507,6 +507,7 @@ form build_fieldcat  using p_val changing pt_fieldcat type lvc_t_fcat.
           ls_fcat-edit = 'X'.
           ls_fcat-just = 'X'.
           ls_fcat-f4availabl = 'X'.
+          ls_fcat-outputlen = 30. "hücre genişliği
 
         when 'NAME1' or 'ADRES' or 'TELF1' or 'SORUMLU_TEL' or
              'STENR' or 'NAKLIYE_UCRET' or 'FKDAT' or 'ACIKLAMA' or

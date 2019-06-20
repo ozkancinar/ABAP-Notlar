@@ -859,3 +859,18 @@ call function 'HOLIDAY_GET'
 "virgülden sonraki sıfırlaı siler decimal sıfırlar"
  call function 'FTR_CORR_SWIFT_DELETE_ENDZERO'
  "---------------------------------------"
+"data element textini döndür header
+call function 'DDIF_DOMA_GET'
+*-----------------------------------------
+"tooltipli ve metinli icon yarat"
+CALL FUNCTION 'ICON_CREATE'
+    EXPORTING
+      name       = '@08@'    " Icon name  (Name from INCLUDE <ICON> )
+      text       = ''    " Icon text (shown behind)
+      info       = 'Tooltip Info'    " Quickinfo (if SPACE: standard quickinfo)
+      add_stdinf = 'X'    " 'X': Qinfo.   ' ': No Qinfo, no std. Qinfo
+    IMPORTING
+      result     = lv_icon.
+*----------------------------------------
+"domain fixed valueyu oku"
+call function 'DD_DOMVALUES_GET'

@@ -10,3 +10,18 @@ CL_GUI_FRONTEND_SERVICES ""-> dosya yükle, indir, işletim sistemi, gui bilgile
 /UI2/CL_JSON ""-> json
 /UI5/CL_JSON_UTIL ""-> json
 C_UTILS ""-> bir çok konuda işe yarar metotlara sahip
+
+
+"---------------------------------------------------"
+"değişken tipini döndür
+cl_abap_elemdescr=>describe_by_name(
+  EXPORTING
+    p_name         =  'MATNR'   " Type name
+  RECEIVING
+    p_descr_ref    = data(lo_ref)    " Reference to description object
+).
+lv_data_kind = lo_ref->type_kind.
+
+*------------------------------------------------------
+*data element metni
+CL_ABAP_STRUCTDESCR  DESCRIBE_BY_NAME GET_DDIC_FIELD
