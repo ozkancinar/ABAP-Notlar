@@ -863,6 +863,7 @@ call function 'HOLIDAY_GET'
 call function 'DDIF_DOMA_GET'
 *-----------------------------------------
 "tooltipli ve metinli icon yarat"
+data lv_icon type char20.
 CALL FUNCTION 'ICON_CREATE'
     EXPORTING
       name       = '@08@'    " Icon name  (Name from INCLUDE <ICON> )

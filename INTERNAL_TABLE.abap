@@ -37,6 +37,7 @@ DELETE itab [ INDEX index I WHERE condition ].
 DELETE ITAB FROM 450 TO 550.
 DELETE itab WHERE field NOT IN select_option...
 DELETE DBTABLE where field eq 'something'.
+DELETE lt_mblnr[] WHERE MBLNR IN lr_mblnr_del.
 ******* /DELETE *************
 
 ******* UPDATE *************
