@@ -23,3 +23,4 @@ prolink_dev -> SAPMZTM_MM_RF_002 "step loop örnek
 DEMO_DYNPRO_F4_HELP_MODULE "dynpro f4 help
 BCALV_TEST_GRID_EDIT "alv f4 help"
 DEMO_SQL_* "yeni sql özellikleri"
+SABAPDEMOS "paketi cds, amdp, xml vs."
