@@ -115,6 +115,25 @@ at selection-screen output.
 
   SELECTION-SCREEN end of BLOCK b3.
 
+  SELECTION-SCREEN:
+    BEGIN OF SCREEN 500 AS WINDOW TITLE title,
+      PUSHBUTTON 2(10)  but1 USER-COMMAND cli1,
+      PUSHBUTTON 12(30) but2 USER-COMMAND cli2
+                             VISIBLE LENGTH 10,
+    END OF SCREEN 500.
+
+  AT SELECTION-SCREEN.
+    CASE sscrfields.
+      WHEN 'CLI1'.
+        ...
+      WHEN 'CLI2'.
+        ...
+    ENDCASE.
+
+  START-OF-SELECTION.
+    title  = 'Push button'.
+    but1 = 'Button 1'. 
+
   TYPE-POOLs icon.
   data functxt TYPE smp_dyntxt.
 
