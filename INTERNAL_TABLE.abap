@@ -8,6 +8,11 @@ t_mara_sorted[] = t_mara_standard[]. "Yapılabilir hata vermez
 insert ls_mara into table t_mara1. "Append kullanılamaz
 ******* /SORTED TABLE *************
 
+******* HASHED TABLE *************
+data itab like hashed table of line with unique key col1.
+DATA htab TYPE HASHED TABLE OF skb1 WITH UNIQUE KEY bukrs  saknr.
+******* /HASHED TABLE *************
+
 ******* APPEND *************
 "Append: Bir structureı internal table''a ekler. Yalnızca standartad table tipi için uygundur. Sorted ve hashed tablolar için insert kullanılır
 APPEND wa_itab to itab.
@@ -33,6 +38,7 @@ ENDLOOP.
 *Delete: Internal tabledan bir satır siler
 DELETE TABLE itab FROM wa_itab.
 DELETE ADJACENT DUPLICATES FROM ITAB COMPARING K.
+DELETE ADJACENT DUPLICATES FROM itab COMPARING ALL FIELDS.
 DELETE itab [ INDEX index I WHERE condition ].
 DELETE ITAB FROM 450 TO 550.
 DELETE itab WHERE field NOT IN select_option...
@@ -60,7 +66,7 @@ READ TABLE it_header INTO wa_header with key order_number = ls_siparis-sip_no
 
 data(lv_countit) = lines( gt_data ). " Satır sayısını al"
 IF NOT line_exists( lt_second_units[ table_line = 'TRY' ] ). "eğer variable table ise"
-
+ASSIGN lt_table[ sy-tfill ] to <last_line>. "son satırı oku
 *>7.40------------------
 TRY.
     wa_header = it_header[ order_number = ls_siparis-sip_no

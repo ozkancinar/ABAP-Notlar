@@ -567,7 +567,9 @@ call function 'RP_LAST_DAY_OF_MONTHS'
 *       OTHERS             = 7
       .
 *------------------------------------------------------
-
+"iki tarih arası fark
+call function 'FIMA_DAYS_AND_MONTHS_AND_YEARS'
+"------------------------------------------------------
 call function 'READ_TEXT' "Metin oku"
 
 *------------------------------------------------------

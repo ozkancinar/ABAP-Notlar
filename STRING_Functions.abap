@@ -60,9 +60,11 @@ data len type i.
   len = STRLEN( STR ).
 write len.
 *----------------------------------
-*Tip aktarımı
+*Tip referans aktarımı
 write ls_mara-menge to lv_str unit ls_mara-meins.
-
+"----------------------------------
+" text to xstring text= Miller -> xtext= 3F373D3D2F49010A018F09 
+CONVERT TEXT line-text INTO SORTABLE CODE line-xtext.
 ****** Comparing string ********
 IF p_string eq c_abc.
   NEW-LINE.

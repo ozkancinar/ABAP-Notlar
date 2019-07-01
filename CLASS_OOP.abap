@@ -680,8 +680,25 @@ CLASS lcl_material_data DEFINITION .
                       EXCEPTIONS
                         invalid_material. "Raised when material is invalid
 ENDCLASS.
-
 *****************/Exception Handling*************************
+
+****************** Type Of Exception *************************
+DATA number TYPE string.
+  out = cl_demo_output=>new( ).
+  cl_demo_input=>request( CHANGING field = number ).
+  TRY.
+      my_sqrt( number ).
+    CATCH cx_root INTO DATA(exc).
+      CASE TYPE OF exc.
+        WHEN TYPE cx_sy_arithmetic_error.
+          out->display( 'Arithmetic error' ).
+        WHEN TYPE cx_sy_conversion_error.
+          out->display( 'Conversion error' ).
+        WHEN OTHERS.
+          out->display( 'Other error' ).
+      ENDCASE.
+  ENDTRY.
+**************** /Type Of Exception ***************************
 
 *****************Local Exception Class**************************
 CLASS lcx_no_material DEFINITION INHERITING FROM cx_static_check.
