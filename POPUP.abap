@@ -123,24 +123,6 @@ CALL FUNCTION 'POPUP_TO_CONFIRM'
     parameter               = lt_parameter.
 
 Evet = 1 - Hayır = 2
-
-------------------------------------------
-Popup Confirm Mesajı - Popup Onay
-
-DATA lv_answer(1).
-
-CALL FUNCTION 'POPUP_TO_CONFIRM'
-  EXPORTING
-    titlebar              = 'Warning'
-    text_question         = 'Do you want to continue?'
-    iv_quickinfo_button_1 = 'Continue'
-  IMPORTING
-    answer                = lv_answer.
-
-WRITE lv_answer.
-
-Evet = 1 - Hayır = 2
-
 ------------------------------------------
 Popup Kaydedilsin mi?
 
@@ -163,16 +145,22 @@ CALL FUNCTION 'POPUP_TO_CONFIRM_DATA_LOSS'
 Evet = J Hayır = N Iptal = A
 
 -------------------------------------------
-Popup Bilgilendirme
+"Hata POPUP. is_error boş ise uyarı mesajı gösterir
+"MESSAGE E103 INTO data(msg).
+call FUNCTION 'FC_POPUP_ERR_WARN_MESSAGE'
+  EXPORTING
+    popup_title  = 'Hata'(007)
+    is_error     = 'X'
+    message_text = msg.
+*------------------------------------------
+"radio button şeklinde seçim imkanı sunan popup
+data lt_spopli type standard table of spopli .
 
-DATA :  lv_titel(35),
-        lv_txt1(80),
-        lv_txt2(80),
-        lv_txt3(80),
-        lv_txt4(80).
-
-lv_titel = 'Title'.
-lv_txt1  = 'First Line'.
-lv_txt2  = 'Second Line'.
-lv_txt3  = 'Third Line'.
-lv_txt4  = 'Forth Line'.
+call FUNCTION 'POPUP_TO_DECIDE_LIST'
+  EXPORTING
+    textline1          = 'Varyant Seçiniz'    " first text line
+    titel              = 'Varyant Seçimi'    " Popup header line
+  TABLES
+    t_spopli           = lt_spopli    " Possible Selections
+.
+*-----------------------------------------

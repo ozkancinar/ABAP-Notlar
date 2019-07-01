@@ -6,6 +6,12 @@ DATA itab1 TYPE STANDARD TABLE OF row_type WITH EMPTY KEY. "herhangi bir primary
 DATA itab2 TYPE STANDARD TABLE OF row_type WITH NON-UNIQUE KEY comp1 comp2. "tekil olmayan keyler tanımlanır
 t_mara_sorted[] = t_mara_standard[]. "Yapılabilir hata vermez
 insert ls_mara into table t_mara1. "Append kullanılamaz
+TRY . "dublicate error hatasının yakalanması"
+  lt_data = VALUE #( ( field1 = 'aa' field2 = 'bb' )
+                     ( field1 = 'aa' field2 = 'bb' ) ).
+CATCH CX_SY_ITAB_ERROR INTO data(err).
+  data(text) = err->get_text( ).
+ENDTRY.
 ******* /SORTED TABLE *************
 
 ******* HASHED TABLE *************
