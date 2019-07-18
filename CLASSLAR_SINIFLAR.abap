@@ -6,3 +6,4 @@ CL_GUI_HTML_VIEWER - Ekranda HTML dosyası veya web sayfası görüntülenmesini
 CL_SIMPLE_TREE_MODEL - Ağaç yapısındaki hiyerarşik liste formunu ekranda göstermeyi sağlar
 CL_BDS_DOCUMENT_SET - BDS document oaor
 CL_GUI_PROPS_CONSUMER "gui operations"
+CL_APPOINTMENT "outlook event yaratma sınıfı

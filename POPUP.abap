@@ -164,3 +164,7 @@ call FUNCTION 'POPUP_TO_DECIDE_LIST'
     t_spopli           = lt_spopli    " Possible Selections
 .
 *-----------------------------------------
+"popup text editör
+call function 'CATSXT_SIMPLE_TEXT_EDITOR'
+*-----------------------------------------
+ 

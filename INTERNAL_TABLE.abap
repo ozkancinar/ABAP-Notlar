@@ -1,5 +1,5 @@
 ******* /SORTED TABLE **************
-Sorted table: Tüm indexi koymak gerekir. Aşağı ekleme yapılamaz. Sıralamanın tersi bir şey eklenirse dump alır.
+"Sorted table: Tüm indexi koymak gerekir. Aşağı ekleme yapılamaz. Sıralamanın tersi bir şey eklenirse dump alır.
 data: t_mara_sorted TYPE SORTED TABLE OF ty_mara,
       t_mara_standard TYPE STANDARD TABLE OF ty_mara,.
 DATA itab1 TYPE STANDARD TABLE OF row_type WITH EMPTY KEY. "herhangi bir primary key lazım değilse
