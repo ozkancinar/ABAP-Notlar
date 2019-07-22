@@ -1,8 +1,17 @@
 *---- string alt satıra geç string enter
 CONCATENATE gv_sbnam gv_telnr gv_email INTO DATA(lv_001) SEPARATED BY cl_abap_char_utilities=>cr_lf.
 read text to text -> call function 'CONVERT_ITF_TO_STREAM_TEXT'
-
-
+*--------SUBSTRING
+"Substring with Offset and length
+result = substring( val = ‘ABCDEFGH’ off = 2 len = 3 ). "OUTPUT:   CDE
+"Substring From
+result = substring_from( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   CDEFGH
+"Substring After
+result = substring_after( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   EFGH
+"Substring Before
+result = substring_brfore( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   AB
+"Substring To
+result = substring_to( val = ‘ABCDEFGH’ sub = ‘CD’ ). " OUTPUT:   ABCD
 *--------SPLIT
 DATA STR(30) VALUE 'SAP IS AN ERP'.
 DATA: S1(5), S2(5), S3(5), S4(5).
@@ -32,6 +41,7 @@ WRITE STR COLOR 5.
 DATA STR(20) VALUE 'ABAP IS IN SAP'.
   SHIFT STR CIRCULAR BY 5 PLACES.
 WRITE STR COLOR 5.
+SHIFT str right by 1 PLACES. "son karakteri sil
 *--------------------------------------
 *---------TRANSLATE Stringin harf boyutunu ayarlar. Küçük veya büyük
 DATA STR(10) VALUE 'CHENNAIÇğÜ'.
@@ -58,12 +68,15 @@ WRITE STR.
 data str(30) value 'ITALY IS GREAT'.
 data len type i.
   len = STRLEN( STR ).
+"son karakteri ekrana yaz
 write len.
+a = strlen( str ) - 1.
+write str+a(1).
 *----------------------------------
 *Tip referans aktarımı
 write ls_mara-menge to lv_str unit ls_mara-meins.
 "----------------------------------
-" text to xstring text= Miller -> xtext= 3F373D3D2F49010A018F09 
+" text to xstring text= Miller -> xtext= 3F373D3D2F49010A018F09
 CONVERT TEXT line-text INTO SORTABLE CODE line-xtext.
 ****** Comparing string ********
 IF p_string eq c_abc.
