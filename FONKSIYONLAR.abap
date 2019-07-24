@@ -879,3 +879,6 @@ CALL FUNCTION 'ICON_CREATE'
 call function 'DD_DOMVALUES_GET'
 *---------------------------------------
 call function 'F4IF_SHLP_EXIT_EXAMPLE'
+*---------------------------------------
+"trigger event programmatically
+call function 'SWE_EVENT_CREATE'

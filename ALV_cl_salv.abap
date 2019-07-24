@@ -34,6 +34,21 @@ CLASS LCL_EVENT DEFINITION.
 
         on_single_click FOR EVENT link_click
         of cl_salv_events_table IMPORTING ROW COLUMN.
+    methods:
+      on_top_of_page for event top_of_page of cl_salv_events_table
+        importing r_top_of_page page table_index,
+
+      on_end_of_page for event end_of_page of cl_salv_events_table
+        importing r_end_of_page page.
+    methods:
+      on_user_command for event added_function of cl_salv_events
+        importing e_salv_function,
+
+      on_before_salv_function for event before_salv_function of cl_salv_events
+        importing e_salv_function,
+
+      on_after_salv_function for event after_salv_function of cl_salv_events
+        importing e_salv_function.
 
 ENDCLASS.               "LCL_EVENT
 
@@ -57,7 +72,7 @@ START-OF-SELECTION.
       UP TO 100 ROWS.
 
   data ls_key type salv_s_layout_key .
-  
+
   TRY.
       CALL METHOD CL_SALV_TABLE=>FACTORY
 *          EXPORTING
@@ -76,6 +91,7 @@ START-OF-SELECTION.
 
   lcl_function = lcl_salv->get_functions( ).
   lcl_function->set_default( abap_true ).
+  lcl_function->set_all( abap_true ). "alternatif"
 
   lr_columns = lcl_salv->get_columns( ).
   PERFORM build_columns USING lr_columns.
@@ -95,6 +111,11 @@ START-OF-SELECTION.
   CREATE OBJECT gr_events.
   set handler gr_events->on_double_click for lr_events.
   set HANDLER gr_events->on_single_click FOR lr_events.
+
+  "-top of page bknz. SALV_DEMO_TABLE_FORM_EVENTS
+  DATA: lr_content TYPE REF TO cl_salv_form_element.
+  set_top_of_page( CHANGING cr_content = lr_content ).
+  go_salv->set_top_of_list( lr_content ).
 
 *... set list title
 *  data: lr_display_settings type ref to cl_salv_display_settings,
@@ -230,3 +251,54 @@ form show_cell_info using i_level  type i
   endif.
 
 endform.                    " show_cell_info
+
+METHOD set_top_of_page.
+  DATA: lr_grid   TYPE REF TO cl_salv_form_layout_grid,
+         lr_grid_1 TYPE REF TO cl_salv_form_layout_grid,
+         lr_label  TYPE REF TO cl_salv_form_label,
+         lr_text   TYPE REF TO cl_salv_form_text,
+         l_text    type string.
+
+   CREATE OBJECT lr_grid.
+   l_text = 'TOP OF PAGE for the report' .
+   lr_grid->create_header_information(
+     row    = 1
+     column = 1
+     text    = l_text
+     tooltip = l_text ).
+
+   lr_grid->add_row( ).
+
+   lr_grid_1 = lr_grid->create_grid(
+                 row    = 3
+                 column = 1 ).
+
+   lr_label = lr_grid_1->create_label(
+     row     = 1
+     column  = 1
+     text    = 'Number of Data Records'
+     tooltip = 'Number of Data Records' ).
+
+   lr_text = lr_grid_1->create_text(
+     row     = 1
+     column  = 2
+     text    = '10'
+     tooltip = '10' ).
+
+   lr_label->set_label_for( lr_text ).
+   lr_label = lr_grid_1->create_label(
+     row    = 2
+     column = 1
+     text    = 'date'
+     tooltip = 'date' ).
+
+   l_text = 'today'.
+   lr_text = lr_grid_1->create_text(
+     row    = 2
+     column = 2
+     text    = 'today'
+     tooltip = 'today' ).
+
+   lr_label->set_label_for( lr_text ).
+   cr_content = lr_grid.
+ENDMETHOD.
