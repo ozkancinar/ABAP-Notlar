@@ -877,3 +877,5 @@ CALL FUNCTION 'ICON_CREATE'
 *----------------------------------------
 "domain fixed valueyu oku"
 call function 'DD_DOMVALUES_GET'
+*---------------------------------------
+call function 'F4IF_SHLP_EXIT_EXAMPLE'

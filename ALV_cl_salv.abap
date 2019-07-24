@@ -56,6 +56,8 @@ START-OF-SELECTION.
   SELECT * FROM vbap INTO TABLE lt_vbap
       UP TO 100 ROWS.
 
+  data ls_key type salv_s_layout_key .
+  
   TRY.
       CALL METHOD CL_SALV_TABLE=>FACTORY
 *          EXPORTING

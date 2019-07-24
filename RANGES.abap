@@ -1,3 +1,15 @@
+"----------Range SELECT-----------------------------"
+TYPES: tr_matnr TYPE RANGE OF matnr.
+
+data(lr_matnr) = VALUE tr_matnr( for ls_afpo in lt_afpo
+                                  let s = 'I'
+                                  o = 'EQ'
+                                  in sign   = s
+                                  option = o
+                                  ( low = ls_afpo-matnr ) ).
+
+  *--------------------------------------------------------*
+
  DATA: lr_range TYPE RANGE OF vbap-pstyv,
         ls_range LIKE LINE OF lr_range.
 
@@ -33,28 +45,6 @@
   IF gs_rapor-departman IS NOT INITIAL.
     lr_departman = VALUE #( ( option = 'EQ' sign = 'I' low = gs_rapor-departman ) ).
   ENDIF.
-
-"----------Range SELECT-----------------------------"
-TYPES: tr_matnr TYPE RANGE OF matnr.
-
-SELECT *
- FROM afpo
-  INTO TABLE @DATA(lt_afpo)
-    WHERE dauat EQ 'ZP01'.
-
-data(lr_matnr) = VALUE tr_matnr( for ls_afpo in lt_afpo
-                                 let s = 'I'
-                                     o = 'EQ'
-                                  in sign   = s
-                                     option = o
-                                  ( low = ls_afpo-matnr ) ).
-
-SELECT * FROM makt
-    INTO TABLE @data(lt_maktx)
-        WHERE matnr in @lr_matnr
-          and spras eq @sy-langu. 
-*--------------------------------------------------------*
-
 
 
   types : tr_aufnr type range of aufnr,
