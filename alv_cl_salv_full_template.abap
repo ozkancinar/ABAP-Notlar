@@ -8,7 +8,30 @@ REPORT zoz_salv_full.
 CLASS lcl_salv DEFINITION.
 
   PUBLIC SECTION.
-    DATA t_data TYPE TABLE OF mara.
+    TYPES: BEGIN OF ty_data,
+             icon      TYPE icon_d,
+             reason    TYPE string,
+             t_resdrop TYPE salv_t_int4_column,
+             checkbox  TYPE sap_bool,
+             matnr     TYPE matnr,
+             ersda     TYPE ersda,
+             ernam     TYPE  ernam,
+             laeda     TYPE  laeda,
+             aenam     TYPE  aenam,
+             vpsta     TYPE  vpsta,
+             pstat     TYPE  pstat_d,
+             lvorm     TYPE  lvoma,
+             mtart     TYPE  mtart,
+             mbrsh     TYPE  mbrsh,
+             matkl     TYPE  matkl,
+             bismt     TYPE  bismt,
+             meins     TYPE  meins,
+             bstme     TYPE  bstme,
+             zeinr     TYPE  dzeinr,
+             cellcolor TYPE lvc_t_scol,
+           END OF ty_data.
+
+    DATA t_data TYPE TABLE OF ty_data.
     "-ALV Declarations
     DATA o_alv TYPE REF TO cl_salv_table.
     METHODS: init.
@@ -20,13 +43,16 @@ CLASS lcl_salv DEFINITION.
                                m_text     TYPE scrtext_m
                                l_text     TYPE scrtext_l
                      CHANGING  lo_columns TYPE REF TO cl_salv_columns_table.
-    METHODS set_color IMPORTING name TYPE lvc_fname
-                                col TYPE lvc_col
-                                int  type lvc_int
-                                inv  type lvc_inv
-                      changing lo_columns TYPE REF TO cl_salv_columns_table.
+    METHODS set_color IMPORTING name       TYPE lvc_fname
+                                col        TYPE lvc_col
+                                int        TYPE lvc_int
+                                inv        TYPE lvc_inv
+                      CHANGING  lo_columns TYPE REF TO cl_salv_columns_table.
 
 
+    "*-----------------EVENTS-------------------------*
+    METHODS on_link_click FOR EVENT link_click OF cl_salv_events_table
+      IMPORTING row column.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -40,7 +66,57 @@ CLASS lcl_salv IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_data.
-    SELECT * FROM mara INTO TABLE t_data.
+    FIELD-SYMBOLS <data> TYPE ty_data.
+
+    SELECT * FROM mara INTO CORRESPONDING FIELDS OF TABLE t_data.
+
+    "*-----------------Insert dropdown data for reason-------------------------*
+*    DATA: ls_dropdown TYPE salv_s_int4_column,
+*          lt_dropdown TYPE salv_t_int4_column.
+*
+*    LOOP AT t_data ASSIGNING FIELD-SYMBOL(<data>).
+*      <data>-reason = |Reason{ <data>-ersda }|.
+*      IF sy-tabix < 3.
+*        ls_dropdown-columnname = 'REASON'.
+*        ls_dropdown-value      = sy-tabix.
+*        APPEND ls_dropdown TO lt_dropdown.
+*
+*        <data>-t_resdrop = lt_dropdown.
+*      ENDIF.
+*      CLEAR: ls_dropdown, lt_dropdown.
+*    ENDLOOP.
+
+    "*-----------------Cell Coloring-------------------------*
+    DATA: ls_color TYPE lvc_s_scol,
+          lt_color TYPE lvc_t_scol.
+    LOOP AT t_data ASSIGNING <data>.
+      IF sy-tabix MOD 2 = 0.
+        ls_color-fname     = 'AENAM'.
+        ls_color-color-col = 6.
+        ls_color-color-int = 0.
+        ls_color-color-inv = 0.
+        APPEND ls_color TO lt_color.
+      ELSEIF sy-tabix MOD 3 = 0.
+        ls_color-fname     = 'PSTAT'.
+        ls_color-color-col = 3.
+        ls_color-color-int = 0.
+        ls_color-color-inv = 0.
+        APPEND ls_color TO lt_color.
+      ELSEIF sy-tabix MOD 5 = 0.
+        "satır renklendirmek için fname alanını boş bırak
+        ls_color-color-col = 4.
+        ls_color-color-int = 1.
+        ls_color-color-inv = 0.
+        APPEND ls_color TO lt_color.
+      ENDIF.
+
+      <data>-cellcolor = lt_color.
+
+      "icon
+      <data>-icon = '@0V@'.
+      CLEAR: ls_color, lt_color.
+    ENDLOOP.
+
   ENDMETHOD.
 
   METHOD display_alv.
@@ -82,13 +158,41 @@ CLASS lcl_salv IMPLEMENTATION.
     lo_display->set_list_header( 'SALV Full Template' ). "gui_title
     lo_display->set_horizontal_lines( cl_salv_display_settings=>false ). "yatay çerçeve çizgisi
     lo_display->set_vertical_lines( cl_salv_display_settings=>true ). "dikey çerçeve çizgisi
-
+    lo_display->set_list_header( |Number of displayed rows: { lines( t_data ) }| ). "üstte satır sayısını göster
     "*-----------------Columns - Fieldcatalog-------------------------*
     lo_columns = o_alv->get_columns( ).
     lo_columns->set_optimize( abap_true ).
     lo_columns->set_key_fixation( abap_true ).
     build_columns( CHANGING lo_columns = lo_columns ).
 
+    "*-----------------Dropdown-------------------------*
+    "fullscreen'de çalışmaz. Grid'de çalışır
+*    DATA: lr_dropdowns TYPE REF TO cl_salv_dropdowns,
+*          lt_values    TYPE salv_t_value.
+*    DATA: lr_functional_settings TYPE REF TO cl_salv_functional_settings.
+*
+*    lr_functional_settings = o_alv->get_functional_settings( ).
+*
+*    lr_dropdowns = lr_functional_settings->get_dropdowns( ).
+*
+*    TRY.
+*        lr_dropdowns->add_dropdown(
+*          handle   = 1
+*          t_values = lt_values ).
+*      CATCH cx_salv_existing.                           "#EC NO_HANDLER
+*    ENDTRY.
+
+
+    "*-----------------Color Column-------------------------*
+    TRY.
+        lo_columns->set_color_column( 'CELLCOLOR' ).
+      CATCH cx_salv_data_error.                         "#EC NO_HANDLER
+    ENDTRY.
+
+    "*-----------------Register Events-------------------------*
+    DATA: lr_events TYPE REF TO cl_salv_events_table.
+    lr_events = o_alv->get_event( ).
+    SET HANDLER me->on_link_click FOR lr_events.
 
 
     "*-----------------Display-------------------------*
@@ -110,13 +214,31 @@ CLASS lcl_salv IMPLEMENTATION.
 
     "*-----------------Colum Design-------------------------*
     TRY.
-        lo_column ?= lo_columns->get_column( 'LAEDA' ).
-        lo_column->set_technical( ). "technical
-        lo_column ?= lo_columns->get_column( 'AENAM' ).
+*        lo_column ?= lo_columns->get_column( 'T_RESDROP' ).
+*        lo_column->set_technical( ). "technical
+        lo_column ?= lo_columns->get_column( 'ICON' ).
+        lo_column->set_icon( ). "icon
+        lo_column ?= lo_columns->get_column( 'REASON' ).
         lo_column->set_visible( abap_false ). "no_out
-        lo_column ?= lo_columns->get_column( 'PSTAT' ).
+*        lo_column ?= lo_columns->get_column( 'CHECKBOX' ).
+*        lo_column->set_cell_type( if_salv_c_cell_type=>checkbox ). "checkbox
+        lo_column ?= lo_columns->get_column( 'CHECKBOX' ).
+        lo_column->set_cell_type( if_salv_c_cell_type=>checkbox_hotspot ). "editable checkbox
+        lo_column->set_long_text( 'Checkbox' ).
+        lo_column ?= lo_columns->get_column( 'MATNR' ).
+        lo_column->set_cell_type( if_salv_c_cell_type=>hotspot ).
+        DATA(asd) = lo_column->get_cell_type( ).
       CATCH cx_salv_not_found INTO DATA(err).
     ENDTRY.
+
+    "*-----------------Dropdown-------------------------*
+    "fullscreen'de çalışmaz. Grid'de çalışır
+*    TRY.
+*        lo_column ?= lo_columns->get_column( 'REASON' ).
+*        lo_column->set_cell_type( if_salv_c_cell_type=>dropdown ).
+*        lo_column->set_dropdown_entry( value = 1 ).
+*      CATCH cx_salv_not_found.
+*    ENDTRY.
 
   ENDMETHOD.
 
@@ -142,12 +264,28 @@ CLASS lcl_salv IMPLEMENTATION.
   METHOD set_color.
     DATA lo_column  TYPE REF TO cl_salv_column_table.
     TRY.
-        data ls_col TYPE lvc_s_colo .
+        DATA ls_col TYPE lvc_s_colo .
         lo_column ?= lo_columns->get_column( name ).
         lo_column->set_color( value = VALUE lvc_s_colo( col = col int = int inv = inv ) ).
       CATCH cx_salv_not_found INTO DATA(err).
     ENDTRY.
 
+  ENDMETHOD.
+
+  METHOD on_link_click.
+    READ TABLE t_data ASSIGNING FIELD-SYMBOL(<line>) INDEX row.
+    IF column = 'MATNR'.
+      SET PARAMETER ID 'MAT' FIELD <line>-matnr .
+      SET PARAMETER ID 'MXX' FIELD 'K' .
+      CALL TRANSACTION 'MM03' AND SKIP FIRST SCREEN.
+    ELSEIF column = 'CHECKBOX'.
+      IF <line>-checkbox IS INITIAL.
+        <line>-checkbox = 'X'.
+      ELSE.
+        CLEAR <line>-checkbox.
+      ENDIF.
+      o_alv->refresh( ).
+    ENDIF.
   ENDMETHOD.
 
 ENDCLASS.

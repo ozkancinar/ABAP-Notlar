@@ -33,6 +33,42 @@ DATA opt TYPE ctu_params.
         opt-dismode = 'E'.
         opt-defsize = 'X'.
 CALL TRANSACTION 'XK03' USING lt_bdcdata OPTIONS FROM opt.
+*----------------------------------------------------------
+"mm03"
+DATA: lt_bdcdata TYPE TABLE OF bdcdata.
+DATA opt TYPE ctu_params.
+lt_bdcdata = VALUE #(
+          ( program  = 'SAPLMGMM' dynpro   = 0060 dynbegin = 'X' )
+          ( fnam = 'BDC_CURSOR'       fval = 'RMMG1-MATNR' )
+          ( fnam = 'BDC_OKCODE'       fval = '=AUSW' )
+          ( fnam = 'RMMG1-MATNR'      fval = <line>-matnr ) "alan adı"
+          ( program  = 'SAPLMGMM' dynpro   = 0070 dynbegin = 'X' )
+          ( fnam = 'BDC_CURSOR'       fval = 'MSICHTAUSW-DYTXT(03)' )
+          ( fnam = 'BDC_OKCODE'       fval = '=ENTR' )
+          ( fnam = 'MSICHTAUSW-KZSEL(01)'      fval = 'X' ) "alan"
+          ( fnam = 'MSICHTAUSW-KZSEL(02)'      fval = 'X' ) "alan"
+          ( fnam = 'MSICHTAUSW-KZSEL(03)'      fval = 'X' ) "alan"
+          ( program  = 'SAPLMGMM' dynpro   = 0080 dynbegin = 'X' )
+          ( fnam = 'BDC_CURSOR'       fval = 'RMMG1-WERKS' )
+          ( fnam = 'BDC_OKCODE'       fval = '=ENTR' )
+          ( fnam = 'RMMG1-WERKS'       fval = '5000' ) ).
+*                ( program  = 'SAPLMGMM' dynpro   = 4004 dynbegin = 'X' )
+*                ( fnam = 'BDC_OKCODE'       fval = '=BABA' ) ).
+  opt-dismode = 'E'.
+  opt-defsize = 'X'.
+  CALL TRANSACTION 'MM03' USING lt_bdcdata OPTIONS FROM opt.
+
+"mm03 basic view
+SET PARAMETER ID 'MAT' FIELD <line>-matnr .
+SET PARAMETER ID 'MXX' FIELD 'K' .
+CALL TRANSACTION 'MM03' AND SKIP FIRST SCREEN.
+
+"mm03 mrp1 view
+SET PARAMETER ID 'MAT' FIELD <line>-matnr .
+SET PARAMETER ID 'MARAV' FIELD <line>-matnr .
+SET PARAMETER ID 'WRK' FIELD '5000'. "werks
+SET PARAMETER ID 'MXX' FIELD 'D'."MRP1 View "default
+CALL TRANSACTION 'MM03' AND SKIP FIRST SCREEN.
 
 "-------------------------------------"
 DATA class_name TYPE c LENGTH 30 VALUE 'CL_ABAP_BROWSER'.

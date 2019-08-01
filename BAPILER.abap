@@ -15,3 +15,5 @@ call function 'BAPI_EXCHRATE_CREATEMULTIPLE'
 *kur verilerini kaydet
 call function 'BAPI_EXCHANGERATE_CREATE'
 *------------------------------------------------
+"malzeme kaydet
+call function 'BAPI_MATERIAL_SAVEDATA'

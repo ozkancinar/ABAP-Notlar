@@ -752,7 +752,7 @@ IF lv_exist EQ '1'.
       url                  = url    " Generated URL
     .
 *------------------------------------
-"HR personel bilgilerini oku
+"HR personel bilgilerini oku adı vs
 call function 'HREIC_READ_EMPDATA'
 *------------------------------------
 "Excel xls dosyalarını sap yükle"

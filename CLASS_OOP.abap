@@ -682,6 +682,15 @@ CLASS lcl_material_data DEFINITION .
 ENDCLASS.
 *****************/Exception Handling*************************
 
+*****************Local Exception Class*************************
+CLASS cx_wrong_size DEFINITION INHERITING FROM cx_static_check.
+ ENDCLASS.
+
+class lcl_main definition.
+"... methods raising cx_wrong_size
+endclass
+*****************/Local Exception Class*************************
+
 ****************** Type Of Exception *************************
 DATA number TYPE string.
   out = cl_demo_output=>new( ).

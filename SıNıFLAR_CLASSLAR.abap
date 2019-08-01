@@ -10,7 +10,8 @@ CL_GUI_FRONTEND_SERVICES ""-> dosya yükle, indir, işletim sistemi, gui bilgile
 /UI2/CL_JSON ""-> json
 /UI5/CL_JSON_UTIL ""-> json
 C_UTILS ""-> bir çok konuda işe yarar metotlara sahip
-
+CL_ABAP_ITAB_UTILITIES
+CL_ABAP_CORRESPONDING "iki tabloyu birleştirme mapleme
 
 "---------------------------------------------------"
 "değişken tipini döndür
