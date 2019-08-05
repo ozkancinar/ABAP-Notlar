@@ -15,14 +15,11 @@ ASSIGN generic->* TO FIELD-SYMBOL(<generic>).
 ASSIGN COMPONENT name OF STRUCTURE structure TO FIELD-SYMBOL(<component>).
 ASSIGN (class_name)=>(static_member) TO FIELD-SYMBOL(<member>).
 
+
 field-symbols: <fs_tab> type standard table,
                <fs_wa> type mara.
 
 loop at <fs_tab> assigning <fs_wa>.
-  <fs_wa>-matnr = ‘NEW CHANGE MATERIAL’.
-endloop.
-
-loop at <fs_tab> assigning field-symbol(<fs_wa>).
   <fs_wa>-matnr = ‘NEW CHANGE MATERIAL’.
 endloop.
 

@@ -7,7 +7,12 @@ data(lr_matnr) = VALUE tr_matnr( for ls_afpo in lt_afpo
                                   in sign   = s
                                   option = o
                                   ( low = ls_afpo-matnr ) ).
-
+lr_hvlid = VALUE #( for level in lT_LEVELNAMES
+                    let s = 'I'
+                         o = 'EQ'
+                     in sign   = s
+                        option = o
+                     ( low = level-hlvlid ) ).
   *--------------------------------------------------------*
 
  DATA: lr_range TYPE RANGE OF vbap-pstyv,
