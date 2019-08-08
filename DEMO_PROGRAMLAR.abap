@@ -39,3 +39,4 @@ J3RPDF "ADobe Forms Paketi"
 CL_CTRLER_SCREEN_WINDOW "Abap oo Dynpro"
 prolink_dev -> SAPMZTM_MM_RF_002 "step loop örnek
 DEMO_DYNPRO_F4_HELP_MODULE "dynpro f4 help
+DEMO_RAISE_MESSAGE_GLOBAL_SHRT "mesaj oo tipinde

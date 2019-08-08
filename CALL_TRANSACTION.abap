@@ -84,7 +84,7 @@ bdcdata_tab = VALUE #(
   ( fnam = 'BDC_OKCODE'       fval = '=WB_DISPLAY' ) ).
 
 opt-dismode = 'E'.
-opt-defsize = 'X'.
+*opt-defsize = 'X'.
 
 TRY.
     CALL TRANSACTION 'SE24' WITH AUTHORITY-CHECK

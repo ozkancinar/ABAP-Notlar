@@ -27,6 +27,13 @@ MESSAGE 'Short Dump Hatası' TYPE 'X'. "Dump hatası gösterilir pek kullanılma
 "Mesaj sınıf ve id bilgilerini değişken ile gönder
 MESSAGE ID my_mid TYPE my_mtype NUMBER my_num WITH my_var1 my_var2 my_var3 my_var4 INTO lv_msg_txt.
 
+*oo mesaj
+*catch kısmındaki sınıf IF_MESSAGE arayüzüne sahip ise aşağıdaki şekilde kullanılabilir
+CATCH cx_demo_dyn_t100 INTO DATA(oref).
+  cl_demo_output=>display(
+    |Caught exception:\n\n| &&
+    |"{ oref->get_text( ) }", Type { oref->msgty } | ).
+  MESSAGE oref TYPE 'I' DISPLAY LIKE oref->msgty.
 "BAPIRET2_T mesaj tablosu oluştur:
 *"  IMPORTING
 *"     VALUE(IV_VAL1) TYPE  INT4 OPTIONAL

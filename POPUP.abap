@@ -167,4 +167,6 @@ call FUNCTION 'POPUP_TO_DECIDE_LIST'
 "popup text editör
 call function 'CATSXT_SIMPLE_TEXT_EDITOR'
 *-----------------------------------------
- 
+"metin girilebilen popup
+call function 'TXW_TEXTNOTE_EDIT'
+*-----------------------------------------
