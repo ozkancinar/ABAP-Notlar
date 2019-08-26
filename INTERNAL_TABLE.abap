@@ -43,6 +43,7 @@ ENDLOOP.
 ******* DELETE *************
 *Delete: Internal tabledan bir satır siler
 DELETE TABLE itab FROM wa_itab.
+DELETE FROM dbtab WHERE uname = gs_screen_201-uname and variant = gs_screen_201-variant.
 DELETE ADJACENT DUPLICATES FROM ITAB COMPARING K.
 DELETE ADJACENT DUPLICATES FROM itab COMPARING ALL FIELDS.
 DELETE itab [ INDEX index I WHERE condition ].
@@ -50,6 +51,9 @@ DELETE ITAB FROM 450 TO 550.
 DELETE itab WHERE field NOT IN select_option...
 DELETE DBTABLE where field eq 'something'.
 DELETE lt_mblnr[] WHERE MBLNR IN lr_mblnr_del.
+LOOP AT result_Tab INTO DATA(result).
+    DELETE result_Tab. "itabın o anki satırını sil"
+ENDLOOP.
 ******* /DELETE *************
 
 ******* UPDATE *************
