@@ -49,10 +49,12 @@ CLASS lcl_salv DEFINITION.
                                 inv        TYPE lvc_inv
                       CHANGING  lo_columns TYPE REF TO cl_salv_columns_table.
 
-
+    METHODS create_top_of_page.
     "*-----------------EVENTS-------------------------*
     METHODS on_link_click FOR EVENT link_click OF cl_salv_events_table
       IMPORTING row column.
+    METHODS: on_user_command FOR EVENT added_function OF cl_salv_events
+      IMPORTING e_salv_function.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -142,15 +144,15 @@ CLASS lcl_salv IMPLEMENTATION.
     "*-----------------Toolbar Design-------------------------*
     ls_key-report = sy-repid.
     o_alv->get_layout( )->set_key( value = ls_key ).
-    o_alv->get_layout( )->set_save_restriction( if_salv_c_layout=>restrict_none ).
-    lo_functions = o_alv->get_functions( ).
+*    o_alv->get_layout( )->set_save_restriction( if_salv_c_layout=>restrict_none ).
+*    lo_functions = o_alv->get_functions( ).
 *    lo_functions->set_default( abap_true ). "Alternatif
-    lo_functions->set_all( abap_true ).
+*    lo_functions->set_all( abap_true ).
     "Alternatif2
     "Eğer özel pf status tasarladıysan üstteki lo_functions kodlarını kapat ve alta pf statusun adını ver
-*    o_alv->set_screen_status( report        = 'SAPLSLVC_FULLSCREEN'
-*                              pfstatus      = 'STANDARD_FULLSCREEN'
-*                              set_functions = o_alv->c_functions_all ).
+    o_alv->set_screen_status( report        = sy-repid"'SAPLSLVC_FULLSCREEN'
+                              pfstatus      = 'STATUS_MAIN'
+                              set_functions = o_alv->c_functions_all ).
 
     "*-----------------Layout-Display Settings-------------------------*
     lo_display = o_alv->get_display_settings( ).
@@ -159,6 +161,8 @@ CLASS lcl_salv IMPLEMENTATION.
     lo_display->set_horizontal_lines( cl_salv_display_settings=>false ). "yatay çerçeve çizgisi
     lo_display->set_vertical_lines( cl_salv_display_settings=>true ). "dikey çerçeve çizgisi
     lo_display->set_list_header( |Number of displayed rows: { lines( t_data ) }| ). "üstte satır sayısını göster
+    "*-----------------TOP-OF-PAGE-------------------------*
+    me->create_top_of_page( ).
     "*-----------------Columns - Fieldcatalog-------------------------*
     lo_columns = o_alv->get_columns( ).
     lo_columns->set_optimize( abap_true ).
@@ -193,7 +197,13 @@ CLASS lcl_salv IMPLEMENTATION.
     DATA: lr_events TYPE REF TO cl_salv_events_table.
     lr_events = o_alv->get_event( ).
     SET HANDLER me->on_link_click FOR lr_events.
+    SET HANDLER me->on_user_command FOR lr_events.
 
+    "*-----------------Selection-------------------------*
+    DATA: lo_selections TYPE REF TO cl_salv_selections.
+    lo_selections = o_alv->get_selections( ).
+*    lo_selections->set_selection_mode( if_salv_c_selection_mode=>multiple ). "çoklu seçime izin verir ama solda seçim görünümü olmaz
+    lo_selections->set_selection_mode( if_salv_c_selection_mode=>row_column ).
 
     "*-----------------Display-------------------------*
     o_alv->display( ).
@@ -286,6 +296,155 @@ CLASS lcl_salv IMPLEMENTATION.
       ENDIF.
       o_alv->refresh( ).
     ENDIF.
+  ENDMETHOD.
+
+  METHOD on_user_command.
+    DATA: lt_rows TYPE salv_t_row,
+          lt_cols TYPE salv_t_column,
+          ls_cell TYPE salv_s_cell.
+    DATA: lr_selections TYPE REF TO cl_salv_selections.
+
+    CASE e_salv_function.
+      WHEN 'SHOW_SEL'."show selection
+        "display selections
+        lr_selections = o_alv->get_selections( ).
+        lt_rows = lr_selections->get_selected_rows( ).
+        lt_cols = lr_selections->get_selected_columns( ).
+        ls_cell = lr_selections->get_current_cell( ).
+
+      WHEN 'SET_ROWS'. "set selected rows
+
+        APPEND 4 TO lt_rows.
+        APPEND 5 TO lt_rows.
+        APPEND 6 TO lt_rows.
+        lr_selections = o_alv->get_selections( ).
+        lr_selections->set_selected_rows( lt_rows ).
+
+      WHEN 'SET_COLS'. "set selected cols
+
+        APPEND 'PRICE' TO lt_cols.
+        lr_selections = o_alv->get_selections( ).
+        lr_selections->set_selected_columns( lt_cols ).
+
+      WHEN 'SET_CELL'." set selected cell
+
+        ls_cell-columnname = 'PLANETYPE'.
+        ls_cell-row        = 4.
+        lr_selections = o_alv->get_selections( ).
+        lr_selections->set_current_cell( ls_cell ).
+    ENDCASE.
+  ENDMETHOD.
+
+  METHOD create_top_of_page.
+
+    DATA: lo_top_element  TYPE REF TO cl_salv_form_layout_grid,
+          lo_end_element  TYPE REF TO cl_salv_form_layout_flow,
+          lo_grid         TYPE REF TO cl_salv_form_layout_grid,
+          lo_header       TYPE REF TO cl_salv_form_header_info,
+          lo_action       TYPE REF TO cl_salv_form_action_info,
+          lo_textview1    TYPE REF TO cl_salv_form_text,
+          lo_textview2    TYPE REF TO cl_salv_form_text,
+          lo_textview3    TYPE REF TO cl_salv_form_text,
+          lo_textview4    TYPE REF TO cl_salv_form_text,
+          lo_icon         TYPE REF TO cl_salv_form_icon,
+          lo_layout_grid1 TYPE REF TO cl_salv_form_layout_data_grid,
+          lo_layout_grid2 TYPE REF TO cl_salv_form_layout_data_grid,
+          lo_layout_grid3 TYPE REF TO cl_salv_form_layout_data_grid,
+          lo_layout_grid4 TYPE REF TO cl_salv_form_layout_data_grid,
+          lo_logo         TYPE REF TO cl_salv_form_layout_logo.
+
+    CREATE OBJECT lo_top_element
+      EXPORTING
+        columns = 2.
+
+    "Büyük harfli sayfa başlığı
+    lo_top_element->create_header_information(
+        row = 1
+        column = 1
+        text     = 'BAŞLIK'
+        tooltip  = 'Alv Başlığı' ).
+
+    "italik küçük harfli bilgi metnü
+    lo_top_element->create_action_information(
+        row     = 2    " Natural Number
+        column  = 1    " Natural Number
+        text    = 'Action Info'
+        tooltip = 'Italik Text'
+    ).
+
+    "yeni bir grid yarat. Giriş parametleri grid'in pozisyonudur
+    lo_grid = lo_top_element->create_grid(
+              row     = 3
+              column  = 1 ).
+
+    lo_textview1 = lo_grid->create_text(
+      row     = 1
+      column  = 1
+      text    = 'New Grid Row 1 Column 1'                   "#EC NOTEXT
+      tooltip = 'Tooltip' ).                                "#EC NOTEXT
+
+    lo_textview2 = lo_grid->create_text(
+        row     = 1
+        column  = 2
+        text    = 'New Grid Row 1 Column 2'                 "#EC NOTEXT
+        tooltip = 'Tooltip' ).                              "#EC NOTEXT
+
+    "Label & Text
+    "Label bold text normal
+    lo_grid->create_label(
+      EXPORTING
+        row         = 2    " Natural Number
+        column      = 1    " Natural Number
+        text        = 'Ad:'
+        tooltip     = 'Label'
+        r_label_for = lo_textview3    " Text
+    ).
+
+    lo_textview3 = lo_grid->create_text(
+        row     = 2
+        column  = 2
+        text    = 'Özkan Çınar'                             "#EC NOTEXT
+        tooltip = 'Labellı TextView' ).                     "#EC NOTEXT
+
+    "Set alignment
+    lo_layout_grid1 ?= lo_textview1->get_layout_data( ).
+    lo_layout_grid2 ?= lo_textview2->get_layout_data( ).
+    lo_layout_grid3 ?= lo_textview3->get_layout_data( ).
+
+    lo_layout_grid1->set_h_align( if_salv_form_c_h_align=>left ).
+    lo_layout_grid2->set_h_align( if_salv_form_c_h_align=>right ).
+    lo_layout_grid3->set_h_align( if_salv_form_c_h_align=>left ).
+
+    "insert icon
+    CREATE OBJECT lo_icon
+      EXPORTING
+        icon    = '@0A@'     "#EC NOTEXT
+        tooltip = 'Air'.     "#EC NOTEXT
+
+    lo_grid->set_element(
+      EXPORTING
+        row       = 2
+        column    = 3
+        r_element = lo_icon ).
+
+    "logosuz
+    o_alv->set_top_of_list( value = lo_top_element ).
+
+    "insert logo
+*    create OBJECT lo_logo.
+*    lo_logo->set_left_content( value = lo_top_element ).
+*    lo_logo->set_right_logo( value = 'ALV_BACKGROUND' ).
+*
+*    o_alv->set_top_of_list( value = lo_logo ).
+
+    "*-----------------FOOTER-------------------------*
+    DATA: lr_eol TYPE REF TO cl_salv_form_header_info.
+    CREATE OBJECT lr_eol
+      EXPORTING
+        text = 'This is my Footer'.     "#EC NOTEXT
+
+    o_alv->set_end_of_list( lr_eol ).
+
   ENDMETHOD.
 
 ENDCLASS.
