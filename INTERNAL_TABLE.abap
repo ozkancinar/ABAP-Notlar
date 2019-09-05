@@ -19,6 +19,13 @@ data itab like hashed table of line with unique key col1.
 DATA htab TYPE HASHED TABLE OF skb1 WITH UNIQUE KEY bukrs  saknr.
 ******* /HASHED TABLE *************
 
+******* SECONDARY KEY *************
+data gt_datatab TYPE STANDARD TABLE OF t_datatab
+       WITH NON-UNIQUE KEY PRIMARY_KEY COMPONENTS col1
+       WITH NON-UNIQUE SORTED KEY sec_key COMPONENTS col2.
+read TABLE gt_datatab INTO DATA(ls_data) WITH KEY sec_key COMPONENTS col2 = 'abc'.
+******* /SECONDARY KEY *************
+
 ******* APPEND *************
 "Append: Bir structureı internal table''a ekler. Yalnızca standartad table tipi için uygundur. Sorted ve hashed tablolar için insert kullanılır
 APPEND wa_itab to itab.

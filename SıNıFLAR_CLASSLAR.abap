@@ -13,6 +13,9 @@ C_UTILS ""-> bir çok konuda işe yarar metotlara sahip
 CL_ABAP_ITAB_UTILITIES
 CL_ABAP_CORRESPONDING "iki tabloyu birleştirme mapleme
 CL_ABAP_DBFEATURES "abap db özellikleri kontrolü"
+CL_ABAP_MATCHER "regex
+CL_ABAP_REGEX "regex
+CL_APC_TIMER_MANAGER "timer"
 "---------------------------------------------------"
 "değişken tipini döndür
 cl_abap_elemdescr=>describe_by_name(

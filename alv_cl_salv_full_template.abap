@@ -29,6 +29,7 @@ CLASS lcl_salv DEFINITION.
              bstme     TYPE  bstme,
              zeinr     TYPE  dzeinr,
              cellcolor TYPE lvc_t_scol,
+             fkimg     TYPE fkimg,
            END OF ty_data.
 
     DATA t_data TYPE TABLE OF ty_data.
@@ -70,7 +71,7 @@ CLASS lcl_salv IMPLEMENTATION.
   METHOD get_data.
     FIELD-SYMBOLS <data> TYPE ty_data.
 
-    SELECT * FROM mara INTO CORRESPONDING FIELDS OF TABLE t_data.
+    SELECT * FROM mara INTO CORRESPONDING FIELDS OF TABLE t_data up to 100 rows.
 
     "*-----------------Insert dropdown data for reason-------------------------*
 *    DATA: ls_dropdown TYPE salv_s_int4_column,
@@ -237,6 +238,8 @@ CLASS lcl_salv IMPLEMENTATION.
         lo_column->set_long_text( 'Checkbox' ).
         lo_column ?= lo_columns->get_column( 'MATNR' ).
         lo_column->set_cell_type( if_salv_c_cell_type=>hotspot ).
+        lo_column ?= lo_columns->get_column( 'FKIMG' ).
+        lo_column->set_zero( ' ' ). "değer sıfır olduğunda boşluk olsun
         DATA(asd) = lo_column->get_cell_type( ).
       CATCH cx_salv_not_found INTO DATA(err).
     ENDTRY.
