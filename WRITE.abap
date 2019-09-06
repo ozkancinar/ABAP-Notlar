@@ -17,7 +17,20 @@ write ls_mara-menge to lv_str unit ls_mara-meins.
   endloop.
   write: / 'Toplam:', lv_toplam under 'Fiyat'.
 
+"----------------------------------"
+"Çizgi çiz"
+  write: /5(82) sy-uline,
+         19 line_bottom_middle_corner as line,
+          21 line_bottom_middle_corner as line.
 
+write: /5(15) sy-uline,
+ /5 sy-vline, sym_documents as symbol,
+ lt_nakliye-regio, 19 sy-vline,
+ /5(82) sy-uline,
+ 19 line_cross as line,
+ 21 line_top_middle_corner as line.
+
+"---------------------------------------------------------"
   … NO-ZERO
 … NO-SIGN
 … DD/MM/YY
