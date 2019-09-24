@@ -8,13 +8,6 @@ data: lv_val4 TYPE matnr,
 
 GET CURSOR FIELD LV_FIELD4 VALUE lv_val4.
 
-IF lv_field4 eq 'PA_LIFNR' and lv_val4 is NOT INITIAL.
-	SET PARAMETER ID 'LIF' FIELD lv_val4 .
-	SET PARAMETER ID 'BUK' FIELD gt_data-bukrs.
-	set PARAMETER ID 'EKO' FIELD gt_data-werks.
-	CALL TRANSACTION 'XK03' AND SKIP FIRST SCREEN .
-endif.
-
 * ikinci yöntem bdcdata kullanmak
 DATA: lt_bdcdata TYPE TABLE OF bdcdata,
         ls_bdcdata LIKE LINE OF lt_bdcdata.
@@ -69,6 +62,23 @@ SET PARAMETER ID 'MARAV' FIELD <line>-matnr .
 SET PARAMETER ID 'WRK' FIELD '5000'. "werks
 SET PARAMETER ID 'MXX' FIELD 'D'."MRP1 View "default
 CALL TRANSACTION 'MM03' AND SKIP FIRST SCREEN.
+
+"me23n ekko-ebeln"
+set parameter id 'BES' field '4500000000'.
+call transaction 'ME23N' and skip first screen.
+
+"xk03 lfa1-lifnr"
+DATA: kdy_val(8) VALUE '/110'.
+SET PARAMETER ID 'LIF' FIELD '9123123123'.   " Pass the vendor
+SET PARAMETER ID 'BUK' FIELD gt_data-bukrs.
+set PARAMETER ID 'EKO' FIELD gt_data-werks.
+SET PARAMETER ID 'KDY' FIELD KDY_VAL.
+CALL TRANSACTION 'XK03' AND SKIP FIRST SCREEN.
+
+"mir4 rbpk-belnr invoice document"
+set PARAMETER ID 'RBN' FIELD <line>-belnr.
+set PARAMETER ID 'GJR' FIELD <line>-gjahr.
+CALL TRANSACTION 'MIR4' and SKIP FIRST SCREEN.
 
 "-------------------------------------"
 DATA class_name TYPE c LENGTH 30 VALUE 'CL_ABAP_BROWSER'.

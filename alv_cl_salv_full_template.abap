@@ -205,6 +205,7 @@ CLASS lcl_salv IMPLEMENTATION.
     lo_selections = o_alv->get_selections( ).
 *    lo_selections->set_selection_mode( if_salv_c_selection_mode=>multiple ). "çoklu seçime izin verir ama solda seçim görünümü olmaz
     lo_selections->set_selection_mode( if_salv_c_selection_mode=>row_column ).
+    lo_selections->set_selection_mode( if_salv_c_selection_mode=>cell ). "hücre seçim modu"
 
     "*-----------------Display-------------------------*
     o_alv->display( ).

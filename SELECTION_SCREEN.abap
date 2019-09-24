@@ -42,7 +42,7 @@ at selection-screen output.
       endif.
       modify screen.
     elseif screen-group1 = 'GR2'.
-      screen-required = 'X'. "Zorunlu yapar
+      screen-required = '1'. "Zorunlu yapar
       if pa_diger eq 'X'.
         screen-active = '1'.
       else.
@@ -132,7 +132,7 @@ at selection-screen output.
 
   START-OF-SELECTION.
     title  = 'Push button'.
-    but1 = 'Button 1'. 
+    but1 = 'Button 1'.
 
   TYPE-POOLs icon.
   data functxt TYPE smp_dyntxt.

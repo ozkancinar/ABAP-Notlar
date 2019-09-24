@@ -598,7 +598,7 @@ call function 'CONVERSION_EXIT_ISOLA_INPUT'
 * IMPORTING
 *         USER_RESET   =
         tables
-          value_tab    = gt_proje_tipi[]
+            value_tab    = gt_proje_tipi[]
 *         FIELD_TAB    =
           return_tab   = lt_ret[]
 *         DYNPFLD_MAPPING        =
