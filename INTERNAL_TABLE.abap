@@ -43,6 +43,7 @@ INSERT itab2 <condition2> FROM <connection1>.
 INSERT CUSTOMERS FROM TABLE t_iTAB. "Database tablosuna internal tablo ile veri atma
 
 LOOP AT TAB INTO TAB_WA.
+  INSERT INTO ZEWMAA_T_SERIALS VALUES @( value #( DELIVERY_SD = <db_data>-delivery_sd MASTER_SERIAL = master SINGLE_SERIAL = single ) ).
   INSERT INTO CUSTOMERS VALUES TAB_WA. "database tablosuna structure şle veri atma
 ENDLOOP.
 ******* /INSERT *************

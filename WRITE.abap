@@ -46,7 +46,7 @@ write: /5(15) sy-uline,
 … UNIT u
 … EXPONENT e
 
-… USING EDIT MASK mask
+  … USING EDIT MASK mask
 … USING NO EDIT MASK
 
 … UNDER g (only with WRITE )

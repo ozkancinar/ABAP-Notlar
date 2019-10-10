@@ -4,6 +4,8 @@ read text to text -> call function 'CONVERT_ITF_TO_STREAM_TEXT'
 *--------SUBSTRING
 "Substring with Offset and length
 result = substring( val = ‘ABCDEFGH’ off = 2 len = 3 ). "OUTPUT:   CDE
+data(barcode) = 'M000012367'.
+data(res) = substring( val = barcode off = 1 ).
 "Substring From
 result = substring_from( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   CDEFGH
 "Substring After
@@ -68,7 +70,7 @@ WRITE STR.
 data str(30) value 'ITALY IS GREAT'.
 data len type i.
   len = STRLEN( STR ).
-"son karakteri ekrana yaz
+"son karakteri ekrana yaz length
 write len.
 a = strlen( str ) - 1.
 write str+a(1).

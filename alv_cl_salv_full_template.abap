@@ -311,6 +311,7 @@ CLASS lcl_salv IMPLEMENTATION.
     CASE e_salv_function.
       WHEN 'SHOW_SEL'."show selection
         "display selections
+        o_alv->get_metadata( ).
         lr_selections = o_alv->get_selections( ).
         lt_rows = lr_selections->get_selected_rows( ).
         lt_cols = lr_selections->get_selected_columns( ).

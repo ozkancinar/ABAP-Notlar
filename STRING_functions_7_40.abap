@@ -160,3 +160,17 @@ cl_demo_output=>display(
  write_template `xstring`    xstring.
  cl_demo_output=>display( result ).
 ENDMETHOD.
+
+*--------SUBSTRING
+"Substring with Offset and length
+result = substring( val = ‘ABCDEFGH’ off = 2 len = 3 ). "OUTPUT:   CDE
+data(barcode) = 'M000012367'.
+data(res) = substring( val = barcode off = 1 ).
+"Substring From
+result = substring_from( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   CDEFGH
+"Substring After
+result = substring_after( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   EFGH
+"Substring Before
+result = substring_brfore( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   AB
+"Substring To
+result = substring_to( val = ‘ABCDEFGH’ sub = ‘CD’ ). " OUTPUT:   ABCD

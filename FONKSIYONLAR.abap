@@ -882,3 +882,6 @@ call function 'F4IF_SHLP_EXIT_EXAMPLE'
 *---------------------------------------
 "trigger event programmatically
 call function 'SWE_EVENT_CREATE'
+"---------------------------------------
+"adobe smartform gibi adres oku
+call function 'ADDRESS_INTO_PRINTFORM'
