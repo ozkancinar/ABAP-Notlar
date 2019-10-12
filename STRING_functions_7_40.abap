@@ -65,7 +65,13 @@ cl_demo_output=>display(
 
 "TEMPLATE_DATE_FORM
 result-result = |{ sy-datum COUNTRY = land }|.
+DATA(pa_date) = sy-datum.
 
+WRITE / pa_date DD/MM/YYYY.
+
+WRITE / |{ pa_date DATE = ISO }|.
+WRITE / |{ pa_date DATE = USER }|.
+WRITE / |{ pa_date DATE = ENVIRONMENT }|.
 "TEMPLATE_ENV_SETT
 LOOP AT country_tab INTO country.
      DATA(tabix) = sy-tabix.

@@ -54,8 +54,16 @@ CLASS lcl_salv DEFINITION.
     "*-----------------EVENTS-------------------------*
     METHODS on_link_click FOR EVENT link_click OF cl_salv_events_table
       IMPORTING row column.
+
     METHODS: on_user_command FOR EVENT added_function OF cl_salv_events
       IMPORTING e_salv_function.
+
+    METHODS: on_before_user_command for event before_salv_function of cl_salv_events
+     importing e_salv_function,
+
+   METHODS: on_after_user_command for event after_salv_function of cl_salv_events
+     importing e_salv_function.
+
   PROTECTED SECTION.
   PRIVATE SECTION.
 
