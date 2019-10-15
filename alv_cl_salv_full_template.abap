@@ -248,7 +248,7 @@ CLASS lcl_salv IMPLEMENTATION.
         lo_column ?= lo_columns->get_column( 'MATNR' ).
         lo_column->set_cell_type( if_salv_c_cell_type=>hotspot ).
         lo_column ?= lo_columns->get_column( 'FKIMG' ).
-        lo_column->set_zero( ' ' ). "değer sıfır olduğunda boşluk olsun
+        lo_column->set_zero( abap_false ). "değer sıfır olduğunda boşluk olsun
         DATA(asd) = lo_column->get_cell_type( ).
       CATCH cx_salv_not_found INTO DATA(err).
     ENDTRY.
