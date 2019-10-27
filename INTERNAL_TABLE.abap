@@ -4,6 +4,7 @@ data: t_mara_sorted TYPE SORTED TABLE OF ty_mara,
       t_mara_standard TYPE STANDARD TABLE OF ty_mara,.
 DATA itab1 TYPE STANDARD TABLE OF row_type WITH EMPTY KEY. "herhangi bir primary key lazım değilse
 DATA itab2 TYPE STANDARD TABLE OF row_type WITH NON-UNIQUE KEY comp1 comp2. "tekil olmayan keyler tanımlanır
+DATA lt_pspnr TYPE SORTED TABLE OF ty_pspnr WITH UNIQUE KEY prodh.
 t_mara_sorted[] = t_mara_standard[]. "Yapılabilir hata vermez
 insert ls_mara into table t_mara1. "Append kullanılamaz
 TRY . "dublicate error hatasının yakalanması"
@@ -37,6 +38,7 @@ APPEND LINES OF ITAB1 TO ITAB2. "itab + itab
 "sorted
 INSERT wa_itab INTO TABLE itab <condition>. "sorted"
 insert LINES OF VALUE if_alv=>tt_malzemeler( for wa1 in go_toplu_giris->t_malzemeler_list where ( sel = 'X' ) ( wa1 ) ) into TABLE lt_mats.
+INSERT CORRESPONDING mmpur_print_ekpo( item->* ) INTO TABLE output_data-item.
 
 "Bir internal table ile çok miktarda kayıt eklemek:
 INSERT itab2 <condition2> FROM <connection1>.

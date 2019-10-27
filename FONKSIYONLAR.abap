@@ -885,3 +885,6 @@ call function 'SWE_EVENT_CREATE'
 "---------------------------------------
 "adobe smartform gibi adres oku
 call function 'ADDRESS_INTO_PRINTFORM'
+"--------------------------------------
+"dil anahtarı çevrimi"
+call function 'CONVERSION_EXIT_ISOLA_INPUT'
