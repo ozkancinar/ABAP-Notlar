@@ -888,3 +888,17 @@ call function 'ADDRESS_INTO_PRINTFORM'
 "--------------------------------------
 "dil anahtarı çevrimi"
 call function 'CONVERSION_EXIT_ISOLA_INPUT'
+"--------------------------------------"
+CALL FUNCTION 'C14W_NUMBER_CHAR_CONVERSION'
+  EXPORTING
+    i_float        = charact->mittelwert    " Predefined Type
+*           i_dec          = 0    " Target Value or Actual Value of a Component
+    i_decimals     = 3    " Predefined Type
+  IMPORTING
+    e_string       = ls_item-sonuc    " 30 Characters
+*           e_float        =     " Predefined Type
+*           e_dec          =     " Target Value or Actual Value of a Component
+*           e_decimals     =     " Predefined Type
+  EXCEPTIONS
+    number_too_big = 1
+    OTHERS         = 2.
