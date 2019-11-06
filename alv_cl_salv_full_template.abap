@@ -215,6 +215,18 @@ CLASS lcl_salv IMPLEMENTATION.
     lo_selections->set_selection_mode( if_salv_c_selection_mode=>row_column ).
     lo_selections->set_selection_mode( if_salv_c_selection_mode=>cell ). "hücre seçim modu"
 
+*    "*-----------------Set Popup Mode-------------------------*
+*    DATA: lv_start_col  TYPE i VALUE 10,
+*          lv_start_line TYPE i VALUE 1,
+*          lv_end_line   TYPE i VALUE 30,
+*          lv_end_col    TYPE i VALUE 100.
+*
+*    o_alv->set_screen_popup(
+*      start_column = lv_start_col
+*      end_column   = lv_end_col
+*      start_line   = lv_start_line
+*      end_line     = lv_end_line ).
+
     "*-----------------Display-------------------------*
     o_alv->display( ).
 
