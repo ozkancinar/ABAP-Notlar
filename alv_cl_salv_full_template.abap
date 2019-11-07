@@ -29,6 +29,7 @@ CLASS lcl_salv DEFINITION.
              bstme     TYPE  bstme,
              zeinr     TYPE  dzeinr,
              cellcolor TYPE lvc_t_scol,
+             CELLSTYLE Types	LVC_T_STYL,
              fkimg     TYPE fkimg,
            END OF ty_data.
 

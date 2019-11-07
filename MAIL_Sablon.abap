@@ -13,7 +13,7 @@ DATA:
       lv_length      TYPE so_obj_len,
       lv_count TYPE i,
       gr_send_request TYPE REF TO cl_bcs,
-      gr_recipient TYPE REF TO if_recipient_bcs, "silme işlemleri
+      gr_recipient TYPE REF TO if_recipient_bcs,
       gr_sender TYPE REF TO cl_sapuser_bcs,
       gr_bcs_exception TYPE REF TO cx_bcs,
       gr_document TYPE REF TO cl_document_bcs

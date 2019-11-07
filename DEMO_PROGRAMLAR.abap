@@ -5,6 +5,7 @@ SALV* "cl_salv demo programlar"
 SALV_DEMO_TABLE_SELECTIONS "SALV custom pf_status
 SALV_DEMO_TABLE_EVENTS "SALV EVENTS
 SALV_DEMO_TABLE_FORM_EVENTS "SALV top of page end of page
+SALV_DEMO_TABLE_POPUP_CALL "salv popup"
 *-- /SALV ALV --*
 
 *-- TREE ALV --*
