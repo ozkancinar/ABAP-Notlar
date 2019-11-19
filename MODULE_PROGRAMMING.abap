@@ -10,6 +10,13 @@ PROCESS AFTER INPUT.
     FIELD INPUT6 MODULE CHAIN_MODULE_2.
   ENDCHAIN.
 
+chain.
+  field: gs_scren-mpn,
+         gs_scren-batch,
+         gs_screen-exp_date.
+  MODULE check_mfrpn on CHAIN-REQUEST.
+endchain.
+
 MODULE module_1 INPUT.
   IF input1 < 50.
     MESSAGE e888(sabapdemos) WITH text-001 '50' text-002.
