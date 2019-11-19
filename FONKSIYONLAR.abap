@@ -902,3 +902,7 @@ CALL FUNCTION 'C14W_NUMBER_CHAR_CONVERSION'
   EXCEPTIONS
     number_too_big = 1
     OTHERS         = 2.
+
+"---------------------------------------"
+"fonksiyon giriş parametrelerini al
+call function 'FUNCTION_IMPORT_INTERFACE'
