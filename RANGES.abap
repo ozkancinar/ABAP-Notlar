@@ -13,6 +13,8 @@ lr_hvlid = VALUE #( for level in lT_LEVELNAMES
                      in sign   = s
                         option = o
                      ( low = level-hlvlid ) ).
+
+SE11 range örneği: RSELOPTION
   *--------------------------------------------------------*
 
  DATA: lr_range TYPE RANGE OF vbap-pstyv,

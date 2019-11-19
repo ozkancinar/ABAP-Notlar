@@ -4,6 +4,10 @@ read text to text -> call function 'CONVERT_ITF_TO_STREAM_TEXT'
 *--------SUBSTRING
 "Substring with Offset and length
 result = substring( val = ‘ABCDEFGH’ off = 2 len = 3 ). "OUTPUT:   CDE
+CX_SY_RANGE_OUT_OF_BOUNDS
+CX_SY_REGEX_TOO_COMPLEX
+CX_SY_STRG_PAR_VAL
+
 data(barcode) = 'M000012367'.
 data(res) = substring( val = barcode off = 1 ).
 "Substring From
