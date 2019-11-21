@@ -906,3 +906,6 @@ CALL FUNCTION 'C14W_NUMBER_CHAR_CONVERSION'
 "---------------------------------------"
 "fonksiyon giriş parametrelerini al
 call function 'FUNCTION_IMPORT_INTERFACE'
+"---------------------------------------"
+"tcode yeni ekranda aç
+call function 'TH_CREATE_MODE'
