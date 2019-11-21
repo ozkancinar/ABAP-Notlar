@@ -101,3 +101,28 @@ TRY.
                             USING bdcdata_tab OPTIONS FROM opt.
   CATCH cx_sy_authorization_error ##NO_HANDLER.
 ENDTRY.
+
+"------------------------------------"
+"yeni ekranda aç
+"call transaction in new window"
+"fm yarat. remote enabled yap"
+FUNCTION zfm_call_tcode_in_new_window.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(TCODE) TYPE  SY-TCODE
+*"     VALUE(SONO) TYPE  VBELN
+*"----------------------------------------------------------------------
+  SET PARAMETER ID 'AUN' FIELD sono.
+  CALL TRANSACTION tcode AND SKIP FIRST SCREEN.
+ENDFUNCTION.
+"--kullanım:"
+e_tcode = 'VA03'.
+e_sono = '9000000012'.
+CALL FUNCTION 'ZFM_CALL_TCODE_IN_NEW_WINDOW' STARTING NEW TASK 'TEST'
+  DESTINATION 'NONE'
+  EXPORTING
+    tcode = e_tcode
+    sono  = e_sono.
+
+"---------------------------"
