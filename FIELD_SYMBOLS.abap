@@ -11,6 +11,9 @@ endif.
 assign component 2 of structure gs_mara to <fs_mara>. "bir structure'ın birinci alanına erişir"
 assign component 'MATNR' of structure gs_mara to <fs_any>. "bir strucure'ın alan ismine göre erişme"
 
+data(cell) = |CLASS{ up_level_ind }|.
+ASSIGN COMPONENT cell OF STRUCTURE <alv_data> TO FIELD-SYMBOL(<up_level>).
+
 ASSIGN generic->* TO FIELD-SYMBOL(<generic>).
 ASSIGN COMPONENT name OF STRUCTURE structure TO FIELD-SYMBOL(<component>).
 ASSIGN (class_name)=>(static_member) TO FIELD-SYMBOL(<member>).

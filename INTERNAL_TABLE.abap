@@ -43,6 +43,7 @@ INSERT CORRESPONDING mmpur_print_ekpo( item->* ) INTO TABLE output_data-item.
 "Bir internal table ile çok miktarda kayıt eklemek:
 INSERT itab2 <condition2> FROM <connection1>.
 INSERT CUSTOMERS FROM TABLE t_iTAB. "Database tablosuna internal tablo ile veri atma
+catch CX_SY_OPEN_SQL_DB.
 
 LOOP AT TAB INTO TAB_WA.
   INSERT INTO ZEWMAA_T_SERIALS VALUES @( value #( DELIVERY_SD = <db_data>-delivery_sd MASTER_SERIAL = master SINGLE_SERIAL = single ) ).
