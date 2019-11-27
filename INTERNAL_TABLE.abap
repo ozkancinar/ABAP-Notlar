@@ -76,6 +76,7 @@ commit work.
 *Modify: Internal tableın bir satırın aynı tipteki bir structurla günceller
 MODIFY TABLE itab FORM wa_itab <conditions>.
 MODIFY dbtable from table gt_data. "Tablodaki verelere göre db tablosunu günceller"
+modify dbtable from wa_structure.
 ******* /MODIFY *************
 
 ******* READ *************
