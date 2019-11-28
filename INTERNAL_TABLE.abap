@@ -31,6 +31,7 @@ read TABLE gt_datatab INTO DATA(ls_data) WITH KEY sec_key COMPONENTS col2 = 'abc
 "Append: Bir structureı internal table''a ekler. Yalnızca standartad table tipi için uygundur. Sorted ve hashed tablolar için insert kullanılır
 APPEND wa_itab to itab.
 APPEND LINES OF ITAB1 TO ITAB2. "itab + itab
+APPEND INITIAL LINE TO lt_mara ASSIGNING FIELD-SYMBOL(<mara>).
 ******* /APPEND *************
 
 ******* INSERT *************
