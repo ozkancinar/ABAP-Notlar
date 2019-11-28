@@ -909,3 +909,6 @@ call function 'FUNCTION_IMPORT_INTERFACE'
 "---------------------------------------"
 "tcode yeni ekranda aç
 call function 'TH_CREATE_MODE'
+"----------------------------------------"
+"string to table. Maillerde işe yarayabilir
+CALL FUNCTION 'SWA_STRING_TO_TABLE'
