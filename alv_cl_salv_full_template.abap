@@ -28,10 +28,9 @@ CLASS lcl_salv DEFINITION.
              meins     TYPE  meins,
              bstme     TYPE  bstme,
              zeinr     TYPE  dzeinr,
-             cellcolor TYPE lvc_t_scol,
-             CELLSTYLE Types	LVC_T_STYL,
-             celltype TYPE salv_t_int4_column,
              fkimg     TYPE fkimg,
+             cellcolor TYPE lvc_t_scol,
+             celltype  TYPE salv_t_int4_column,
            END OF ty_data.
 
     DATA t_data TYPE TABLE OF ty_data.
@@ -56,16 +55,8 @@ CLASS lcl_salv DEFINITION.
     "*-----------------EVENTS-------------------------*
     METHODS on_link_click FOR EVENT link_click OF cl_salv_events_table
       IMPORTING row column.
-
     METHODS: on_user_command FOR EVENT added_function OF cl_salv_events
       IMPORTING e_salv_function.
-
-    METHODS: on_before_user_command for event before_salv_function of cl_salv_events
-     importing e_salv_function,
-
-   METHODS: on_after_user_command for event after_salv_function of cl_salv_events
-     importing e_salv_function.
-
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -81,7 +72,7 @@ CLASS lcl_salv IMPLEMENTATION.
   METHOD get_data.
     FIELD-SYMBOLS <data> TYPE ty_data.
 
-    SELECT * FROM mara INTO CORRESPONDING FIELDS OF TABLE t_data up to 100 rows.
+    SELECT * FROM mara INTO CORRESPONDING FIELDS OF TABLE t_data UP TO 100 ROWS.
 
     "*-----------------Insert dropdown data for reason-------------------------*
 *    DATA: ls_dropdown TYPE salv_s_int4_column,
@@ -128,6 +119,13 @@ CLASS lcl_salv IMPLEMENTATION.
       "icon
       <data>-icon = '@0V@'.
       CLEAR: ls_color, lt_color.
+    ENDLOOP.
+
+    "change layout of alv clickable cells
+    LOOP AT t_data ASSIGNING FIELD-SYMBOL(<alv_line>).
+      IF <alv_line>-matnr IS INITIAL.
+        APPEND VALUE #( columnname = 'DELIVERY_SD' value = if_salv_c_cell_type=>text ) TO <alv_line>-celltype.
+      ENDIF.
     ENDLOOP.
 
   ENDMETHOD.
@@ -203,6 +201,10 @@ CLASS lcl_salv IMPLEMENTATION.
         lo_columns->set_color_column( 'CELLCOLOR' ).
       CATCH cx_salv_data_error.                         "#EC NO_HANDLER
     ENDTRY.
+    TRY.
+        lo_columns->set_cell_type_column( 'CELLTYPE' ).
+      CATCH cx_salv_data_error.
+    ENDTRY.
 
     "*-----------------Register Events-------------------------*
     DATA: lr_events TYPE REF TO cl_salv_events_table.
@@ -215,19 +217,6 @@ CLASS lcl_salv IMPLEMENTATION.
     lo_selections = o_alv->get_selections( ).
 *    lo_selections->set_selection_mode( if_salv_c_selection_mode=>multiple ). "çoklu seçime izin verir ama solda seçim görünümü olmaz
     lo_selections->set_selection_mode( if_salv_c_selection_mode=>row_column ).
-    lo_selections->set_selection_mode( if_salv_c_selection_mode=>cell ). "hücre seçim modu"
-
-*    "*-----------------Set Popup Mode-------------------------*
-*    DATA: lv_start_col  TYPE i VALUE 10,
-*          lv_start_line TYPE i VALUE 1,
-*          lv_end_line   TYPE i VALUE 30,
-*          lv_end_col    TYPE i VALUE 100.
-*
-*    o_alv->set_screen_popup(
-*      start_column = lv_start_col
-*      end_column   = lv_end_col
-*      start_line   = lv_start_line
-*      end_line     = lv_end_line ).
 
     "*-----------------Display-------------------------*
     o_alv->display( ).
@@ -253,7 +242,7 @@ CLASS lcl_salv IMPLEMENTATION.
         lo_column ?= lo_columns->get_column( 'ICON' ).
         lo_column->set_icon( ). "icon
         lo_column ?= lo_columns->get_column( 'REASON' ).
-        lo_column->set_visible( abap_false ). "no_out
+        lo_column->set_visible( abap_false ). "no_out, statusteki layout ile görünüme eklenebilir
 *        lo_column ?= lo_columns->get_column( 'CHECKBOX' ).
 *        lo_column->set_cell_type( if_salv_c_cell_type=>checkbox ). "checkbox
         lo_column ?= lo_columns->get_column( 'CHECKBOX' ).
@@ -262,7 +251,9 @@ CLASS lcl_salv IMPLEMENTATION.
         lo_column ?= lo_columns->get_column( 'MATNR' ).
         lo_column->set_cell_type( if_salv_c_cell_type=>hotspot ).
         lo_column ?= lo_columns->get_column( 'FKIMG' ).
-        lo_column->set_zero( abap_false ). "değer sıfır olduğunda boşluk olsun
+        lo_column->set_zero( ' ' ). "değer sıfır olduğunda boşluk olsun
+        lo_column ?= lo_columns->get_column( 'CELLTYPE' ).
+        lo_column->set_technical( ).
         DATA(asd) = lo_column->get_cell_type( ).
       CATCH cx_salv_not_found INTO DATA(err).
     ENDTRY.
@@ -333,7 +324,6 @@ CLASS lcl_salv IMPLEMENTATION.
     CASE e_salv_function.
       WHEN 'SHOW_SEL'."show selection
         "display selections
-        o_alv->get_metadata( ).
         lr_selections = o_alv->get_selections( ).
         lt_rows = lr_selections->get_selected_rows( ).
         lt_cols = lr_selections->get_selected_columns( ).
