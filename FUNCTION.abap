@@ -1,1 +1,0 @@
-* Function module Z_ ile başlar
