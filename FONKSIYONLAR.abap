@@ -912,3 +912,6 @@ call function 'TH_CREATE_MODE'
 "----------------------------------------"
 "string to table. Maillerde işe yarayabilir
 CALL FUNCTION 'SWA_STRING_TO_TABLE'
+"-----------------------------------------"
+"sayısal ifadenin metin haline çevrilmesi"
+call function 'SPELL_AMOUNT'
