@@ -915,3 +915,12 @@ CALL FUNCTION 'SWA_STRING_TO_TABLE'
 "-----------------------------------------"
 "sayısal ifadenin metin haline çevrilmesi"
 call function 'SPELL_AMOUNT'
+"-----------------------------------------"
+"round, yuvarla aşağı yukarı + = yukarı - = aşağı"
+call FUNCTION 'ROUND'
+EXPORTING
+*  decimals      = 0
+  input         = <item>-qua_pcs_val
+  sign          = '+'
+IMPORTING
+  output        = <delivery_footer>-qua_pcs_val
