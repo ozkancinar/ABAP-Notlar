@@ -6,6 +6,8 @@ COND #( WHEN text1 < text2 THEN |{ text1 } < { text2 }|
 "CONCATENATION
  |Optimization factor: { t21 / t43 }|
 
+"escape character: \
+
 "DISTANCE
 index_tab = cl_abap_docu=>get_abap_index(
       COND #( WHEN sy-langu <> 'D'

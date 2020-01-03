@@ -8,6 +8,8 @@ CX_SY_RANGE_OUT_OF_BOUNDS
 CX_SY_REGEX_TOO_COMPLEX
 CX_SY_STRG_PAR_VAL
 
+escape character: \
+
 data(barcode) = 'M000012367'.
 data(res) = substring( val = barcode off = 1 ).
 "Substring From
