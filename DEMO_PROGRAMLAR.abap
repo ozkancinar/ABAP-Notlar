@@ -42,4 +42,4 @@ prolink_dev -> SAPMZTM_MM_RF_002 "step loop örnek
 DEMO_DYNPRO_F4_HELP_MODULE "dynpro f4 help
 DEMO_RAISE_MESSAGE_GLOBAL_SHRT "mesaj oo tipinde
 DEMO_REGEX "regex demo"
-SFDT_DEMO_OBJECTS " brf+ demo paket"
+SFDT_DEMO_OBJECTS "brf+ demo paket
