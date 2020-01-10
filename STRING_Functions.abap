@@ -1,5 +1,6 @@
-*---- string alt satıra geç string enter
+*---- string alt satıra geç string enter paragraf
 CONCATENATE gv_sbnam gv_telnr gv_email INTO DATA(lv_001) SEPARATED BY cl_abap_char_utilities=>cr_lf.
+|aasdas { cl_abap_char_utilities=>cr_lf }asddwwww{ cl_abap_char_utilities=>HORIZONTAL_TAB }tabtabtab{ cl_abap_char_utilities=>newline }newnewnew|
 read text to text -> call function 'CONVERT_ITF_TO_STREAM_TEXT'
 *--------SUBSTRING
 "Substring with Offset and length

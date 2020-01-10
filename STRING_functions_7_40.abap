@@ -8,6 +8,9 @@ COND #( WHEN text1 < text2 THEN |{ text1 } < { text2 }|
 
 "escape character: \
 
+"string enter paragraf"
+cl_abap_char_utilities=>cr_lf
+
 "DISTANCE
 index_tab = cl_abap_docu=>get_abap_index(
       COND #( WHEN sy-langu <> 'D'
