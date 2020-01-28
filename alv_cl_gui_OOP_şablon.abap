@@ -357,6 +357,14 @@ class lcl_szl_nak implementation.
       move 'Fatura Oluştur' to ls_toolbar-quickinfo.
       move 'Fatura Oluştur' to ls_toolbar-text.
       append ls_toolbar to e_object->mt_toolbar.
+
+      DATA: ls_toolbar TYPE stb_button.
+
+      READ TABLE e_object->mt_toolbar INTO ls_toolbar
+           WITH KEY function = cl_gui_alv_grid=>mc_fc_loc_delete_row.
+      IF ( syst-subrc = 0 ).
+        ls_toolbar-function = 'DELETE'.
+        MODIFY e_object->mt_toolbar FROM ls_toolbar INDEX syst-tabix.
     endif.
   endmethod.
   "-----------------------------------------------------------------------"
