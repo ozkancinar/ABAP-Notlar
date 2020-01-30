@@ -170,3 +170,5 @@ call function 'CATSXT_SIMPLE_TEXT_EDITOR'
 "metin girilebilen popup
 call function 'TXW_TEXTNOTE_EDIT'
 *-----------------------------------------
+"ay seçim popupı"
+CALL FUNCTION 'POPUP_TO_SELECT_MONTH'
