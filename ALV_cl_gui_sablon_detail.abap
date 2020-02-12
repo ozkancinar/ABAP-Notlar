@@ -15,6 +15,23 @@ class lcl_main definition create public.
            tr_vtweg type range of vtweg,
            tr_kunnr type range of kunnr.
 
+           "zcoaa_st_pm_general_alv:
+           key guid       : sysuuid_c32 not null;
+           key item_key   : zcoaa_de_key not null;
+           key matnr      : matnr not null;
+           maktx          : maktx;
+           vkorg          : vkorg;
+           vtext          : vtxtk;
+           vtweg          : vtweg;
+           vtweg_t        : vtxtk;
+           deleted        : zcoaa_de_deleted;
+           modified       : char1;
+           error_exists   : char1;
+           cellstyle      : lvc_t_styl;
+           cellcolor      : lvc_t_scol;
+           rowcolor       : char4;
+           lticon         : icon_d;
+
     types: begin of ty_alv_data_with_row,
              rowid type int4.
         include type ty_alv_data.
