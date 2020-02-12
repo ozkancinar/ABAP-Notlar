@@ -1054,3 +1054,14 @@ class lcl_main implementation.
   endmethod.
 
 endclass.
+
+MODULE user_command_0101 INPUT.
+    "gui status event handler
+    CLEAR save_code.
+    save_code = ok_code.
+    CLEAR ok_code.
+    o_grid_alv->set_function_code(
+              CHANGING
+                c_ucomm = save_code    " Function Code
+            ).
+ENDMODULE.
