@@ -226,11 +226,29 @@ CLASS lcl_salv IMPLEMENTATION.
   METHOD build_columns.
     DATA lo_column  TYPE REF TO cl_salv_column_table.
 
+    "----Alternate"
+    DEFINE set_text.
+      TRY .
+          lr_column ?= lo_columns->get_column( &1 ).
+          IF &2 NE space.
+            lr_column->set_short_text( conv #( &2 ) ).
+          ENDIF.
+          IF &3 NE space.
+            lr_column->set_medium_text( conv #( &3 ) ).
+          ENDIF.
+          IF &4 NE space.
+            lr_column->set_long_text( conv #( &4 ) ).
+          ENDIF.
+        CATCH cx_salv_not_found.                        "#EC NO_HANDLER
+      ENDTRY.
+    END-OF-DEFINITION.
+    "----Alternate"
+    
     "*-----------------Set Column Texts-------------------------*
 *   set_text( EXPORTING name =  s_text = m_text =  l_text =  CHANGING lo_columns =  ).
     set_text( EXPORTING name = 'ERSDA' s_text = 'Tarih' m_text = 'Tarih' l_text = 'Tarih' CHANGING lo_columns = lo_columns ).
     set_text( EXPORTING name = 'MATNR' s_text = 'Malzeme' m_text = 'Malzeme' l_text = 'Malzeme' CHANGING lo_columns = lo_columns ).
-
+    set_text: 'BSD_SURE' text-012 text-012 text-012.
     "*-----------------Set Color-------------------------*
     set_color( EXPORTING name = 'ERSDA'  col = 5 int = 0 inv = 0 CHANGING lo_columns = lo_columns ).
     set_color( EXPORTING name = 'ERNAM'  col = 6 int = 1 inv = 0 CHANGING lo_columns = lo_columns ).
