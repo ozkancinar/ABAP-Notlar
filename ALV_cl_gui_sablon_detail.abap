@@ -654,6 +654,9 @@ class lcl_main implementation.
         refresh_alv( iv_soft = abap_true ).
       when c_del_row.
         delete_selected_line( ).
+        "change field catalog"
+        data(lt_new_fcat) = build_fcat( ).
+        o_grid_alv->set_frontend_fieldcatalog( it_fieldcatalog = lt_new_fcat ).
         refresh_alv( ).
     endcase.
 
