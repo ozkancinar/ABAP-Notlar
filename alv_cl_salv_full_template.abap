@@ -243,7 +243,7 @@ CLASS lcl_salv IMPLEMENTATION.
       ENDTRY.
     END-OF-DEFINITION.
     "----Alternate"
-    
+
     "*-----------------Set Column Texts-------------------------*
 *   set_text( EXPORTING name =  s_text = m_text =  l_text =  CHANGING lo_columns =  ).
     set_text( EXPORTING name = 'ERSDA' s_text = 'Tarih' m_text = 'Tarih' l_text = 'Tarih' CHANGING lo_columns = lo_columns ).
@@ -367,6 +367,34 @@ CLASS lcl_salv IMPLEMENTATION.
         ls_cell-row        = 4.
         lr_selections = o_alv->get_selections( ).
         lr_selections->set_current_cell( ls_cell ).
+
+      WHEN 'SUBTOTAL'.
+        DATA: lo_aggregations TYPE REF TO cl_salv_aggregations.
+        DATA: lo_groups TYPE REF TO cl_salv_sorts .
+
+        lo_aggregations = o_alv->get_aggregations( ).
+        lo_aggregations->clear( ).
+        lo_groups = o_alv->get_sorts( ) .
+        lo_groups->clear( ).
+
+        TRY.
+            lo_groups->add_sort(
+               columnname = 'STOK_KODU'
+*               position   = 1
+               subtotal   = abap_true
+               sequence   = if_salv_c_sort=>sort_up ).
+
+          CATCH cx_salv_not_found cx_salv_data_error cx_salv_existing.
+        ENDTRY.
+        TRY.
+            lo_aggregations->add_aggregation( columnname = 'TEORIK_GEREKLI' ).
+          CATCH cx_salv_not_found cx_salv_data_error cx_salv_existing.
+        ENDTRY.
+        o_alv->refresh(
+          EXPORTING
+*            s_stable     = value lvc_s_stbl( row = 'X' )     " ALV Control: Refresh Stability
+            refresh_mode = if_salv_c_refresh=>full    " ALV: Data Element for Constants
+        ).
     ENDCASE.
   ENDMETHOD.
 
