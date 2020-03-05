@@ -236,6 +236,20 @@ class lcl_main implementation.
       ls_layout-stylefname = 'CELLSTYLE'.
       ls_layout-ctab_fname = 'CELLCOLOR'.
 *      ls_layout-cwidth_opt = 'X'.
+
+"alternatif"
+"data grid         TYPE REF TO cl_gui_alv_grid,
+*     CREATE OBJECT grid
+*          EXPORTING
+*            i_parent          = cl_gui_container=>default_screen
+*          EXCEPTIONS ##SUBRC_OK
+*            error_cntl_create = 1
+*            error_cntl_init   = 2
+*            error_cntl_link   = 3
+*            error_dp_create   = 4
+*            OTHERS            = 5.
+
+
       go_grid_alv->set_table_for_first_display(
           exporting
 *            i_buffer_active               =
