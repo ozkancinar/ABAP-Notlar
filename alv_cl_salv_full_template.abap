@@ -160,7 +160,7 @@ CLASS lcl_salv IMPLEMENTATION.
     "Alternatif2
     "Eğer özel pf status tasarladıysan üstteki lo_functions kodlarını kapat ve alta pf statusun adını ver
     o_alv->set_screen_status( report        = sy-repid"'SAPLSLVC_FULLSCREEN'
-                              pfstatus      = 'STATUS_MAIN'
+                              pfstatus      = 'STATUS_MAIN' "STANDARD_FULLSCREEN
                               set_functions = o_alv->c_functions_all ).
 
     "*-----------------Layout-Display Settings-------------------------*

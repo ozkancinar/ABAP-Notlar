@@ -56,7 +56,7 @@ SHIFT str right by 1 PLACES. "son karakteri sil
 DATA STR(10) VALUE 'CHENNAIÇğÜ'.
   TRANSLATE STR TO LOWER CASE.
   translate lv_projetipi to upper case.
-  translate lv_proje using 'AaHh'. "değer olarak bir harf kabul eder. İlk harfi ikinci harfle değiştirir"
+  translate lv_proje using 'AaHh'. "değer olarak bir harf karak bir harf kabul eder. İlk harfi ikinci harfle değiştirir"
   TRANSLATE str USING 'ğgşsİIçcÇC'. "türkçe karakterleri ingilizceye çevirir"
 WRITE STR.
 *-------------------------------------
