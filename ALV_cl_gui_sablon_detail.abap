@@ -248,7 +248,9 @@ class lcl_main implementation.
 *            error_cntl_link   = 3
 *            error_dp_create   = 4
 *            OTHERS            = 5.
-
+      "variant
+      DATA(ls_variant) = VALUE disvariant( report = sy-repid ).
+      ls_variant-variant = p_vari. "parametreden gelen
 
       go_grid_alv->set_table_for_first_display(
           exporting
@@ -256,7 +258,7 @@ class lcl_main implementation.
 *            i_bypassing_buffer            =
 *            i_consistency_check           =
 *            i_structure_name              =
-*            is_variant                    =
+            is_variant                    = ls_variant
             i_save                        = 'A'
 *            i_default                     = 'X'
             is_layout                     = ls_layout
