@@ -924,3 +924,6 @@ EXPORTING
   sign          = '+'
 IMPORTING
   output        = <delivery_footer>-qua_pcs_val
+"------------------------------------------
+"sm30 bakım tablosunu açar
+call function 'VIEW_MAINTENANCE_CALL'
