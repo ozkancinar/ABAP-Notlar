@@ -14,6 +14,13 @@ lr_hvlid = VALUE #( for level in lT_LEVELNAMES
                         option = o
                      ( low = level-hlvlid ) ).
 
+ DATA(lr_matnr) = VALUE ranges_matnr(
+      FOR GROUPS gr OF ls_mseg_gr_matnr IN lt_mseg WHERE ( matnr IS NOT INITIAL )
+      GROUP BY ls_mseg_gr_matnr-matnr
+      (  sign = 'I'
+         option = 'EQ'
+         low = gr ) ).
+
 SE11 range örneği: RSELOPTION
   *--------------------------------------------------------*
 
