@@ -752,3 +752,13 @@ CLASS /dirty/some_data_container DEFINITION.
     DATA c TYPE d.
 ENDCLASS.
 *******************/Read Only Variable********************************
+
+*******************/Raise Raising********************************
+METHODS exclude_materials changing materials          TYPE tt_materials
+                          RAISING cx_axt_data_not_found.
+
+METHOD exclude_materials.
+  if materials is INITIAL.
+      RAISE EXCEPTION TYPE cx_axt_data_not_found.
+  endif.
+ENDMETHOD.

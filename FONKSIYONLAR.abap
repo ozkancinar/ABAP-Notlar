@@ -927,3 +927,9 @@ IMPORTING
 "------------------------------------------
 "sm30 bakım tablosunu açar
 call function 'VIEW_MAINTENANCE_CALL'
+"------------------------------------------
+"hafta içinde toplama çıkarma işlemleri yap
+CALL FUNCTION 'DATE_CONVERT_TO_FACTORYDATE'
+"------------------------------------------
+"tarihe gün ay yıl ekle çıkar month day year
+call function 'RP_CALC_DATE_IN_INTERVAL'
