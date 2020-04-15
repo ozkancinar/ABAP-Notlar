@@ -254,6 +254,8 @@ CLASS lcl_salv IMPLEMENTATION.
     set_color( EXPORTING name = 'ERNAM'  col = 6 int = 1 inv = 0 CHANGING lo_columns = lo_columns ).
 
     "*-----------------Colum Design-------------------------*
+    DATA tech_fields TYPE TABLE OF lvc_fname .
+    tech_fields = VALUE #( ( 'CELLSTYLE' ) ( 'CELLCOLOR' ) ).
     TRY.
 *        lo_column ?= lo_columns->get_column( 'T_RESDROP' ).
 *        lo_column->set_technical( ). "technical
@@ -272,6 +274,10 @@ CLASS lcl_salv IMPLEMENTATION.
         lo_column->set_zero( ' ' ). "değer sıfır olduğunda boşluk olsun
         lo_column ?= lo_columns->get_column( 'CELLTYPE' ).
         lo_column->set_technical( ).
+        LOOP AT tech_fields ASSIGNING FIELD-SYMBOL(<field>).
+          lo_column ?= lo_columns->get_column( <field> ).
+          lo_column->set_technical( ). "technical
+        ENDLOOP.
         DATA(asd) = lo_column->get_cell_type( ).
       CATCH cx_salv_not_found INTO DATA(err).
     ENDTRY.
