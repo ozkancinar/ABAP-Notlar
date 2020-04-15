@@ -137,7 +137,7 @@ at selection-screen output.
   TYPE-POOLs icon.
   data functxt TYPE smp_dyntxt.
 
-  " add button to screen
+  " add button to screen toolbar
   SELECTION-SCREEN: FUNCTION KEY 1,
                     FUNCTION KEY 2.
 
