@@ -80,6 +80,14 @@ set PARAMETER ID 'RBN' FIELD <line>-belnr.
 set PARAMETER ID 'GJR' FIELD <line>-gjahr.
 CALL TRANSACTION 'MIR4' and SKIP FIRST SCREEN.
 
+"va33
+lt_bdcdata = VALUE #(
+    ( program  = 'SAPMV45A' dynpro   = '0125' dynbegin = 'X' )
+    ( fnam = 'BDC_CURSOR'       fval = 'VBAK-VBELN' )
+    ( fnam = 'VBAK-VBELN'      fval = <line>-sch_aggr )
+    ( fnam = 'BDC_OKCODE'       fval = '/00' ) ).
+opt-dismode = 'E'.
+CALL TRANSACTION 'VA33' USING lt_bdcdata OPTIONS FROM opt.
 "-------------------------------------"
 DATA class_name TYPE c LENGTH 30 VALUE 'CL_ABAP_BROWSER'.
 
