@@ -1,7 +1,6 @@
-
-data: 1,
-	t,
-	done.
+data: l,
+	  t,
+	  done.
 
 parameters p(25) default '      Vendor Number'.
 while done = ' '
