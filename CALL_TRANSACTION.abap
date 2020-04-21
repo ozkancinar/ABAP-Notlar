@@ -88,6 +88,14 @@ lt_bdcdata = VALUE #(
     ( fnam = 'BDC_OKCODE'       fval = '/00' ) ).
 opt-dismode = 'E'.
 CALL TRANSACTION 'VA33' USING lt_bdcdata OPTIONS FROM opt.
+
+lt_bdcdata = VALUE #(
+    ( program  = 'SAPMV50A' dynpro   = '4004' dynbegin = 'X' )
+    ( fnam = 'BDC_CURSOR'       fval = 'LIKP-VBELN' )
+    ( fnam = 'LIKP-VBELN'      fval = <line>-delv_doc )
+    ( fnam = 'BDC_OKCODE'       fval = '=ENT2' ) ).
+opt-dismode = 'E'.
+CALL TRANSACTION 'VL03N' USING lt_bdcdata OPTIONS FROM opt.
 "-------------------------------------"
 DATA class_name TYPE c LENGTH 30 VALUE 'CL_ABAP_BROWSER'.
 

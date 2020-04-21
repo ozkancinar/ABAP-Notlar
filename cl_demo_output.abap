@@ -11,3 +11,6 @@ cl_demo_output=>display(
     data = itab
 *    name = 
 ).
+
+data in      TYPE REF TO if_demo_input,
+in->request( CHANGING field = iterations ).

@@ -18,18 +18,19 @@ ASSIGN generic->* TO FIELD-SYMBOL(<generic>).
 ASSIGN COMPONENT name OF STRUCTURE structure TO FIELD-SYMBOL(<component>).
 ASSIGN (class_name)=>(static_member) TO FIELD-SYMBOL(<member>).
 
+"casting
+TYPES:
+  BEGIN OF time,
+    hours   TYPE c LENGTH 2,
+    minute  TYPE c LENGTH 2,
+    seconds TYPE c LENGTH 2,
+  END OF time.
+FIELD-SYMBOLS <fs> TYPE any.
+ASSIGN sy-timlo TO <fs> CASTING TYPE time.
+cl_demo_output=>display( <fs> ).
 
-field-symbols: <fs_tab> type standard table,
-               <fs_wa> type mara.
-
-loop at <fs_tab> assigning <fs_wa>.
-  <fs_wa>-matnr = ‘NEW CHANGE MATERIAL’.
-endloop.
-
-UNASSIGN <lfs_mara>.
-* Check if Field-Symbol is assigned
-IF <lfs_mara> IS ASSIGNED.
-  WRITE: 'Assigned'.
-ELSE.
-  WRITE: 'Unassigned'.
-ENDIF.
+"casting to predefined type
+DATA: pack1 TYPE p DECIMALS 2 VALUE '400'.
+ASSIGN pack1 TO <f1> CASTING TYPE p DECIMALS 1.
+"pack1: 400.00 
+"<f1>: 4000.0

@@ -13,6 +13,8 @@ TRY . "dublicate error hatasının yakalanması"
 CATCH CX_SY_ITAB_ERROR INTO data(err).
   data(text) = err->get_text( ).
 ENDTRY.
+"standard table to sorted table tekrarlı kayıt olduğunda dump almasını engeller
+sorted_materials = CORRESPONDING #( materials DISCARDING DUPLICATES ).
 ******* /SORTED TABLE *************
 
 ******* HASHED TABLE *************
