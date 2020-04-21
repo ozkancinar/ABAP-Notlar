@@ -18,3 +18,4 @@ PARAMETERS: p_city(100) LOWER CASE.  "küçük harf"
 PARAMETERS pa_skodu TYPE text10 MEMORY ID skodu.
 PARAMETERS pa_matnr TYPE matnr MEMORY ID MATN. "başka bir ekranda doldurulan matnr alanınına yazılan ifadenin
                                               "gelmesi sağlanır
+                                              
