@@ -762,3 +762,8 @@ METHOD exclude_materials.
       RAISE EXCEPTION TYPE cx_axt_data_not_found.
   endif.
 ENDMETHOD.
+
+"duplicate object - copy object without reference
+SYSTEM-CALL OBJMGR CLONE scope_with_ref TO new_object.
+"interface
+if_os_clone
