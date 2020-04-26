@@ -185,3 +185,6 @@ result = substring_after( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   EFGH
 result = substring_brfore( val = ‘ABCDEFGH’ sub = ‘CD’ ). "OUTPUT:   AB
 "Substring To
 result = substring_to( val = ‘ABCDEFGH’ sub = ‘CD’ ). " OUTPUT:   ABCD
+
+* örneğin 123456 ise bunu 654321'e çevirir.
+data(lv_revers) = reverse( ls_head-invoice_no ).

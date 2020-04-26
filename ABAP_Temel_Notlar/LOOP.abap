@@ -32,3 +32,12 @@ loop at lt_flight1 INTO data(ls_data) GROUP BY ( connid = ls_data-conn
     WRITE: / ,5 <fs_data2>-carrid, <fs_data2>-connid, <fs_data2>-fldate.
   ENDLOOP.
 endloop.
+
+- Check continue ifadesine benzer. Döngünün sonuna gönderir ancak tek bir farkı vardır o da mantıksal bir
+ifade alabilmesidir.
+Check kullanırken bir şart ifade ederiz. Eğer şart sağlanırsa döngünün o adımının sonuna gider
+
+DO 4 TIMES.
+  CHECK sy-index BETWEEN 2 AND 3.
+  WRITE sy-index.
+ENDDO.

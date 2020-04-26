@@ -349,3 +349,50 @@ at SELECTION-SCREEN .
       MESSAGE 'Yarat' TYPE 'S'.
     WHEN OTHERS.
   ENDCASE.
+
+LOOP AT SCREEN.
+ CASE screen-name.
+  WHEN 'PA_MAKTX'.
+    wa_fieldvalue-fieldname = 'PA_MAKTX'.
+    wa_fieldvalue-fieldvalue = gt_data-maktx.
+  WHEN 'PA_MATNR'.
+   wa_fieldvalue-fieldname  = 'PA_MATNR'.
+    wa_fieldvalue-fieldvalue = gt_data-matnr.
+  when 'PA_WERKS'.
+    wa_fieldvalue-fieldname = 'PA_WERKS'.
+    wa_fieldvalue-fieldvalue = gt_data-werks.
+  WHEN 'PA_URTYER'.
+    wa_fieldvalue-fieldname = 'PA_URTYER'.
+    wa_fieldvalue-fieldvalue = lv_urtyer.
+   WHEN OTHERS.
+ ENDCASE.
+ append wa_fieldvalue to it_fieldvalues.
+ENDLOOP.
+
+PARAMETERS opt1 TYPE i.
+PARAMETERS opt2 TYPE i.
+
+PARAMETERS pa_yarat RADIOBUTTON GROUP grp1 USER-COMMAND abc. "radio butonun tek clickte tetiklemesi için
+
+PARAMETERS add RADIOBUTTON GROUP grp1.
+PARAMETERS substract RADIOBUTTON GROUP grp1.
+PARAMETERS multiply RADIOBUTTON GROUP grp1.
+PARAMETERS divide RADIOBUTTON GROUP grp1.
+
+IF add = 'X'. " Radiobuttonun seçili olup olmadığını 'X' ile kontrol ediyoruz
+	add opt2 to opt1.
+ENDIF.
+
+IF substract = 'X'.
+	SUBSTRACT opt2 from opt1.
+ENDIF.
+
+IF multiply = 'X'.
+	MULTIPLY opt1 by opt2.
+ENDIF.
+
+IF divide = 'X'.
+	DIVIDE opt1 by opt2.
+ENDIF.
+
+WRITE: 'result: ' , opt1.

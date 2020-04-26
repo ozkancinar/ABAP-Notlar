@@ -46,6 +46,17 @@ write: /5(15) sy-uline,
 … UNIT u
 … EXPONENT e
 
+WRITE lv_date to lv_date2 DD/MM/YYY. "Birinci değişkeni lv_date2'ye belirtilen formatta yazar
+
+*Ekrana yazdıralım
+
+WRITE: / 'Formatlı tarih:' , lv_date2. "DD.MM.YYYY.
+
+* Zaman için uygulayalım
+DATA lv_time2 TYPE c LENGTH 30.
+WRITE lv_time to lv_time2 USING EDIT MAST '__:__:__'. "Formatı belirliyoruz
+
+
   … USING EDIT MASK mask
 … USING NO EDIT MASK
 

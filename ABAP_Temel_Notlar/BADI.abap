@@ -1,1 +1,0 @@
-Bir programda SXV_GET_CLIF_BY_NAME fonksiyonuna breakpoint koyarak hangi badileri kullandığını bulabiliriz

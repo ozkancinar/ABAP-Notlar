@@ -1,1 +1,0 @@
-CALL 'SYST_LOGOFF'.

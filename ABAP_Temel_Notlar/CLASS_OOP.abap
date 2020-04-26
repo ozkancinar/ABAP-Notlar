@@ -767,3 +767,5 @@ ENDMETHOD.
 SYSTEM-CALL OBJMGR CLONE scope_with_ref TO new_object.
 "interface
 if_os_clone
+"örnek class
+CL_OS_STATE
