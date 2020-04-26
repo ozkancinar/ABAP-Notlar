@@ -47,29 +47,29 @@
 1. [String Functions >7.4x](ABAP_Temel_Notlar\STRING_functions_7_40.abap)
 1. [String Karşılaştırma İfadeleri](ABAP_Temel_Notlar\STRING_Karşılaştırma_ifadeleri.abap)
 
-## 8. SQL İfadeleri
+### 8. SQL İfadeleri
 1. [SQL Buint-in Fonksiyonlar >7.4x ](ABAP_Temel_Notlar\SQL_built_in_Ifadeleri_7_40.abap)
 1. [DB Crud İşlemleri](ABAP_Temel_Notlar\DB_CRUD_Islemleri.abap)
 1. [Select İfadesi](ABAP_Temel_Notlar\SELECT_Statement.abap)
 
-## 9. Syntax >7.4x
+### 9. Syntax >7.4x
 1. [>7.4x ABAP](ABAP_Temel_Notlar\7_xx.abap)
 1. [SQL Built-in İfadeler](ABAP_Temel_Notlar\SQL_built_in_Ifadeleri_7_40.abap)
 1. [String](ABAP_Temel_Notlar\STRING_functions_7_40.abap)
 
-## 10. Corresponding
+### 10. Corresponding
 1. [Corresponding](ABAP_Temel_Notlar\CORRESPONDING.abap)
 1. [Cl_abap_corresponding Class](ABAP_Temel_Notlar\cl_abap_corresponding.abap)
 
-## 11. Messages
+### 11. Messages
 1. [Messages](ABAP_Temel_Notlar\MESSAGES.abap)
 
-## 12. Memory
+### 12. Memory
 1. [Memory](ABAP_Temel_Notlar\MEMORY_Export_Import.abap)
 1. [Dataset](ABAP_Temel_Notlar\DATASET_Kullanımı.abap)
 1. [Shared Memory Object](ABAP_Temel_Notlar\SHARED_MEMORY_OBJECT.abap)
 
-## 13. Kullanışlı İşe Yarar Standart İfadeler
+### 13. Kullanışlı İşe Yarar Standart İfadeler
 1. [Fonksiyonlar](ABAP_Temel_Notlar\FONKSIYONLAR.abap)
 1. [Sınıflar](ABAP_Temel_Notlar\SıNıFLAR_CLASSLAR.abap)
 1. [Demo Programlar](ABAP_Temel_Notlar\DEMO_PROGRAMLAR.abap)
@@ -78,7 +78,7 @@
 1. [cl_demo_output - Demo çıktılar göstermek için sınıf](ABAP_Temel_Notlar\cl_demo_output.abap)
 1. [Call Transaction](ABAP_Temel_Notlar\CALL_TRANSACTION.abap)
 
-## 14. ALV
+### 14. ALV
 1. [cl_gui_alv_grid Şablon 1](ABAP_Temel_Notlar\ALV_cl_gui_sablon_detail.abap)
 1. [cl_salv_table Full Template](ABAP_Temel_Notlar\ALV_cl_salv_FULL_template.abap)
 1. [cl_salv_table Events](ABAP_Temel_Notlar\ALV_cl_salv_events.abap)
