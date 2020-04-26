@@ -1,4 +1,4 @@
-# Kişisel ABAP Notlarım
+# ABAP Notlarım
 ## Temel Düzeyde Hatırlatıcı Notlar
 
 ### 1. Değişken ve Tip Tanımlamaları
