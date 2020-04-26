@@ -37,7 +37,7 @@
 1. [Ranges](ABAP_Temel_Notlar\RANGES.abap)
 
 ### 6. Sınıf & Nesne
-1. [Class-Sınıf-OO Tüm Kullanım Örnekleri](ABAP_Temel_Notlar\CLASS_OOP.abap)
+1. [Class-Sınıf-OO Tüm Kullanım Örnekleri](ABAP_Temel_Notlar/CLASS_OOP.abap)
 1. [Shared Memory Object](ABAP_Temel_Notlar\SHARED_MEMORY_OBJECT.abap)
 1. [Persistent Class](ABAP_Temel_Notlar\PERSISTENT_CLASS.abap)
 1. [Reference](ABAP_Temel_Notlar\REFERENCE.abap)
