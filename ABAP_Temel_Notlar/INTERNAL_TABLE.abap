@@ -73,6 +73,9 @@ ENDLOOP.
 ******* UPDATE *************
 UPDATE dbtable set isim = 'Özkan' where id = '12'.
 commit work.
+"update itab
+MODIFY gt_out FROM CORRESPONDING ty_out( ls_mat_info MAPPING f_goods_m_91 = lfimg )
+        TRANSPORTING f_goods_m_91 WHERE matnr EQ ls_mat_info-matnr.
 ******* /UPDATE *************
 
 ******* MODIFY *************
