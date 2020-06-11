@@ -933,3 +933,7 @@ CALL FUNCTION 'DATE_CONVERT_TO_FACTORYDATE'
 "------------------------------------------
 "tarihe gün ay yıl ekle çıkar month day year
 call function 'RP_CALC_DATE_IN_INTERVAL'
+"------------------------------------------
+"verilen tarihler arasındaki çalışma günlerini verir
+call function 'RKE_SELECT_FACTDAYS_FOR_PERIOD'
+"------------------------------------------

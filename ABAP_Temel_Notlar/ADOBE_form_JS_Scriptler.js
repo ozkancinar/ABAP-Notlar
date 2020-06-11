@@ -78,9 +78,10 @@ page1.table.bodyrow[].all.length //tablo satur sayısı
 //Barkod barcode genişliğini değiştir
 this.ui.barcode.dataLength = '10';
 this.ui.barcode.dataLength = MATNR_SIZE.rawValue;
+this.ui.barcode.dataLength = this.rawValue.length.toString();
 
 // Sayfa toplam alt toplam vs.
-1. örnek
+//1. örnek
 
 var i = 0
 var p = $layout.page(ref($))
@@ -145,3 +146,5 @@ else
     page1.Table2.EndPageTotal.QUANT = Format("zzz,zzz,zz9.999", qnt)
   endif
 endif
+// string length
+this.rawValue = CHAR_18.rawValue.length;
