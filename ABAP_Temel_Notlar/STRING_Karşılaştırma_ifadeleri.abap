@@ -34,7 +34,7 @@ ENDIF.
 
 
 ****** Comparing string ********
-
+"check demo program: DEMO_CHARACTER_COMPARISON
 IF p_string eq c_abc.
   NEW-LINE.
   WRITE: p_string, 'Sabit degerimiz', c_abc,'e eşit'.

@@ -44,3 +44,4 @@ DEMO_RAISE_MESSAGE_GLOBAL_SHRT "mesaj oo tipinde
 DEMO_REGEX "regex demo"
 SFDT_DEMO_OBJECTS "brf+ demo paket
 SAPRDEMO_TABLES_IN_EXCEL "office entrasyonu, gömülü excel görüntüleme
+DEMO_CHARACTER_COMPARISON "string karşılaştırma
