@@ -154,7 +154,7 @@ CLASS lcl_salv IMPLEMENTATION.
     ls_key-report = sy-repid.
     o_alv->get_layout( )->set_key( value = ls_key ).
 *    o_alv->get_layout( )->set_save_restriction( if_salv_c_layout=>restrict_none ).
-*    o_alv->get_layout( )->set_default( value = abap_true ). "kullanıcı varyant kaydında default seçeneği açılır 
+     o_alv->get_layout( )->set_default( value = abap_true ). "kullanıcı varyant kaydında default seçeneği açılır 
 *    lo_functions = o_alv->get_functions( ).
 *    lo_functions->set_default( abap_true ). "Alternatif
 *    lo_functions->set_all( abap_true ).
