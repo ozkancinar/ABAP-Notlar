@@ -621,6 +621,7 @@ call function 'CONVERSION_EXIT_ISOLA_INPUT'
     endif.
 *---------------------------------------------------
 "f4 help se11'den yaratılan search help ile input parametrelerini vererek"
+"search helpin varsa tabname, fieldname, searchhelp doldursan sana sonuç verir
  CALL FUNCTION 'F4IF_FIELD_VALUE_REQUEST'
       EXPORTING
         tabname           = 'ZOZ_DOKTORLAR'    " Table/structure name from Dictionary
