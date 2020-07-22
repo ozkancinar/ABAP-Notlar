@@ -131,6 +131,8 @@ cl_demo_output=>display(
     FOR j = 1 UNTIL j > strlen( sy-abcde )
     ( |{ substring( val = sy-abcde len = j )
          WIDTH = strlen( sy-abcde ) / 2 } <---| ) ) ).
+"TODO
+"string template CURRENCY
 
 "TEMPLATE_XSD
  DATA: i          TYPE i            VALUE -123,

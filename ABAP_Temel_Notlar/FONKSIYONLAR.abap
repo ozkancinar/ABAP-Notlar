@@ -938,3 +938,6 @@ call function 'RP_CALC_DATE_IN_INTERVAL'
 "verilen tarihler arasındaki çalışma günlerini verir
 call function 'RKE_SELECT_FACTDAYS_FOR_PERIOD'
 "------------------------------------------
+"eğer excelden veya bir kaynaktan tanımlanamayan bir karakter okursan
+"onu chara çevirir
+call function 'SCP_REPLACE_STRANGE_CHARS'
