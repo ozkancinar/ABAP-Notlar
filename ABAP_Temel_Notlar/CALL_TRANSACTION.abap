@@ -80,6 +80,12 @@ set PARAMETER ID 'RBN' FIELD <line>-belnr.
 set PARAMETER ID 'GJR' FIELD <line>-gjahr.
 CALL TRANSACTION 'MIR4' and SKIP FIRST SCREEN.
 
+SET PARAMETER ID 'VL' FIELD <line>-inb_delv_num .
+CALL TRANSACTION 'VL33N' AND SKIP FIRST SCREEN.
+
+SET PARAMETER ID 'MBN' FIELD <line>-mat_doc_in_migo .
+CALL TRANSACTION 'MIGO' AND SKIP FIRST SCREEN.
+
 "va33
 lt_bdcdata = VALUE #(
     ( program  = 'SAPMV45A' dynpro   = '0125' dynbegin = 'X' )

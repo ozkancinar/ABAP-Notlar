@@ -179,8 +179,7 @@ ENDLOOP.
 
 CALL FUNCTION 'MESSAGES_SHOW'.
 ------------------------------------------
-*Fazla sıfırları silerek integera çevirir  0000300014 -> 300014
-
+*Fazla sıfırları siler
 call function 'CONVERSION_EXIT_ALPHA_OUTPUT'
     exporting
       input  = ptext
@@ -941,3 +940,6 @@ call function 'RKE_SELECT_FACTDAYS_FOR_PERIOD'
 "eğer excelden veya bir kaynaktan tanımlanamayan bir karakter okursan
 "onu chara çevirir
 call function 'SCP_REPLACE_STRANGE_CHARS'
+"-------------------------------------------
+"year/month seçimi için popup
+call function 'POPUP_TO_SELECT_MONTH'
