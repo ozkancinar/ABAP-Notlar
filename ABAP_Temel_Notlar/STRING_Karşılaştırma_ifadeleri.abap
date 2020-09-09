@@ -76,6 +76,9 @@ IF p_string cp c_abc. " contains pattern
   WRITE: / p_string, 'desenler uyuştu', c_abc.
 ENDIF.
 
+"+ 1 katakter nümerik alanı temsil eder
+p_string cp 'V++.++++'. 
+
 IF p_string np c_abc. " contains no pattern
   WRITE: / p_string, 'herhangi bir desen tekrar yok', c_abc.
 ENDIF.

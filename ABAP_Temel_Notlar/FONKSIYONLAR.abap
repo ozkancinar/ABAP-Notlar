@@ -943,3 +943,6 @@ call function 'SCP_REPLACE_STRANGE_CHARS'
 "-------------------------------------------
 "year/month seçimi için popup
 call function 'POPUP_TO_SELECT_MONTH'
+"-------------------------------------------
+"factory calander içinde tarih aralığındaki tatiller
+call function 'HOLIDAY_GET' 
