@@ -97,3 +97,20 @@ at selection-screen on value-request for p_file.
   if sy-subrc ne 0.
     exit.
   endif.
+
+  cl_gui_frontend_services=>directory_browse(
+*      EXPORTING
+*        window_title         =     " Title of Browsing Window
+*        initial_folder       =     " Start Browsing Here
+      CHANGING
+        selected_folder      = lv_path    " Folder Selected By User
+      EXCEPTIONS
+        cntl_error           = 1
+        error_no_gui         = 2
+        not_supported_by_gui = 3
+        others               = 4
+    ).
+    IF sy-subrc <> 0.
+     MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+                WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+    ENDIF.
