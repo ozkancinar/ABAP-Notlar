@@ -53,6 +53,13 @@ at selection-screen output.
     endif.
   endloop.
 
+" one line two parameters
+SELECTION-SCREEN BEGIN OF LINE.
+  SELECTION-SCREEN COMMENT 1(33) TEXT-001 FOR FIELD p_menge.
+  PARAMETERS: p_menge TYPE menge_d OBLIGATORY.
+  SELECTION-SCREEN COMMENT 53(7) TEXT-002 FOR FIELD p_meins.
+  PARAMETERS: p_meins TYPE mara-meins.
+SELECTION-SCREEN END OF LINE.
   *&---------------------------------------------------------------------*
   *& Report  ZCOMPLEX_SELECTION_SCREEN
   *&

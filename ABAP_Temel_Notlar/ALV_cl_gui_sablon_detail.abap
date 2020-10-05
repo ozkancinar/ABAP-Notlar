@@ -717,6 +717,12 @@ class lcl_main implementation.
     data lv_style type raw4.
     data lt_cellcolor type lvc_t_scol.
     data lv_color type lvc_col .
+    CONSTANTS lc_bold TYPE lvc_style VALUE '00000020'. "bold
+    "custom sum line
+    ls_sum_line-cellstyle = VALUE #( ( fieldname = 'MTTR' style = lc_bold ) ( fieldname = 'ACTUAL_BREAKDOWN' style = lc_bold )
+        ( fieldname = 'MTBR' style = lc_bold ) ( fieldname = 'TOTAL_DOWNTIME' style = lc_bold )
+        ( style = cl_gui_alv_grid=>mc_style_f4_no style2 = cl_gui_alv_grid=>mc_style_disabled
+        style3 = cl_gui_alv_grid=>mc_style4_link_no style4 = cl_gui_alv_grid=>mc_style_no_delete_row ) ).
     "cell row coloring"
 
     lv_style = cond #( when s_line-is_locked eq abap_true then cl_gui_alv_grid=>mc_style_disabled else cl_gui_alv_grid=>mc_style_enabled ).
