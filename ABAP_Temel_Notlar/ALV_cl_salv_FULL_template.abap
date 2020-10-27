@@ -285,6 +285,7 @@ CLASS lcl_salv IMPLEMENTATION.
         lo_column->set_cell_type( if_salv_c_cell_type=>hotspot ).
         lo_column ?= lo_columns->get_column( 'FKIMG' ).
         lo_column->set_zero( ' ' ). "değer sıfır olduğunda boşluk olsun
+        lo_column->set_sign( ). "eksi değer gösterebilmeyi sağlar
         lo_column ?= lo_columns->get_column( 'CELLTYPE' ).
         lo_column->set_technical( ).
         LOOP AT tech_fields ASSIGNING FIELD-SYMBOL(<field>).
