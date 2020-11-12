@@ -47,3 +47,4 @@ SFDT_DEMO_OBJECTS "brf+ demo paket
 SAPRDEMO_TABLES_IN_EXCEL "office entrasyonu, gömülü excel görüntüleme
 DEMO_CHARACTER_COMPARISON "string karşılaştırma
 RSDEMO*  "çeşitli demolar alv vs
+FP_CHECK_BATCH_PDF_RETURN "adobe forms merge pdf
