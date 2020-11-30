@@ -946,3 +946,6 @@ call function 'POPUP_TO_SELECT_MONTH'
 "-------------------------------------------
 "factory calander içinde tarih aralığındaki tatiller
 call function 'HOLIDAY_GET' 
+"-------------------------------------------
+"convert string to amount
+CALL FUNCTION 'HRCM_STRING_TO_AMOUNT_CONVERT'
