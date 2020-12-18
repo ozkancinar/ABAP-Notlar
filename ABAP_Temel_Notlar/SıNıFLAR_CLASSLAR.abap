@@ -26,6 +26,7 @@ CL_SIMPLE_TREE_MODEL - Ağaç yapısındaki hiyerarşik liste formunu ekranda g�
 CL_BDS_DOCUMENT_SET - BDS document oaor
 CL_GUI_PROPS_CONSUMER "gui operations"
 CL_APPOINTMENT "outlook event yaratma sınıfı
+cl_shdb_seltab "sql dinamik where koşulu üretim
 
 "---------------------------------------------------"
 "değişken tipini döndür
@@ -50,3 +51,6 @@ cl_abap_typedescr
 
 "seçilen dosya gerçekten var mı kontrolü
 cl_gui_frontend_services=>file_exist()
+
+"returns a SQL WHERE condition for multiple seltabs
+cl_shdb_seltab=>combine_seltabs( EXPORTING it_named_seltabs = lt_sel_tab ).

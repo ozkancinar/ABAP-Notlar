@@ -949,3 +949,6 @@ call function 'HOLIDAY_GET'
 "-------------------------------------------
 "convert string to amount
 CALL FUNCTION 'HRCM_STRING_TO_AMOUNT_CONVERT'
+"-------------------------------------------
+"DD: Interface for writing a data element to the ABAP Dictionary
+call function 'DDIF_DTEL_PUT'
